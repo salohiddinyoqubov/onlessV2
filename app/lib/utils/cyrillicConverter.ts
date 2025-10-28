@@ -84,12 +84,32 @@ const uzbekLatinToCyrillic: Record<string, string> = {
 export function latinToCyrillic(text: string): string {
   let result = text;
 
-  // Sort keys by length (longest first) to handle multi-character sequences first
-  const sortedKeys = Object.keys(uzbekLatinToCyrillic).sort((a, b) => b.length - a.length);
+  // First, handle multi-character sequences
+  const multiCharKeys = Object.keys(uzbekLatinToCyrillic)
+    .filter(k => k.length > 1)
+    .sort((a, b) => b.length - a.length);
 
-  for (const latinChar of sortedKeys) {
+  for (const latinChar of multiCharKeys) {
     const cyrillicChar = uzbekLatinToCyrillic[latinChar];
-    // Use global replacement
+    result = result.split(latinChar).join(cyrillicChar);
+  }
+
+  // Handle 'E/e' with special logic (Э at start, Е in the middle)
+  // Replace E at the beginning of words or after spaces with Э
+  result = result.replace(/\bE/g, 'Э'); // Word boundary E → Э
+  result = result.replace(/\be/g, 'э'); // Word boundary e → э
+
+  // Replace remaining E/e (in the middle of words) with Е/е
+  result = result.replace(/E/g, 'Е');
+  result = result.replace(/e/g, 'е');
+
+  // Now handle all other single characters except E/e (already handled)
+  const singleCharKeys = Object.keys(uzbekLatinToCyrillic)
+    .filter(k => k.length === 1 && k !== 'E' && k !== 'e')
+    .sort((a, b) => b.length - a.length);
+
+  for (const latinChar of singleCharKeys) {
+    const cyrillicChar = uzbekLatinToCyrillic[latinChar];
     result = result.split(latinChar).join(cyrillicChar);
   }
 
