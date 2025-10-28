@@ -68,9 +68,6 @@ export default function TestPage() {
     [currentQuestion, selectAnswer]
   );
 
-  // Set up keyboard shortcuts
-  useKeyboardShortcuts(currentQuestion?.options || [], handleSelectOption);
-
   // Calculate answered questions
   const answeredQuestionIds = useMemo(() => {
     return new Set(
@@ -79,6 +76,35 @@ export default function TestPage() {
         .map(Number)
     );
   }, [session.answers]);
+
+  // Handle F7 - Skip to next unanswered question
+  const handleSkipToNext = useCallback(() => {
+    const currentIndex = session.currentQuestionIndex;
+    const totalQuestions = session.selectedQuestionIds.length;
+
+    // Search from next question to end
+    for (let i = currentIndex + 1; i < totalQuestions; i++) {
+      const questionId = session.selectedQuestionIds[i];
+      if (!answeredQuestionIds.has(questionId)) {
+        navigateToQuestion(i);
+        return;
+      }
+    }
+
+    // If not found, wrap around and search from start to current
+    for (let i = 0; i < currentIndex; i++) {
+      const questionId = session.selectedQuestionIds[i];
+      if (!answeredQuestionIds.has(questionId)) {
+        navigateToQuestion(i);
+        return;
+      }
+    }
+
+    // If all questions answered, stay on current question
+  }, [session, answeredQuestionIds, navigateToQuestion]);
+
+  // Set up keyboard shortcuts
+  useKeyboardShortcuts(currentQuestion?.options || [], handleSelectOption, handleSkipToNext);
 
   // Handle close
   const handleClose = useCallback(() => {
@@ -100,9 +126,11 @@ export default function TestPage() {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-100 via-blue-50 to-gray-100 dark:from-primary-dark dark:via-background dark:to-primary-dark">
       {/* Header */}
       <TestHeader
+        ticketNumber={1}
         currentQuestionNumber={session.currentQuestionIndex + 1}
         totalQuestions={session.selectedQuestionIds.length}
         timeRemaining={formattedTime}
+        studentName="Yakubov Salohiddin"
         onClose={handleClose}
       />
 
@@ -117,6 +145,7 @@ export default function TestPage() {
               selectedOptionId={session.answers[currentQuestion.id] || null}
               correctOptionId={currentQuestion.correctOptionId}
               showFeedback={!!session.answers[currentQuestion.id]}
+              explanation={currentQuestion.explanation}
               onSelectOption={handleSelectOption}
             />
           </div>

@@ -15,6 +15,7 @@ export const mockQuestions: Question[] = [
       { id: 'F3', text: "Yo'lning o'ng tomonida" },
     ],
     correctOptionId: 'F3',
+    explanation: "Yo'l harakati qoidalariga ko'ra, avtomobilni faqat yo'lning o'ng tomonida to'xtatish mumkin. Chap tomonda to'xtatish yoki piyodalar o'tish joyida to'xtatish qat'iyan taqiqlanadi, chunki bu boshqa haydovchilar va piyodalar uchun xavfli vaziyat yaratadi.",
     category: 'parking',
   },
   {
@@ -27,6 +28,7 @@ export const mockQuestions: Question[] = [
       { id: 'F3', text: "Har ikkisi ham buzmadi" },
     ],
     correctOptionId: 'F1',
+    explanation: "Rasmda yashil avtomobil 'To'xtash taqiqlangan' belgisi oldida to'xtab qolgan. Bu qoidani qo'pol buzishdir va jarima solinadi. Sariq avtomobil esa yo'lning o'ng tomonida, belgi ta'sir doirasidan tashqarida to'xtagan, shuning uchun u qoidani buzmagan.",
     category: 'parking',
   },
   {
@@ -354,6 +356,7 @@ export const mockQuestions: Question[] = [
       { id: 'F3', text: "Ehtiyot bo'lish kerak" },
     ],
     correctOptionId: 'F2',
+    explanation: "Sariq uzluksiz chiziq yo'l chizig'i bo'lib, uni kesib o'tish qat'iyan man etilgan. Bu chiziq yo'l harakatining xavfli joylarida, qiyaliklarda, ko'prik va tunnel yaqinida chiziladi. Agar haydovchi bu chiziqni kesib o'tsa, boshqa transport vositalariga to'qnash kelish xavfi yuqori bo'ladi.",
     category: 'traffic-signs',
   },
   {

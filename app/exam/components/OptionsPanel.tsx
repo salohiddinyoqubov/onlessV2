@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { QuestionOption } from '@/types/exam.types';
 import { useLanguage } from '@/app/lib/contexts/LanguageContext';
 
@@ -14,6 +15,8 @@ interface OptionsPanelProps {
   correctOptionId?: string;
   /** Whether to show answer feedback */
   showFeedback?: boolean;
+  /** Explanation or comment for the question */
+  explanation?: string;
   /** Callback when an option is selected */
   onSelectOption: (optionId: string) => void;
 }
@@ -28,9 +31,11 @@ export function OptionsPanel({
   selectedOptionId,
   correctOptionId,
   showFeedback = false,
+  explanation,
   onSelectOption,
 }: OptionsPanelProps) {
   const { convertText } = useLanguage();
+  const [isExplanationOpen, setIsExplanationOpen] = useState(false);
   return (
     <div className="flex flex-col">
       {/* Question Box */}
@@ -90,12 +95,27 @@ export function OptionsPanel({
       </ul>
 
       {/* Explanation Box */}
-      <div className="bg-amber-50 dark:bg-background-secondary border-2 border-amber-300 dark:border-warning/30 rounded-lg p-4 text-gray-600 dark:text-neutral-light text-sm shadow-md">
-        <div className="flex items-center gap-2">
-          <span className="text-amber-600 dark:text-warning font-bold">💡</span>
-          <span className="font-semibold text-amber-700 dark:text-warning">Izoh</span>
+      {explanation && (
+        <div className="bg-amber-50 dark:bg-background-secondary border-2 border-amber-300 dark:border-warning/30 rounded-lg overflow-hidden text-gray-600 dark:text-neutral-light text-sm shadow-md">
+          <button
+            onClick={() => setIsExplanationOpen(!isExplanationOpen)}
+            className="w-full flex items-center gap-2 p-4 hover:bg-amber-100 dark:hover:bg-background-dark transition-colors cursor-pointer"
+          >
+            <span className="text-amber-600 dark:text-warning font-bold text-lg">💡</span>
+            <span className="font-semibold text-amber-700 dark:text-warning">Izoh</span>
+            <span className="ml-auto text-amber-700 dark:text-warning">
+              {isExplanationOpen ? '▲' : '▼'}
+            </span>
+          </button>
+          {isExplanationOpen && (
+            <div className="px-4 pb-4 pt-2">
+              <p className="leading-relaxed text-gray-700 dark:text-neutral-light ml-7">
+                {convertText(explanation)}
+              </p>
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </div>
   );
 }

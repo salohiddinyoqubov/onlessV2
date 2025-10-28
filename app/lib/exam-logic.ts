@@ -70,22 +70,21 @@ export function calculateExamResult(
 }
 
 /**
- * Formats seconds into H:MM:SS display format
+ * Formats seconds into MM:SS display format
  *
  * @param seconds Total seconds to format
- * @returns Formatted time string (e.g., "0:40:00")
+ * @returns Formatted time string (e.g., "40:00")
  *
  * @example
- * formatTime(2400) // "0:40:00"
- * formatTime(125) // "0:02:05"
- * formatTime(3665) // "1:01:05"
+ * formatTime(2400) // "40:00"
+ * formatTime(125) // "02:05"
+ * formatTime(3665) // "61:05"
  */
 export function formatTime(seconds: number): string {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
+  const minutes = Math.floor(seconds / 60);
   const secs = seconds % 60;
 
-  return `${hours}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
 /**

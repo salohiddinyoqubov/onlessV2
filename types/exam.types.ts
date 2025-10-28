@@ -36,6 +36,8 @@ export interface Question {
   options: QuestionOption[];
   /** ID of the correct answer option */
   correctOptionId: string;
+  /** Explanation or comment for the question (optional) */
+  explanation?: string;
   /** Category for analytics (optional) */
   category?: QuestionCategory;
 }

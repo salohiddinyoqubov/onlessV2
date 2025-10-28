@@ -25,9 +25,9 @@ export function QuestionNavigationGrid({
   const questionNumbers = Array.from({ length: 20 }, (_, i) => i + 1);
 
   return (
-    <footer className="bg-white dark:bg-background-secondary border-t-2 border-blue-200 dark:border-primary-border p-3 px-5 flex justify-between items-center shadow-lg">
-      {/* Progress Grid - Single Row */}
-      <div className="grid grid-cols-20 gap-2">
+    <footer className="bg-gradient-to-r from-blue-50 to-gray-50 dark:from-background-dark dark:to-background-secondary border-t-2 border-blue-200 dark:border-primary-border py-4 px-8 flex items-center justify-center shadow-lg">
+      {/* Progress Grid - Single Row centered */}
+      <div className="grid grid-cols-20 gap-3">
         {questionNumbers.map((questionNumber) => {
           const questionId = questionIds[questionNumber - 1];
           const isAnswered = answeredQuestionIds.has(questionId);
@@ -38,13 +38,13 @@ export function QuestionNavigationGrid({
               key={questionNumber}
               onClick={() => onNavigate(questionNumber - 1)}
               className={`
-                w-8 h-8 flex justify-center items-center text-xs font-bold rounded-lg border-2 transition-all shadow-sm hover:shadow-md
+                w-11 h-11 flex justify-center items-center text-sm font-bold rounded-xl border-2 transition-all duration-200 shadow-md hover:shadow-xl
                 ${
                   isCurrent
-                    ? 'bg-gradient-to-br from-blue-500 to-blue-600 dark:from-accent dark:to-primary border-blue-500 dark:border-accent text-white scale-110 shadow-lg ring-2 ring-blue-500/30 dark:ring-accent/30'
+                    ? 'bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 dark:from-accent dark:via-primary-light dark:to-primary border-blue-400 dark:border-accent text-white scale-110 shadow-xl ring-4 ring-blue-400/40 dark:ring-accent/40'
                     : isAnswered
-                    ? 'bg-green-100 dark:bg-success-bg border-green-500 dark:border-success text-green-700 dark:text-success hover:scale-105'
-                    : 'bg-gray-100 dark:bg-neutral-dark border-gray-300 dark:border-background-border text-gray-600 dark:text-neutral-light hover:border-blue-400 dark:hover:border-accent/50 hover:scale-105'
+                    ? 'bg-gradient-to-br from-green-50 to-green-100 dark:from-success-bg dark:to-success-bg/50 border-green-400 dark:border-success text-green-700 dark:text-success hover:scale-105 hover:border-green-500'
+                    : 'bg-gradient-to-br from-gray-50 to-gray-100 dark:from-neutral-dark dark:to-background-dark border-gray-300 dark:border-background-border text-gray-700 dark:text-neutral-light hover:border-blue-400 dark:hover:border-accent/60 hover:scale-105 hover:from-blue-50 dark:hover:from-background'
                 }
               `}
             >

@@ -8,10 +8,12 @@ import { QuestionOption } from '@/types/exam.types';
  *
  * @param options Array of question options
  * @param onSelectOption Callback when an option is selected via keyboard
+ * @param onSkipToNext Optional callback when F7 is pressed to skip to next unanswered question
  */
 export function useKeyboardShortcuts(
   options: QuestionOption[],
-  onSelectOption: (optionId: string) => void
+  onSelectOption: (optionId: string) => void,
+  onSkipToNext?: () => void
 ) {
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -31,6 +33,12 @@ export function useKeyboardShortcuts(
         event.preventDefault();
         onSelectOption(options[index].id);
       }
+
+      // Check if key is F7 (skip to next unanswered)
+      if (event.key === 'F7' && onSkipToNext) {
+        event.preventDefault();
+        onSkipToNext();
+      }
     };
 
     // Attach event listener
@@ -40,5 +48,5 @@ export function useKeyboardShortcuts(
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [options, onSelectOption]);
+  }, [options, onSelectOption, onSkipToNext]);
 }
