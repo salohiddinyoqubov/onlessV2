@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { QuestionOption } from '@/types/test.types';
+import { QuestionOption } from '@/types/exam.types';
 
 /**
  * Custom hook for handling F1-F4 keyboard shortcuts

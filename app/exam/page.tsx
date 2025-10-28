@@ -3,15 +3,15 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { mockQuestions } from '@/data/questions';
-import { useTestSession } from '@/app/lib/hooks/useTestSession';
+import { useExamSession } from '@/app/lib/hooks/useExamSession';
 import { useTimer } from '@/app/lib/hooks/useTimer';
 import { useKeyboardShortcuts } from '@/app/lib/hooks/useKeyboardShortcuts';
 import { TestHeader } from './components/TestHeader';
 import { QuestionDisplay } from './components/QuestionDisplay';
 import { OptionsPanel } from './components/OptionsPanel';
 import { QuestionNavigationGrid } from './components/QuestionNavigationGrid';
-import { calculateTestResult } from '@/app/lib/test-logic';
-import { TEST_CONFIG } from '@/config/test.config';
+import { calculateExamResult } from '@/app/lib/exam-logic';
+import { EXAM_CONFIG } from '@/config/exam.config';
 
 /**
  * Main test page component
@@ -28,13 +28,13 @@ export default function TestPage() {
     selectAnswer,
     navigateToQuestion,
     submitTest,
-  } = useTestSession(mockQuestions);
+  } = useExamSession(mockQuestions);
 
   // Handle test submission - define first without using secondsRemaining
   const handleSubmitTest = useCallback(
     (timeRemaining: number) => {
-      const timeTaken = TEST_CONFIG.TEST_DURATION_SECONDS - timeRemaining;
-      const result = calculateTestResult(session.answers, testQuestions, timeTaken);
+      const timeTaken = EXAM_CONFIG.EXAM_DURATION_SECONDS - timeRemaining;
+      const result = calculateExamResult(session.answers, testQuestions, timeTaken);
 
       // Store result in sessionStorage for result page
       sessionStorage.setItem('testResult', JSON.stringify(result));
@@ -50,7 +50,7 @@ export default function TestPage() {
 
   // Initialize timer
   const { secondsRemaining, formattedTime, start } = useTimer(
-    TEST_CONFIG.TEST_DURATION_SECONDS,
+    EXAM_CONFIG.EXAM_DURATION_SECONDS,
     () => handleSubmitTest(0)
   );
 

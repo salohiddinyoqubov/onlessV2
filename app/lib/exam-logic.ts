@@ -1,5 +1,5 @@
-import { Question, TestResult, AnswerDetail } from '@/types/test.types';
-import { TEST_CONFIG } from '@/config/test.config';
+import { Question, ExamResult, AnswerDetail } from '@/types/exam.types';
+import { EXAM_CONFIG } from '@/config/exam.config';
 
 /**
  * Randomly selects unique question IDs from the question bank
@@ -10,8 +10,8 @@ import { TEST_CONFIG } from '@/config/test.config';
  * @returns Array of randomly selected question IDs
  */
 export function selectRandomQuestions(
-  totalQuestions: number = TEST_CONFIG.TOTAL_QUESTIONS,
-  selectCount: number = TEST_CONFIG.QUESTIONS_PER_SESSION
+  totalQuestions: number = EXAM_CONFIG.TOTAL_QUESTIONS,
+  selectCount: number = EXAM_CONFIG.QUESTIONS_PER_SESSION
 ): number[] {
   // Create array of all question IDs [1, 2, 3, ..., 50]
   const allIds = Array.from({ length: totalQuestions }, (_, i) => i + 1);
@@ -32,13 +32,13 @@ export function selectRandomQuestions(
  * @param answers Map of question ID to selected option ID
  * @param questions Array of Question objects for the test
  * @param timeTakenSeconds Total time taken to complete the test
- * @returns Complete TestResult object with score and details
+ * @returns Complete ExamResult object with score and details
  */
-export function calculateTestResult(
+export function calculateExamResult(
   answers: Record<number, string>,
   questions: Question[],
   timeTakenSeconds: number
-): TestResult {
+): ExamResult {
   // Build detailed answer breakdown
   const answerDetails: AnswerDetail[] = questions.map((question) => {
     const selectedOptionId = answers[question.id] || null;
@@ -63,7 +63,7 @@ export function calculateTestResult(
     correctCount,
     incorrectCount: totalQuestions - correctCount,
     scorePercentage,
-    hasPassed: scorePercentage >= TEST_CONFIG.PASSING_THRESHOLD,
+    hasPassed: scorePercentage >= EXAM_CONFIG.PASSING_THRESHOLD,
     timeTakenSeconds,
     answerDetails,
   };

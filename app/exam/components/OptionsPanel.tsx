@@ -1,6 +1,6 @@
 'use client';
 
-import { QuestionOption } from '@/types/test.types';
+import { QuestionOption } from '@/types/exam.types';
 import { useLanguage } from '@/app/lib/contexts/LanguageContext';
 
 interface OptionsPanelProps {

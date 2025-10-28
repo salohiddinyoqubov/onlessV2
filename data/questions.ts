@@ -1,4 +1,4 @@
-import { Question } from '@/types/test.types';
+import { Question } from '@/types/exam.types';
 
 /**
  * Mock question bank for driving theory test

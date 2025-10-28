@@ -1,10 +1,10 @@
 'use client';
 
-import { TestResult } from '@/types/test.types';
-import { formatTime } from '@/app/lib/test-logic';
+import { ExamResult } from '@/types/exam.types';
+import { formatTime } from '@/app/lib/exam-logic';
 
 interface ResultDisplayProps {
-  result: TestResult;
+  result: ExamResult;
 }
 
 /**

@@ -1,16 +1,16 @@
 /**
- * Configuration constants for the driving theory test
+ * Configuration constants for the driving exam
  */
 
-export const TEST_CONFIG = {
+export const EXAM_CONFIG = {
   /** Total questions in question bank */
   TOTAL_QUESTIONS: 50,
 
-  /** Questions per test session */
+  /** Questions per exam session */
   QUESTIONS_PER_SESSION: 20,
 
-  /** Test duration in seconds (40 minutes) */
-  TEST_DURATION_SECONDS: 2400,
+  /** Exam duration in seconds (40 minutes) */
+  EXAM_DURATION_SECONDS: 2400,
 
   /** Minimum passing percentage */
   PASSING_THRESHOLD: 70,

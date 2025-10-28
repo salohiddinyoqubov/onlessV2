@@ -9,7 +9,7 @@ export default function HomePage() {
           Haydovchilik nazariy imtihoni platformasi
         </p>
         <Link
-          href="/test"
+          href="/exam"
           className="inline-block px-8 py-4 bg-success hover:bg-success/80 text-white rounded-lg font-semibold transition-colors"
         >
           Imtihonni boshlash

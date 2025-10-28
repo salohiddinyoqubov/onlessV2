@@ -1,5 +1,5 @@
 /**
- * Type definitions for the driving theory test module
+ * Type definitions for the driving exam module
  */
 
 /**
@@ -23,7 +23,7 @@ export type QuestionCategory =
   | 'safety';
 
 /**
- * Represents a test question
+ * Represents an exam question
  */
 export interface Question {
   /** Unique identifier (1-50) */
@@ -41,9 +41,9 @@ export interface Question {
 }
 
 /**
- * Test session state
+ * Exam session state
  */
-export interface TestSession {
+export interface ExamSession {
   /** IDs of 20 randomly selected questions */
   selectedQuestionIds: number[];
   /** Current question index (0-19) */
@@ -54,7 +54,7 @@ export interface TestSession {
   timeRemainingSeconds: number;
   /** Session start timestamp */
   startedAt: Date;
-  /** Whether test is completed */
+  /** Whether exam is completed */
   isCompleted: boolean;
 }
 
@@ -70,10 +70,10 @@ export interface AnswerDetail {
 }
 
 /**
- * Test results after completion
+ * Exam results after completion
  */
-export interface TestResult {
-  /** Total questions in test (always 20) */
+export interface ExamResult {
+  /** Total questions in exam (always 20) */
   totalQuestions: number;
   /** Number of correct answers */
   correctCount: number;
@@ -83,7 +83,7 @@ export interface TestResult {
   scorePercentage: number;
   /** Whether user passed (≥70%) */
   hasPassed: boolean;
-  /** Time taken to complete test */
+  /** Time taken to complete exam */
   timeTakenSeconds: number;
   /** Detailed answer breakdown */
   answerDetails: AnswerDetail[];

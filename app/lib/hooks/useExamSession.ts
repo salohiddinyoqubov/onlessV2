@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useCallback, useMemo } from 'react';
-import { Question, TestSession } from '@/types/test.types';
+import { Question, ExamSession } from '@/types/exam.types';
 import { selectRandomQuestions } from '../test-logic';
-import { TEST_CONFIG } from '@/config/test.config';
+import { EXAM_CONFIG } from '@/config/exam.config';
 
 /**
  * Custom hook for managing test session state
@@ -11,14 +11,14 @@ import { TEST_CONFIG } from '@/config/test.config';
  * @param allQuestions Complete array of all available questions
  * @returns Test session state and control functions
  */
-export function useTestSession(allQuestions: Question[]) {
-  const [session, setSession] = useState<TestSession>(() => {
+export function useExamSession(allQuestions: Question[]) {
+  const [session, setSession] = useState<ExamSession>(() => {
     const selectedIds = selectRandomQuestions();
     return {
       selectedQuestionIds: selectedIds,
       currentQuestionIndex: 0,
       answers: {},
-      timeRemainingSeconds: TEST_CONFIG.TEST_DURATION_SECONDS,
+      timeRemainingSeconds: EXAM_CONFIG.EXAM_DURATION_SECONDS,
       startedAt: new Date(),
       isCompleted: false,
     };

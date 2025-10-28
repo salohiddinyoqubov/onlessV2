@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { TestResult } from '@/types/test.types';
+import { ExamResult } from '@/types/exam.types';
 import { ResultDisplay } from '../components/ResultDisplay';
 
 /**
@@ -10,7 +10,7 @@ import { ResultDisplay } from '../components/ResultDisplay';
  */
 export default function ResultPage() {
   const router = useRouter();
-  const [result, setResult] = useState<TestResult | null>(null);
+  const [result, setResult] = useState<ExamResult | null>(null);
 
   useEffect(() => {
     // Retrieve result from sessionStorage
@@ -23,7 +23,7 @@ export default function ResultPage() {
     }
 
     try {
-      const parsedResult: TestResult = JSON.parse(storedResult);
+      const parsedResult: ExamResult = JSON.parse(storedResult);
       setResult(parsedResult);
     } catch (error) {
       console.error('Error parsing test result:', error);
