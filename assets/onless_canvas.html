@@ -1,0 +1,2884 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onless.uz - Birinchi online digital avtomaktab</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1a5a96;
+            border-bottom: 3px solid #1a5a96;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2a7cb0;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        h3 {
+            color: #3a8cc0;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #2a7cb0;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        table th {
+            background-color: #1a5a96;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .role-table tr:hover {
+            background-color: #e8f4f8;
+        }
+        .tariff-table {
+            width: 100%;
+            margin: 20px 0;
+        }
+        .tariff-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1a5a96;
+        }
+        .tariff-card h3 {
+            margin-top: 0;
+            color: #1a5a96;
+        }
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .restriction-list li:before {
+            content: "✗";
+            color: #e74c3c;
+        }
+        strong {
+            color: #1a5a96;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+        .important {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            color: #721c24;
+        }
+        .price {
+            font-size: 1.2em;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 "Onless.uz" Onlayn Ta'lim Platformasi</h1>
+        <h1 style="font-size: 1.5em; margin-top: 0;">Texnik Spetsifikatsiya</h1>
+
+        <!-- 1. Tizimning Umumiy Tavsifi -->
+        <div class="section">
+            <h2>1. Tizimning Umumiy Tavsifi</h2>
+            <p><strong>Onless.uz</strong> — haydovchilikga tayyorlanayotgan talabalar uchun onlayn ta'lim platformasi. Yangi qonunlarga ko'ra, avtomaktablarda nazariy darslar bekor qilinmoqda, va talaba o'ziga qulay bo'lgan platformada mustaqil o'qish huquqiga ega.</p>
+            <p>Asosiy maqsad: nazariy o'qitishning barcha bosqichlarini raqamli shaklda, zamonaviy, interaktiv va o'yinlashtirilgan (gamified) usullar orqali taqdim etish.</p>
+            <p>Platformaning asosiy moduli - yo'l harakati qoidalarini sinovdan o'tkazish tizimi. Tizimda kategoriyalar (masalan, "Chorrahalarda harakatlanish," "Svetofor ishoralari"), har biri 20 ta savoldan iborat test biletlari va rasmiy qoidalarga asoslangan javob izohlari mavjud.</p>
+        </div>
+
+        <!-- 2. Tizimdagi Rollar -->
+        <div class="section">
+            <h2>2. Tizimdagi Rollar</h2>
+            <table class="role-table">
+                <thead>
+                    <tr>
+                        <th>Rol nomi</th>
+                        <th>Tavsif</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Admin</strong></td>
+                        <td>Butun tizimni, foydalanuvchilar faoliyatini va platforma sozlamalarini boshqaradi.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kontent Menejer</strong></td>
+                        <td>Tizimdagi barcha kontentlarni boshqaradi. Testlar (Admin tomonidan joylangan) va videolar (Mentorlar tomonidan joylangan) ustida to'liq CRUD huquqiga ega.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>O'quvchi</strong></td>
+                        <td>Tizimda ro'yxatdan o'tadi, testlarni yechadi va imtihonlarga tayyorlanadi.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mentor</strong></td>
+                        <td>Ham o'qituvchilik, ham ma'muriy funksiyalarni bajaradigan malakali mutaxassislar. Mentorlar o'z o'quvchilarini ro'yxatga oladi (O'qituvchi funksiyasi) va premium video/sessiya kontentini yaratadi (Ekspert funksiyasi). Mentorlar Basic, Pro va Premium darajalariga bo'linadi.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Investor</strong></td>
+                        <td>Platformaning moliyaviy ahvolini to'liq ko'rish huquqiga ega. Barcha daromadlar va xarajatlarni kuzatib boradi, shu jumladan: server va internet xarajatlari, xodimlar uchun oylik ish haqlari, Mentorlarga bonuslar, O'quvchilarga bonuslar va platformaning umumiy moliyaviy hisobotlarini ko'rish imkoniyati.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business Owner (Biznes Egasi)</strong></td>
+                        <td>Haydovchilik maktablari va ekspress kurslar egalari. O'z o'qituvchilari (Teacher) va instruktorlarini (Instructor) ro'yxatdan o'tkazadi, narxlarni belgilaydi, talabalarni boshqaradi va moliyaviy hisobotlarni ko'radi. Platformada white-label brending imkoniyatiga ega.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Teacher (O'qituvchi)</strong></td>
+                        <td>Business Owner tomonidan ishga olingan xodim. Nazariy darslarni olib boradi (onlayn yoki oflayn), talabalar savollariga javob beradi va o'quvchilar taraqqiyotini kuzatib boradi. To'lovni Business Owner'dan oladi.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Instructor (Instruktor)</strong></td>
+                        <td>Business Owner tomonidan ishga olingan xodim. Amaliy haydovchilik darslarini olib boradi, o'z jadvalini belgilaydi va talabalar bilan mashg'ulotlar o'tkazadi. To'lovni Business Owner'dan oladi (odatda darsdan komissiya asosida).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="important">
+                <strong>🔑 BITTA YAGONA FOYDALANUVCHI TIZIMI:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>✅ Barcha foydalanuvchilar BITTA ma'lumotlar bazasida saqlanadi</li>
+                    <li>✅ Bir foydalanuvchi bir nechta rolga ega bo'lishi mumkin (masalan, O'quvchi + Mentor)</li>
+                    <li>✅ Rollar orqali huquqlar boshqariladi (alohida tizimlar emas)</li>
+                    <li>✅ Business Owner o'z xodimlarini tizimga qo'shadi va ularga Teacher/Instructor rollarini beradi</li>
+                    <li>💡 <strong>Farq:</strong> Mentor = Mustaqil ekspert, Teacher/Instructor = Biznes xodimi</li>
+                </ul>
+            </div>
+
+            <h3>🔄 Ikki Kontekstli Ish Rejimi: Biznes vs Shaxsiy</h3>
+
+            <div class="important">
+                <strong>⚡ YANGI FUNKSIONALLIK:</strong> Teacher va Instructor ikkalasi ham biznesda ishlash bilan bir vaqtda SHAXSIY (Private) ishlashi mumkin!
+                <br><br>
+                <strong>Asosiy Printsip:</strong> Bitta foydalanuvchi, bitta rol, lekin IKKI KONTEKST - "Biznes Rejimi" va "Shaxsiy Rejim"
+            </div>
+
+            <h4>📋 Kim Ikki Kontekstda Ishlashi Mumkin:</h4>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rol</th>
+                        <th>Biznes Konteksti</th>
+                        <th>Shaxsiy Kontekst</th>
+                        <th>Xizmat Turi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Teacher</strong></td>
+                        <td>Biznes uchun nazariy darslar</td>
+                        <td>Shaxsiy talabalar uchun nazariy sessiyalar (Mentor sifatida)</td>
+                        <td>Nazariy ta'lim</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Instructor</strong></td>
+                        <td>Biznes uchun amaliy darslar (haydash)</td>
+                        <td>Shaxsiy talabalar uchun amaliy darslar (soatbay)</td>
+                        <td>Amaliy haydash</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>🔄 Akkount Almashtirish Tizimi (Context Switching)</h4>
+
+            <div style="background: #f0f8ff; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                <p><strong>Dashboard'ning yuqori qismida doimo ko'rinadi:</strong></p>
+
+                <div style="background: #fff; padding: 10px; border-radius: 3px; margin: 10px 0; border: 2px solid #2196F3;">
+                    <strong>🔄 AKTIV REJIM:</strong>
+                    <span style="background: #2196F3; color: white; padding: 5px 10px; border-radius: 3px; margin: 0 10px;">🏢 Biznes Rejimi</span>
+                    <button style="background: #4CAF50; color: white; padding: 5px 15px; border: none; border-radius: 3px; cursor: pointer;">
+                        ➜ Shaxsiy Rejimga O'tish
+                    </button>
+                    <br><br>
+                    <em>Hozir: Andijon Avto Maktab uchun ishlayapsiz</em>
+                </div>
+
+                <p><strong>Tugmani bossangiz:</strong></p>
+
+                <div style="background: #fff; padding: 10px; border-radius: 3px; margin: 10px 0; border: 2px solid #4CAF50;">
+                    <strong>🔄 AKTIV REJIM:</strong>
+                    <span style="background: #4CAF50; color: white; padding: 5px 10px; border-radius: 3px; margin: 0 10px;">💼 Shaxsiy Rejim</span>
+                    <button style="background: #2196F3; color: white; padding: 5px 15px; border: none; border-radius: 3px; cursor: pointer;">
+                        ➜ Biznes Rejimga O'tish
+                    </button>
+                    <br><br>
+                    <em>Hozir: Shaxsiy faoliyatingiz</em>
+                </div>
+            </div>
+
+            <h4>📊 Har Bir Rejimda Dashboard Farqi:</h4>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Element</th>
+                        <th>🏢 Biznes Rejimi</th>
+                        <th>💼 Shaxsiy Rejim</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Talabalar Ro'yxati</strong></td>
+                        <td>Faqat biznes orqali kelganlar</td>
+                        <td>Faqat shaxsiy topganlar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jadval/Calendar</strong></td>
+                        <td>Biznes sessiyalari</td>
+                        <td>Shaxsiy sessiyalar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Daromad Ko'rinishi</strong></td>
+                        <td>Biznes statistikasi (maosh/bonuslar)</td>
+                        <td>Shaxsiy daromad (to'g'ridan-to'g'ri)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Narxlar</strong></td>
+                        <td>Business Owner belgilagan</td>
+                        <td>O'zi belgilaydi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Profil</strong></td>
+                        <td>Biznes brendi ostida</td>
+                        <td>Shaxsiy profil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sessiya Booking</strong></td>
+                        <td>Biznes orqali bron qilingan</td>
+                        <td>To'g'ridan-to'g'ri booking</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>💰 To'lov va Daromad Taqsimoti:</h4>
+
+            <div style="background: #fff3e0; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                <p><strong>TEACHER MISOLI (Ali - Nazariy O'qituvchi):</strong></p>
+
+                <table style="width: 100%; margin-top: 10px;">
+                    <thead>
+                        <tr style="background: #f5f5f5;">
+                            <th>Kontekst</th>
+                            <th>Talaba</th>
+                            <th>Xizmat</th>
+                            <th>Narx</th>
+                            <th>Kimga Ketadi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #e3f2fd;">
+                            <td><strong>🏢 Biznes</strong></td>
+                            <td>Aziz</td>
+                            <td>Nazariy kurs (biznes kursi)</td>
+                            <td>400,000 UZS</td>
+                            <td>Business Owner → Ali'ga maosh beradi</td>
+                        </tr>
+                        <tr style="background: #c8e6c9;">
+                            <td><strong>💼 Shaxsiy</strong></td>
+                            <td>Jasur</td>
+                            <td>60 min sessiya</td>
+                            <td>53,560 UZS</td>
+                            <td>Ali to'g'ridan-to'g'ri oladi (minus 15% komissiya)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="margin-top: 15px;"><strong>INSTRUCTOR MISOLI (Kamola - Amaliy Instruktor):</strong></p>
+
+                <table style="width: 100%; margin-top: 10px;">
+                    <thead>
+                        <tr style="background: #f5f5f5;">
+                            <th>Kontekst</th>
+                            <th>Talaba</th>
+                            <th>Xizmat</th>
+                            <th>Narx</th>
+                            <th>Kimga Ketadi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #e3f2fd;">
+                            <td><strong>🏢 Biznes</strong></td>
+                            <td>Sardor</td>
+                            <td>20 soat amaliy dars (biznes to'plami)</td>
+                            <td>1,000,000 UZS</td>
+                            <td>Business Owner → Kamola'ga maosh/komissiya beradi</td>
+                        </tr>
+                        <tr style="background: #c8e6c9;">
+                            <td><strong>💼 Shaxsiy</strong></td>
+                            <td>Dilnoza</td>
+                            <td>1 soat amaliy dars</td>
+                            <td>60,000 UZS</td>
+                            <td>Kamola to'g'ridan-to'g'ri oladi (minus 15% komissiya)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>🎯 Shaxsiy Instructor - Soatbay Xizmat (YANGI!)</h4>
+
+            <div class="important">
+                <strong>💡 YANGI XUSUSIYAT:</strong> Instructorlar ham Mentorlar kabi shaxsiy soatbay sessiya taklif qilishi mumkin!
+            </div>
+
+            <p><strong>Shaxsiy Instructor Narxlari (o'zi belgilaydi):</strong></p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Davomiyligi</th>
+                        <th>Tavsiya Etilgan Narx</th>
+                        <th>BHM %</th>
+                        <th>Instructor Oladi (15% komissiya)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1 soat</strong></td>
+                        <td>50,000 - 80,000 UZS</td>
+                        <td>12-19%</td>
+                        <td>42,500 - 68,000 UZS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2 soat</strong></td>
+                        <td>95,000 - 150,000 UZS</td>
+                        <td>23-36%</td>
+                        <td>80,750 - 127,500 UZS</td>
+                    </tr>
+                    <tr style="background: #e8f5e9;">
+                        <td><strong>5 soat paketi</strong></td>
+                        <td>230,000 - 370,000 UZS</td>
+                        <td>56-90%</td>
+                        <td>195,500 - 314,500 UZS</td>
+                    </tr>
+                    <tr style="background: #fff3e0;">
+                        <td><strong>10 soat paketi</strong></td>
+                        <td>440,000 - 700,000 UZS</td>
+                        <td>107-170%</td>
+                        <td>374,000 - 595,000 UZS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Talaba Booking Jarayoni (Shaxsiy Instructor):</strong></p>
+            <ol class="feature-list">
+                <li>Talaba platformada "Shaxsiy Instructorlar" katalogini ochadi</li>
+                <li>Instructor profilini ko'radi (reyting, tajriba, mashina turi, hudud)</li>
+                <li>Mavjud jadvaldan vaqt tanlaydi</li>
+                <li>To'lovni amalga oshiradi (masalan, 60,000 UZS - 1 soat)</li>
+                <li>Instructor tasdiqlaydi va uchrashish joyini belgilaydi</li>
+                <li>Darsdan keyin ikkalasi ham baho qoldiradi</li>
+            </ol>
+
+            <h4>🏆 Shaxsiy Instructor Darajalari - Ishlash Asosida</h4>
+
+            <div class="important">
+                <strong>⚡ MENTOR KABI:</strong> Shaxsiy Instructorlar ham ishlash asosida avtomatik darajalarga ega bo'ladilar!
+                <br><br>
+                Har bir dushanba soat 00:00 da tizim ko'rsatkichlarni tekshiradi va darajani avtomatik belgilaydi.
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Daraja</th>
+                        <th>Oylik To'lov</th>
+                        <th>Komissiya</th>
+                        <th>Qanday Olish Mumkin</th>
+                        <th>Imtiyozlar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🚗 Basic Instructor</strong></td>
+                        <td><span class="price">BEPUL</span></td>
+                        <td>20%</td>
+                        <td>Avtomatik - tasdiqlangandan keyin</td>
+                        <td>Oyiga 15 ta dars. Oddiy profil.</td>
+                    </tr>
+                    <tr style="background: #e8f5e9;">
+                        <td><strong>🏎️ Pro Instructor</strong></td>
+                        <td><span class="price">BEPUL</span></td>
+                        <td>15%</td>
+                        <td>
+                            <strong>AVTOMATIK BERILADI:</strong><br>
+                            • 30+ tugallangan dars<br>
+                            • 4.2⭐ o'rtacha reyting<br>
+                            • ≤3% bekor qilish darajasi<br>
+                            • 5+ aktiv talabalar<br>
+                            • 1+ oy tajriba<br>
+                            • Haydovchilik guvohnomasi (2+ yil)
+                        </td>
+                        <td>Oyiga 40 ta dars. Pro badge. Katalogda yuqorida.</td>
+                    </tr>
+                    <tr style="background: #fff3e0;">
+                        <td><strong>🏁 Elite Instructor</strong></td>
+                        <td><span class="price">BEPUL</span></td>
+                        <td>10%</td>
+                        <td>
+                            <strong>AVTOMATIK BERILADI:</strong><br>
+                            • 100+ tugallangan dars<br>
+                            • 4.6⭐ o'rtacha reyting<br>
+                            • ≤1% bekor qilish darajasi<br>
+                            • 15+ aktiv talabalar<br>
+                            • 90%+ "Mukammal" baholar<br>
+                            • 300,000 UZS+ oylik daromad<br>
+                            • 4+ oy tajriba
+                        </td>
+                        <td>Cheksiz darslar. Elite badge. Birinchi o'rinda. Ijtimoiy tarmoqlarda reklama.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>📊 Instructor Darajasini Kuzatish:</h5>
+            <div style="background: #f0f8ff; padding: 15px; border-radius: 5px; margin: 15px 0; font-family: monospace;">
+                <strong>🎯 PRO INSTRUCTOR'GA TARAQQIYOT</strong><br>
+                ✅ Darslar: 32/30<br>
+                ✅ Reyting: 4.4⭐/4.2⭐<br>
+                ✅ Bekor qilish: 2%/3%<br>
+                ✅ Talabalar: 6/5<br>
+                ⚠️ Tajriba: 3 hafta/1 oy ← <span style="color: #ff9800;">1 hafta qoldi!</span><br>
+                <br>
+                <strong style="color: #4CAF50;">🎉 Barcha talablar bajarilmoqda! 1 hafta ishdan keyin Pro bo'lasiz!</strong>
+            </div>
+
+            <h5>🚗 Instructor-ga Maxsus Talablar:</h5>
+            <ul class="feature-list">
+                <li><strong>Haydovchilik Guvohnomasi:</strong> Kamida 2 yillik tajriba (Pro uchun), 5 yil (Elite uchun)</li>
+                <li><strong>Mashina Texnik Ko'rigi:</strong> Har 6 oyda bir marta texnik ko'rikdan o'tkazish (foto yuklash)</li>
+                <li><strong>Sug'urta:</strong> Avtomobil sug'urtasi bo'lishi shart (Elite uchun)</li>
+                <li><strong>Yoqilg'i:</strong> Instructor o'zi ta'minlaydi (narxga kiritilgan)</li>
+                <li><strong>Uchrashish Joyi:</strong> Odatda talaba manzilidan boshlanadi</li>
+            </ul>
+
+            <h4>🔐 Xavfsizlik va Qoidalar:</h4>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Qoida</th>
+                        <th>Tavsif</th>
+                        <th>Jazо</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #ffebee;">
+                        <td><strong>1. Talaba O'g'irlash TAQIQ</strong></td>
+                        <td>Biznes talabalarini shaxsiy kontekstga ko'chirish</td>
+                        <td>1-marta: Ogohlantirish<br>2-marta: Akkaunt bloklanadi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Narxlarni Dumping Qilish</strong></td>
+                        <td>Biznes narxidan ancha past shaxsiy narx belgilash (biznesdan talaba tortish uchun)</td>
+                        <td>Business Owner tekshirishi mumkin, shikoyat qilsa - Warning</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Jadval Konflikti Yo'q</strong></td>
+                        <td>Tizim avtomatik bir vaqtda ikki sessiyaga ruxsat bermaydi</td>
+                        <td>Avtomatik oldini olinadi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Shaffoflik</strong></td>
+                        <td>Business Owner shaxsiy faoliyatni ko'ra olmaydi</td>
+                        <td>Maxfiylik kafolati</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Talaba Xabardorligi</strong></td>
+                        <td>Talaba aniq bilishi kerak - biznes yoki shaxsiy sessiya</td>
+                        <td>Har bir bookingda aniq ko'rsatiladi</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>⚙️ Maxsus Sozlamalar (Account Settings):</h4>
+
+            <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                <p><strong>Har bir Teacher/Instructor o'z settings'ida:</strong></p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sozlama</th>
+                            <th>Tavsif</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Shaxsiy Faoliyat Yoqilgan</strong></td>
+                            <td>Shaxsiy rejimni faollashtirish/o'chirish</td>
+                            <td>❌ O'chirilgan</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shaxsiy Narxlar</strong></td>
+                            <td>O'z sessiya narxlarini belgilash</td>
+                            <td>Tavsiya etilgan narxlar</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shaxsiy Jadval</strong></td>
+                            <td>Qaysi kunlar/soatlarda shaxsiy booking qabul qilish</td>
+                            <td>Dam olish kunlari</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Avtomatik Tasdiqlash</strong></td>
+                            <td>Shaxsiy bookinglar avtomatik tasdiqlansinmi</td>
+                            <td>❌ Yo'q (qo'lda)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hudud (Instructorlar Uchun)</strong></td>
+                            <td>Qaysi hududlarda amaliy dars berish</td>
+                            <td>Biznes manzili atrofi</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mashina Turi (Instructorlar)</strong></td>
+                            <td>Qanday mashina ishlatish (mexanika/avtomat)</td>
+                            <td>Biznes mashinasi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>📈 Foyda - Barcha Tomonlar Uchun:</h4>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tomon</th>
+                        <th>Foydalar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Teacher/Instructor</strong></td>
+                        <td>
+                            ✅ Barqaror maosh (biznesdan)<br>
+                            ✅ Qo'shimcha daromad (shaxsiy)<br>
+                            ✅ Moslashuvchan jadval<br>
+                            ✅ Platformadan bepul foydalanish<br>
+                            ✅ Yagona dashboard
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business Owner</strong></td>
+                        <td>
+                            ✅ Motivatsiyalangan xodimlar<br>
+                            ✅ Yuqori sifatli mutaxassislarni jalb qilish<br>
+                            ✅ Xodim reputatsiyasi biznesga foyda<br>
+                            ✅ Xavfsizlik tizimi (talaba o'g'irlash oldini oladi)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Talaba</strong></td>
+                        <td>
+                            ✅ Ko'proq tanlov (biznes + shaxsiy)<br>
+                            ✅ Narx moslashuvchanligi<br>
+                            ✅ Sifatli mutaxassislarga kirish<br>
+                            ✅ Moslashuvchan jadval
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Platforma</strong></td>
+                        <td>
+                            ✅ Ikki tomondan daromad (biznes obuna + shaxsiy komissiya)<br>
+                            ✅ Faol ecosystem<br>
+                            ✅ Yuqori engagement<br>
+                            ✅ Raqobatbardoshlik
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="important">
+                <strong>🎯 XULOSA:</strong> Bitta akkaunt, bitta rol, lekin ikki mustaqil ish konteksti - biznes va shaxsiy. Oddiy tugma bilan almashtirish. Barcha tomonlar uchun foyda!
+            </div>
+        </div>
+
+        <!-- 2.1 B2B Marketplace - Haydovchilik Maktablari Integratsiyasi -->
+        <div class="section">
+            <h2>2.1. B2B Marketplace - Haydovchilik Maktablari va Ekspress Kurslar Tizimi</h2>
+
+            <h3>📋 Tizimga Ehtiyoj va Maqsad</h3>
+            <div class="important">
+                <strong>🏛️ Vazirlar Mahkamasi Qarori:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>❌ Haydovchilik maktablarida nazariy darslar BEKOR QILINDI</li>
+                    <li>✅ Talabalar onlayn yoki oflayn mustaqil tayyorlanishlari mumkin</li>
+                    <li>✅ Faqat nazariy imtihondan o'tish yetarli</li>
+                    <li>⚠️ Ko'plab nazariy o'qituvchilar ishsiz qolmoqda</li>
+                    <li>🚗 Amaliy mashg'ulotlar (mashina haydash) haydovchilik maktablarida qoladi</li>
+                    <li>📉 O'qish muddati: 4.5 oy → Endi faqat 20 soat amaliy + nazariy test</li>
+                </ul>
+            </div>
+
+            <p><strong>Platforma Yechimi:</strong> Haydovchilik maktablari va ekspress kurslarni platformaga jalb qilish orqali:</p>
+            <ul class="feature-list">
+                <li>Ishsiz o'qituvchilar uchun yangi ish imkoniyati (onlayn nazariy darslar)</li>
+                <li>Talabalar uchun amaliy mashg'ulotlarni tizim orqali bron qilish</li>
+                <li>Haydovchilik maktablari uchun yangi talabalar oqimi</li>
+                <li>Platforma uchun yangi daromad manbai (komissiya asosida)</li>
+            </ul>
+
+            <h3>🏢 Biznes Obuna Darajalari (Gibrid Model: Oylik + Tranzaksiya)</h3>
+            <p><em>Barqaror daromad + muvaffaqiyat asosida komissiya</em></p>
+
+            <div class="important" style="margin-bottom: 20px;">
+                <strong>💰 NEGA OBUNA MODELI?</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>✅ <strong>Platforma uchun:</strong> Barqaror, bashorat qilinadigan daromad</li>
+                    <li>✅ <strong>Biznes uchun:</strong> CRM, marketing vositalari, analytics va talabalar bazasiga kirish</li>
+                    <li>✅ <strong>Adolatli:</strong> Yuqori obuna = past tranzaksiya to'lovi</li>
+                    <li>✅ <strong>BHM ga bog'langan:</strong> Narxlar avtomatik indeksatsiya qilinadi</li>
+                    <li>💡 <strong>Tranzaksiya to'lovi:</strong> Platforma biznesning muvaffaqiyatida manfaatdor</li>
+                </ul>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tarif</th>
+                        <th>Oylik To'lov</th>
+                        <th>Tranzaksiya To'lovi</th>
+                        <th>Talabalar Limiti</th>
+                        <th>Xodimlar Limiti</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🏁 Starter</strong></td>
+                        <td><span class="price">206,000 UZS</span> (50% BHM)</td>
+                        <td>5%</td>
+                        <td>30 ta/oy</td>
+                        <td>3 ta xodim</td>
+                    </tr>
+                    <tr style="background: #e8f5e9;">
+                        <td><strong>🚀 Standard</strong></td>
+                        <td><span class="price">412,000 UZS</span> (100% BHM)</td>
+                        <td>3%</td>
+                        <td>80 ta/oy</td>
+                        <td>10 ta xodim</td>
+                    </tr>
+                    <tr style="background: #fff3e0;">
+                        <td><strong>🏆 Professional</strong></td>
+                        <td><span class="price">824,000 UZS</span> (200% BHM)</td>
+                        <td>2%</td>
+                        <td>200 ta/oy</td>
+                        <td>30 ta xodim</td>
+                    </tr>
+                    <tr style="background: #e3f2fd;">
+                        <td><strong>🎯 Enterprise</strong></td>
+                        <td><span class="price">1,648,000 UZS</span> (400% BHM)</td>
+                        <td>1%</td>
+                        <td>Cheksiz</td>
+                        <td>Cheksiz</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>💡 Narxlarning Mantiqiy Asoslari:</h4>
+            <div style="background: #f0f8ff; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                <p><strong>Starter (206,000 UZS/oy):</strong></p>
+                <ul style="margin: 5px 0; padding-left: 20px;">
+                    <li>30 ta talaba × 350,000 = 10,500,000 UZS oylik daromad</li>
+                    <li>Platforma narxi: ~2% daromaddan (juda arzon!)</li>
+                    <li>Yolg'iz o'qituvchi yoki kichik biznes uchun</li>
+                </ul>
+
+                <p><strong>Standard (412,000 UZS/oy):</strong></p>
+                <ul style="margin: 5px 0; padding-left: 20px;">
+                    <li>80 ta talaba × 350,000 = 28,000,000 UZS oylik daromad</li>
+                    <li>Platforma narxi: ~1.5% daromaddan</li>
+                    <li>Kichik haydovchilik maktabi uchun</li>
+                </ul>
+
+                <p><strong>Professional (824,000 UZS/oy):</strong></p>
+                <ul style="margin: 5px 0; padding-left: 20px;">
+                    <li>200 ta talaba × 350,000 = 70,000,000 UZS oylik daromad</li>
+                    <li>Platforma narxi: ~1.2% daromaddan</li>
+                    <li>O'rta va yirik maktablar uchun</li>
+                </ul>
+
+                <p><strong>Enterprise (1,648,000 UZS/oy):</strong></p>
+                <ul style="margin: 5px 0; padding-left: 20px;">
+                    <li>300+ talaba × 350,000 = 100,000,000+ UZS oylik daromad</li>
+                    <li>Platforma narxi: <2% daromaddan</li>
+                    <li>Katta zanjirlar va franshizalar uchun</li>
+                </ul>
+            </div>
+
+            <h4>🔄 Avtomatik Tarif Yangilash:</h4>
+            <div class="important">
+                <strong>Talabalar Limiti Oshganda:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>Agar biznes limitdan oshsa (masalan, Starter'da 31-talaba), tizim avtomatik yuqori tarifga o'tkazadi</li>
+                    <li>Pro-rata hisoblash: Faqat qolgan kunlar uchun farq to'lanadi</li>
+                    <li>Keyingi oyda yangi tarif narxida to'lov</li>
+                    <li>⚠️ Pasaytirib bo'lmaydi - faqat yuqoriga o'tish mumkin</li>
+                </ul>
+
+                <p><strong>Misol:</strong></p>
+                <div style="background: #fff; padding: 10px; border-radius: 3px; margin-top: 10px;">
+                    Biznes: Starter tarifda (206,000/oy, max 30 talaba)<br>
+                    15-kun: 31-talaba ro'yxatdan o'tdi<br>
+                    Tizim: Avtomatik Standard tarifga o'tkazadi<br><br>
+                    Hisoblash:<br>
+                    • Starter (15 kun): 206,000 × 15/30 = 103,000 UZS<br>
+                    • Standard (15 kun): 412,000 × 15/30 = 206,000 UZS<br>
+                    • Oy uchun jami: 309,000 UZS<br>
+                    • Keyingi oy: 412,000 UZS (Standard tarif)
+                </div>
+            </div>
+
+            <h3>💰 Komissiya Tuzilmasi - Xizmat Turlari Bo'yicha</h3>
+
+            <h4>A) Nazariy Kurs Obunalari</h4>
+            <p><strong>Biznes o'z narxini belgilaydi:</strong> 200,000 - 500,000 UZS (to'liq kurs)</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Biznes Tarifi</th>
+                        <th>Tranzaksiya To'lovi</th>
+                        <th>Qo'llanilish</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Starter</strong></td>
+                        <td>5%</td>
+                        <td>Har bir nazariy kurs obunasidan</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Standard</strong></td>
+                        <td>3%</td>
+                        <td>Har bir nazariy kurs obunasidan</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Professional</strong></td>
+                        <td>2%</td>
+                        <td>Har bir nazariy kurs obunasidan</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Enterprise</strong></td>
+                        <td>1%</td>
+                        <td>Har bir nazariy kurs obunasidan</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Misol 1: Starter Tarifda</strong></p>
+            <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <strong>Biznes:</strong> "Andijon Avto Maktab" (Starter tarif)<br>
+                <strong>Oylik obuna:</strong> 206,000 UZS<br>
+                <strong>Nazariy kurs narxi:</strong> 350,000 UZS<br>
+                <strong>Oy davomida 25 ta talaba ro'yxatdan o'tdi</strong><br><br>
+
+                <strong>Hisoblash:</strong><br>
+                • Talabalardan daromad: 25 × 350,000 = 8,750,000 UZS<br>
+                • Tranzaksiya to'lovi (5%): 437,500 UZS<br>
+                • Oylik obuna: 206,000 UZS<br>
+                <strong>• Jami platforma oladi:</strong> 643,500 UZS<br>
+                <strong>• Biznes oladi:</strong> 8,106,500 UZS + (keyingi oylar 100%)<br><br>
+
+                <em>Keyingi oylar: Talabalar uzaytirishda tranzaksiya to'lovi yo'q, faqat oylik obuna 206,000 UZS</em>
+            </div>
+
+            <p><strong>Misol 2: Professional Tarifda</strong></p>
+            <div style="background: #fff3e0; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <strong>Biznes:</strong> "Toshkent Driving School" (Professional tarif)<br>
+                <strong>Oylik obuna:</strong> 824,000 UZS<br>
+                <strong>Nazariy kurs narxi:</strong> 400,000 UZS<br>
+                <strong>Oy davomida 150 ta talaba ro'yxatdan o'tdi</strong><br><br>
+
+                <strong>Hisoblash:</strong><br>
+                • Talabalardan daromad: 150 × 400,000 = 60,000,000 UZS<br>
+                • Tranzaksiya to'lovi (2%): 1,200,000 UZS<br>
+                • Oylik obuna: 824,000 UZS<br>
+                <strong>• Jami platforma oladi:</strong> 2,024,000 UZS<br>
+                <strong>• Biznes oladi:</strong> 57,976,000 UZS<br>
+                <strong>• Platforma ulushi:</strong> ~3.4% (juda adolatli!)<br><br>
+
+                <em>Bu darajada platforma narxi jami daromadning 3.4% i - bu 150 ta talabaga to'liq xizmat uchun juda arzon!</em>
+            </div>
+
+            <h4>B) Amaliy Haydovchilik Darslari</h4>
+            <p><strong>Biznes soatlik narx belgilaydi:</strong> 40,000 - 80,000 UZS/soat</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Xizmat</th>
+                        <th>Platforma Komissiyasi</th>
+                        <th>Sabab</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Amaliy darslar</strong></td>
+                        <td><span class="price">1%</span></td>
+                        <td>Ultra-past, yuqori hajmli model. Har bir talaba 20+ soat kerak.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Misol:</strong></p>
+            <div style="background: #f0f8ff; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <strong>Talaba band qildi:</strong> 20 soat × 50,000 UZS = 1,000,000 UZS<br>
+                <strong>Platforma oladi:</strong> 10,000 UZS (1%)<br>
+                <strong>Biznes oladi:</strong> 990,000 UZS (99%)<br><br>
+                <em>Nega faqat 1%? Yuqori tranzaksiya hajmi. Har bir talaba 20+ soat kerak, biz hajm orqali daromad topamiz.</em>
+            </div>
+
+            <h3>🔒 To'lov Escrow va Biznes Almashtirish Tizimi</h3>
+
+            <h4>7 Kunlik Ushlab Turish Davri (Faqat Nazariy Kurslar)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kun</th>
+                        <th>Voqea</th>
+                        <th>Pul Holati</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>0-kun</strong></td>
+                        <td>Talaba 350,000 UZS to'laydi</td>
+                        <td>💰 Platformada escrow'da ushlanadi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1-kun</strong></td>
+                        <td>Talaba birinchi darsga qatnashadi (demo)</td>
+                        <td>⏳ Kutilmoqda</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1-7 kun</strong></td>
+                        <td>Agar talabaga yoqmasa, biznesni almashtirishi mumkin</td>
+                        <td>⏳ Escrow'da</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7-kun</strong></td>
+                        <td>Agar shikoyat bo'lmasa → Pul biznesga o'tkaziladi</td>
+                        <td>✅ Biznesga o'tkaziladi (komissiya ayirilgan holda)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>🚫 Biznes Almashtirish Qoidalari (Firibgarlikka Qarshi)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Urinish</th>
+                        <th>Talaba Harakati</th>
+                        <th>Platforma Javobi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1-almashtirish</strong></td>
+                        <td>"Biznes A menga yoqmadi"</td>
+                        <td>✅ Ruxsat berildi - Pul Biznes B ga o'tkaziladi (7 kunlik ushlab turish qaytadan boshlanadi)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2-almashtirish</strong></td>
+                        <td>"Biznes B ham yoqmadi"</td>
+                        <td>⚠️ Ogohlantirish - "Oxirgi imkoniyat. Ehtiyotkorlik bilan tanlang."</td>
+                    </tr>
+                    <tr style="background: #ffebee;">
+                        <td><strong>3-almashtirish</strong></td>
+                        <td>"Biznes C ham yoqmadi"</td>
+                        <td>❌ <strong>BLOKLANGAN</strong> - Biznes C bilan tugatish SHART yoki to'lovni qaytarish (10% admin to'lovi ayiriladi)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="important">
+                <strong>3 marta almashtirgandan keyin:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>Variant 1: Joriy biznes bilan kursni tugatish</li>
+                    <li>Variant 2: To'liq to'lovni qaytarish minus 10% ma'muriy to'lov</li>
+                    <li>⚠️ Platforma talaba akkauntini belgilaydi (potentsial firibgar)</li>
+                </ul>
+                <strong>Sabab:</strong> Agar talaba 10 ta biznesni aylanib, hamma narsani o'rganib, oxirida "yoqmadi" desa, bu firibgarlik imkonini beradi.
+            </div>
+
+            <h3>🎨 White-Label Brending Tizimi</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Daraja</th>
+                        <th>Brending Imkoniyatlari</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Starter</strong></td>
+                        <td>
+                            • Logo yuklash (PNG, max 2MB)<br>
+                            • Biznes nomi ko'rsatish<br>
+                            • Standart rang sxemasi
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Professional</strong></td>
+                        <td>
+                            • Logo + favicon<br>
+                            • Maxsus brend ranglari (primary, secondary, accent)<br>
+                            • Maxsus xush kelibsiz xabari<br>
+                            • Biznes profil sahifasi
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Enterprise</strong></td>
+                        <td>
+                            • To'liq white-label (maxsus subdomain: andijon.onless.uz)<br>
+                            • Maxsus domen qo'llab-quvvatlash (avto-maktab.uz)<br>
+                            • To'liq brendlangan talaba portali<br>
+                            • Brendlangan sertifikatlar<br>
+                            • Maxsus email shablonlari
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Misol: Talaba Tajribasi</strong></p>
+            <div style="display: flex; gap: 20px; margin: 20px 0;">
+                <div style="flex: 1; background: #f5f5f5; padding: 15px; border-radius: 5px;">
+                    <strong>OLDIN (Platforma brendlangan):</strong><br><br>
+                    Website: onless.uz<br>
+                    Header: "Onless.uz - Online Ta'lim"<br>
+                    Ranglar: Ko'k/Oq
+                </div>
+                <div style="flex: 1; background: #e3f2fd; padding: 15px; border-radius: 5px;">
+                    <strong>KEYIN (Biznes brendlangan):</strong><br><br>
+                    Website: andijon.onless.uz<br>
+                    Header: "Andijon Avto Maktab"<br>
+                    Logo: [Biznes Logosi]<br>
+                    Ranglar: Qizil/Qora (biznes ranglari)
+                </div>
+            </div>
+            <p><em>Lekin sahna orqasida = bir xil platforma, bir xil ma'lumotlar bazasi!</em></p>
+
+            <h3>🎯 To'liq Xususiyatlar Taqqoslash Jadvali</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Xususiyat</th>
+                        <th>Starter</th>
+                        <th>Standard</th>
+                        <th>Professional</th>
+                        <th>Enterprise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="5"><strong>NARXLAR VA LIMITLAR</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Oylik To'lov</strong></td>
+                        <td>206,000 UZS</td>
+                        <td>412,000 UZS</td>
+                        <td>824,000 UZS</td>
+                        <td>1,648,000 UZS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tranzaksiya To'lovi</strong></td>
+                        <td>5%</td>
+                        <td>3%</td>
+                        <td>2%</td>
+                        <td>1%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max Talabalar</strong></td>
+                        <td>30/oy</td>
+                        <td>80/oy</td>
+                        <td>200/oy</td>
+                        <td>Cheksiz</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max Xodimlar</strong></td>
+                        <td>3 ta</td>
+                        <td>10 ta</td>
+                        <td>30 ta</td>
+                        <td>Cheksiz</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="5"><strong>BRENDING VA DIZAYN</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Logo Yuklash</strong></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maxsus Ranglar</strong></td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Xush Kelibsiz Xabari</strong></td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Subdomain (name.onless.uz)</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maxsus Domen (name.com)</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="5"><strong>TAHLILLAR VA HISOBOTLAR</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Oddiy Tahlillar</strong></td>
+                        <td>✅ Asosiy</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ilg'or Tahlillar</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Daromad Prognozi</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅ + AI</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Raqobatchilar Tahlili</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Xodimlar Ishlashi</strong></td>
+                        <td>❌</td>
+                        <td>✅ Oddiy</td>
+                        <td>✅ Batafsil</td>
+                        <td>✅ To'liq</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="5"><strong>MARKETING VA AVTOMATLASHTIRISH</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email Bildirishnomalar</strong></td>
+                        <td>✅ Qo'lda</td>
+                        <td>✅ Avtomatik</td>
+                        <td>✅ Avtomatik</td>
+                        <td>✅ Avtomatik</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SMS Bildirishnomalar</strong></td>
+                        <td>❌</td>
+                        <td>✅ (alohida to'lov)</td>
+                        <td>✅ (100 SMS/oy)</td>
+                        <td>✅ (500 SMS/oy)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avtomatik Marketing Kampaniyalar</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Talaba Referral Dasturi</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WhatsApp Integratsiya</strong></td>
+                        <td>❌</td>
+                        <td>❌ (qo'shimcha to'lov)</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="5"><strong>KATALOG VA REYTING</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Katalogda O'rni</strong></td>
+                        <td>Oddiy ro'yxat</td>
+                        <td>Featured (yuqorida)</td>
+                        <td>TOP (birinchi)</td>
+                        <td>Eksklyuziv (doim 1-o'rinda)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Profil Sahifasi</strong></td>
+                        <td>✅ Oddiy</td>
+                        <td>✅ Kengaytirilgan</td>
+                        <td>✅ To'liq</td>
+                        <td>✅ Premium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Video Va Rasmlar</strong></td>
+                        <td>3 ta rasm</td>
+                        <td>10 ta rasm + 1 video</td>
+                        <td>20 ta rasm + 3 video</td>
+                        <td>Cheksiz</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="5"><strong>TEXNIK INTEGRATSIYALAR</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>API Kirish</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅ To'liq</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Webhook'lar</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Multi-Filial Boshqaruv</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅ (3 ta gacha)</td>
+                        <td>✅ Cheksiz</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Franshiza Vositalari</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="5"><strong>QO'LLAB-QUVVATLASH</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Qo'llab-Quvvatlash</strong></td>
+                        <td>Email (48 soat)</td>
+                        <td>Email (12 soat)</td>
+                        <td>Email+Chat (4 soat)</td>
+                        <td>Telefon (1 soat)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shaxsiy Menejer</strong></td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>O'qitish Va Onboarding</strong></td>
+                        <td>Video darslar</td>
+                        <td>Video + FAQ</td>
+                        <td>Video + 1:1 sessiya</td>
+                        <td>To'liq onboarding dasturi</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>💎 Qo'shimcha Xizmatlar (Add-ons)</h3>
+            <p><strong>Barcha tariflar uchun qo'shimcha to'lov bilan:</strong></p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Xizmat</th>
+                        <th>Narx</th>
+                        <th>BHM %</th>
+                        <th>Tavsif</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Qo'shimcha Xodim Slot</strong></td>
+                        <td>20,600 UZS/xodim/oy</td>
+                        <td>5%</td>
+                        <td>Limitdan ortiq xodim qo'shish</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Qo'shimcha Talaba Limiti</strong></td>
+                        <td>4,120 UZS/talaba</td>
+                        <td>1%</td>
+                        <td>Oylik limitni oshirish (avtomatik yangilashsiz)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Premium Tahlillar</strong></td>
+                        <td>82,400 UZS/oy</td>
+                        <td>20%</td>
+                        <td>Ilg'or hisobotlar, AI prognozlar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SMS Marketing</strong></td>
+                        <td>100 so'm/SMS</td>
+                        <td>-</td>
+                        <td>Ommaviy SMS xabarlari</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WhatsApp Business API</strong></td>
+                        <td>206,000 UZS/oy</td>
+                        <td>50%</td>
+                        <td>WhatsApp orqali avtomatik xabarlar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>White-label Mobil Ilova</strong></td>
+                        <td>412,000 UZS/oy</td>
+                        <td>100%</td>
+                        <td>iOS/Android ilova biznes brendi bilan</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shaxsiy Onboarding</strong></td>
+                        <td>206,000 UZS (bir martalik)</td>
+                        <td>50%</td>
+                        <td>1:1 o'rnatish va o'qitish sessiyasi</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>📊 Business Owner Dashboard</h3>
+
+            <h4>Asosiy Funksiyalar:</h4>
+
+            <p><strong>1. Xodimlarni Boshqarish</strong></p>
+            <ul class="feature-list">
+                <li>Teacher va Instructor qo'shish/o'chirish</li>
+                <li>Rol va ruxsatlar tayinlash</li>
+                <li>Har bir xodim bo'yicha ishlash ko'rsatkichlarini ko'rish</li>
+            </ul>
+
+            <p><strong>2. Narxlarni Boshqarish</strong></p>
+            <ul class="feature-list">
+                <li>Nazariy kurs narxini belgilash</li>
+                <li>Amaliy dars narxini belgilash (soatiga)</li>
+                <li>Chegirma paketlarini yaratish</li>
+            </ul>
+
+            <p><strong>3. Talabalarni Boshqarish</strong></p>
+            <ul class="feature-list">
+                <li>Ro'yxatdan o'tgan talabalarni ko'rish</li>
+                <li>Taraqqiyotni kuzatib borish</li>
+                <li>Aloqa vositalari</li>
+            </ul>
+
+            <p><strong>4. Moliyaviy Dashboard</strong></p>
+            <ul class="feature-list">
+                <li>Ushbu oyda daromad</li>
+                <li>Platforma komissiyasi tafsiloti</li>
+                <li>Kutilayotgan to'lovlar (escrow'da)</li>
+                <li>To'lov jadvali</li>
+            </ul>
+
+            <p><strong>5. Tahlillar</strong></p>
+            <ul class="feature-list">
+                <li>Talaba olish manbalari</li>
+                <li>Tugatish darajalari</li>
+                <li>Reyting tendentsiyalari</li>
+                <li>Raqobatchilar bilan taqqoslash</li>
+            </ul>
+
+            <h3>⭐ Biznes Reyting va Ranking Tizimi</h3>
+
+            <h4>Bizneslar Qanday Baholanadi:</h4>
+            <p><strong>Talabalar baholaydi:</strong></p>
+            <ol>
+                <li>Nazariy kursni tugatgandan keyin (1-5 yulduz + sharh)</li>
+                <li>Amaliy darslarni tugatgandan keyin (1-5 yulduz + sharh)</li>
+            </ol>
+
+            <p><strong>Reyting Tarkibi:</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mezon</th>
+                        <th>Vazn</th>
+                        <th>Tavsif</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Talaba Mamnunligi</strong></td>
+                        <td>40%</td>
+                        <td>O'rtacha reyting (1-5 yulduz)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tugatish Darajasi</strong></td>
+                        <td>30%</td>
+                        <td>Kursni tugatgan talabalar foizi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Javob Vaqti</strong></td>
+                        <td>20%</td>
+                        <td>So'rovlarga qanchalik tez javob beradi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>O'tish Darajasi</strong></td>
+                        <td>10%</td>
+                        <td>Birinchi urinishda imtihondan o'tgan talabalar foizi</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Ommaviy Biznes Katalogi</h4>
+            <p><strong>Saralash:</strong></p>
+            <ul>
+                <li>⭐ Eng Yuqori Baholangan</li>
+                <li>📍 Menga Eng Yaqin (joylashuv asosida)</li>
+                <li>💰 Eng Arzon Narx</li>
+                <li>🎓 Eng Ko'p Bitiruvchilar</li>
+            </ul>
+
+            <p><strong>Har bir ro'yxat ko'rsatadi:</strong></p>
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <strong>Andijon Avto Maktab</strong> 🏆<br>
+                ⭐⭐⭐⭐⭐ 4.7 (234 ta sharh)<br>
+                📚 Nazariy kurs: 350,000 UZS<br>
+                🚗 Amaliy dars: 50,000 UZS/soat<br>
+                🎓 Bitiruvchilar: 1,240 ta<br>
+                ✅ Muvaffaqiyat darajasi: 87%<br>
+                📍 Joylashuv: Andijon, Markaziy ko'cha<br>
+                📅 Mavjud jadval: Dush-Jum 09:00-18:00
+            </div>
+
+            <h3>👥 Teacher vs Instructor Rollari</h3>
+
+            <h4>Teacher Roli (Nazariy O'qitish)</h4>
+            <p><strong>Imkoniyatlar:</strong></p>
+            <ul class="feature-list">
+                <li>Nazariy darslarni o'tkazish (Google Meet orqali onlayn YOKI oflayn haydovchilik maktabida)</li>
+                <li>Telegram guruhida talabalar savollariga javob berish</li>
+                <li>Test materiallari yaratish (ixtiyoriy)</li>
+                <li>Talabalar taraqqiyotini kuzatish</li>
+            </ul>
+            <p><strong>To'lov:</strong> Business Owner tomonidan to'lanadi (platforma emas). Biznes qaror qiladi: maosh, soatlik, komissiya va h.k.</p>
+
+            <h4>Instructor Roli (Amaliy Haydovchilik)</h4>
+            <p><strong>Imkoniyatlar:</strong></p>
+            <ul class="feature-list">
+                <li>Amaliy haydovchilik darslarini o'tkazish</li>
+                <li>Mavjudlik kalendarini belgilash</li>
+                <li>Talabalar ma'lum instruktorni band qiladi (yoki avtomatik tayinlanadi)</li>
+                <li>Tugallangan darslarni qayd qilish</li>
+            </ul>
+            <p><strong>To'lov:</strong> Business Owner tomonidan to'lanadi. Odatiy model: Darsdan komissiya (masalan, instruktor 60% oladi, biznes 40% ushlab qoladi)</p>
+
+            <h3>💵 Narxlar Misollari (BHM Asosida)</h3>
+            <p><strong>BHM = 412,000 UZS</strong></p>
+
+            <h4>Nazariy Kurs Narxlari (Biznes Belgilaydi)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Biznes Hajmi</th>
+                        <th>Odatiy Narx Oralig'i</th>
+                        <th>Platforma Komissiyasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Kichik (1-2 ta o'qituvchi)</td>
+                        <td>200,000 - 300,000 UZS</td>
+                        <td>15% (Starter daraja)</td>
+                    </tr>
+                    <tr>
+                        <td>O'rta (3-10 ta o'qituvchi)</td>
+                        <td>300,000 - 400,000 UZS</td>
+                        <td>10% (Professional)</td>
+                    </tr>
+                    <tr>
+                        <td>Katta (10+ ta o'qituvchi)</td>
+                        <td>400,000 - 500,000 UZS</td>
+                        <td>5% (Enterprise)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Amaliy Dars Narxlari (Biznes Belgilaydi)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dars Turi</th>
+                        <th>Odatiy Narx</th>
+                        <th>Platforma Komissiyasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1 soat mexanik uzatma</td>
+                        <td>40,000 - 50,000 UZS</td>
+                        <td>1%</td>
+                    </tr>
+                    <tr>
+                        <td>1 soat avtomatik uzatma</td>
+                        <td>50,000 - 60,000 UZS</td>
+                        <td>1%</td>
+                    </tr>
+                    <tr>
+                        <td>Paket: 20 soat</td>
+                        <td>800,000 - 1,000,000 UZS</td>
+                        <td>1%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 3. Platformaning Asosiy Modullari -->
+        <div class="section">
+            <h2>3. Platformaning Asosiy Modullari va Funksiyalari</h2>
+            
+            <h3>3.1. Test Rejimlari</h3>
+            <p>O'quvchilar uchta asosiy rejimda shug'ullanishlari mumkin:</p>
+            
+            <h4>📚 Mashq Rejimi</h4>
+            <ul class="feature-list">
+                <li>O'quvchilar mashq qilish uchun maxsus biletni tanlaydilar</li>
+                <li>Vaqt chegarasi qo'yilmaydi</li>
+                <li>Har bir savol uchun "Izoh" tugmasi mavjud bo'lib, u bosilganda rasmiy qoidalarga asoslangan to'g'ri javobni tushuntiruvchi UI elementi ochiladi</li>
+                <li>Noto'g'ri javoblar qizil rangga, to'g'ri javoblar yashil rangga aylanadi</li>
+            </ul>
+
+            <h4>🎯 Imtihon Rejimi</h4>
+            <ul class="feature-list">
+                <li>Butun savollar bankidan tasodifiy 20 ta savol tanlanadi</li>
+                <li>Qat'iy 25 daqiqalik taymer orqaga sanaydi</li>
+                <li>To'liq ekran rejimi (F11 tugmasi kabi)</li>
+                <li>Rasmiy imtihon markazi interfeysini taqlid qiladi</li>
+                <li>Noto'g'ri javoblar qizil rangga aylanadi, keyingi savolga avtomatik o'tadi</li>
+            </ul>
+
+            <h4>✨ Adaptiv "Kundalik Fokus Test" Rejimi</h4>
+            <ul class="feature-list">
+                <li>Tizim o'quvchining barcha urinishlari natijalarini kuzatib boradi</li>
+                <li>Hafta davomida eng zaif 3 ta kategoriya aniqlanadi (noto'g'ri javoblar foiziga asoslanib)</li>
+                <li>Har kuni ushbu kategoriyalardan 20 ta savoldan iborat test taklif qilinadi</li>
+                <li>Plus, Pro va Expert obunachilari uchun mavjud</li>
+            </ul>
+
+            <div class="important">
+                <strong>📌 Kundalik Fokus Test Yangilash Mexanizmi:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>✅ <strong>Yangilash Vaqti:</strong> Har kuni <span class="highlight">00:00 (yarim tun)</span>da avtomatik yangilanadi</li>
+                    <li>✅ <strong>Frekansiya:</strong> Foydalanuvchi kuniga FAQAT BITTA Kundalik Fokus Testni yechishi mumkin</li>
+                    <li>✅ <strong>Algoritm:</strong> Oxirgi 7 kun ichida yechilgan testlardagi noto'g'ri javoblar kategoriya bo'yicha hisoblanadi</li>
+                    <li>✅ <strong>Tahlil:</strong> Eng ko'p xatolar bo'lgan 3 ta kategoriya tanlanadi (masalan: "Chorrahadalar" 50%, "Tezlik" 42%, "Yo'l Belgilari" 38%)</li>
+                    <li>✅ <strong>Yangi Test:</strong> 00:00 da tizim ushbu uchta kategoriyadan tasodifiy 20 ta savol tanlab, yangi Fokus Test yaratadi</li>
+                </ul>
+            </div>
+
+            <h3>3.2. Test Interfeysi (UI)</h3>
+            <ul class="feature-list">
+                <li><span class="emoji">🖱️</span>Javoblarni sichqoncha bilan bosish yoki F-tugmalari (F1, F2, F3, F4) orqali tanlash mumkin</li>
+                <li><span class="emoji">🎨</span>To'g'ri javoblar yashil, noto'g'ri javoblar qizil rang bilan belgilanadi</li>
+            </ul>
+
+            <h3>3.3. Ro'yxatdan O'tish va Autentifikatsiya</h3>
+            <ul class="feature-list">
+                <li>Ro'yxatdan o'tish shakli: Ism, Familiya, Parol</li>
+                <li>Foydalanuvchilar o'z akkauntlarini Telegram yoki Telefon Raqami (OTP) orqali tasdiqlashlari kerak</li>
+                <li>Telefon raqami: O'zbekiston formati (+998 + 9 xonali raqam)</li>
+                <li>Tizimga kirish tasdiqlangan telefon raqami orqali amalga oshiriladi</li>
+            </ul>
+
+            <h3>3.4. Ma'lumotlarning Saqlanishi</h3>
+            <div class="important">
+                <strong>MUHIM:</strong> Foydalanuvchi yuborgan har bir javob (to'g'ri yoki noto'g'ri) ma'lumotlar bazasiga saqlanadi. Ushbu ma'lumotlar "Xatolar Tahlili" funksiyasi va foydalanuvchi rivojlanish hisobotlarini yaratish uchun juda muhimdir.
+            </div>
+
+            <h3>3.5. Multimedia Izohlari va Mentor Kontenti</h3>
+            <p>Bu bo'lim test tizimiga audio va video sharhlarni integratsiyalashni, kirish cheklovlari va sifat nazorati mexanizmlarini batafsil tavsiflaydi.</p>
+
+            <h4>Multimedia Kirish Cheklovlari (Monetizatsiya)</h4>
+            <ul class="feature-list">
+                <li><span class="emoji">🏁</span><strong>Lite:</strong> Faqat matnli izohlar, audio/video yo'q</li>
+                <li><span class="emoji">🚘</span><strong>Plus:</strong> Barcha audio, videoga 30 soniyalik oldindan ko'rish</li>
+                <li><span class="emoji">🏆</span><strong>Pro:</strong> Cheksiz audio va barcha sifatli videolar</li>
+                <li><span class="emoji">🎓</span><strong>Expert:</strong> Premium Mentor kutubxonasiga eksklyuziv kirish</li>
+            </ul>
+
+            <h4>Videoni Tanlash Mantig'i</h4>
+            <ul class="feature-list">
+                <li>Shaxsiylashtirilgan Mentor Mosligi: O'quvchi ma'lum Mentor bilan qatnashayotgan bo'lsa, o'sha Mentorning video tushuntirishni ko'rsatadi</li>
+                <li>Eng Yuqori Baholangan: "Ajoyib" baholarning eng yuqori umumiy foiziga ega videoni tanlaydi</li>
+                <li>Tasodifiy Rotatsiya: Adolatlilik uchun teng ko'rinish ta'minlanadi</li>
+            </ul>
+
+            <h4>Sifatni Ta'minlash Mexanizmi - Video Reyting Tizimi</h4>
+            
+            <p><strong>A) Foydalanuvchi Reyting Tizimi</strong></p>
+            <p>O'quvchilar videoni ko'rgandan so'ng darhol uchta variant yordamida izohni baholashlari kerak:</p>
+            <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #1976d2; color: white;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Reyting</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Belgi</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Tavsif</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;"><strong>👎 Qoniqarsiz</strong></td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">1 ⭐</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Video noto'g'ri, aniq emas yoki foydali emas</td>
+                        </tr>
+                        <tr style="background: #f5f5f5;">
+                            <td style="padding: 10px; border: 1px solid #ddd;"><strong>👍 Yaxshi</strong></td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">2 ⭐⭐</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Video tushunarli, lekin yaxshilanishi mumkin</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;"><strong>❤️ Ajoyib</strong></td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">3 ⭐⭐⭐</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Video juda yaxshi, oydincha tushuntiradi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p><strong>B) Avtomatlashtirilgan Sifatni Ta'minlash va Admin Notifikatsiyasi</strong></p>
+            <div class="important">
+                <strong>🚨 Sifatsiz Kontentni Belgilash Algoritmi:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>📊 <strong>Chegara:</strong> Agar Mentor videosi umumiy reytinglarning <span class="highlight">30% yoki ko'p</span>i "Qoniqarsiz" (1 ⭐) deb baholansa, video avtomatik ravishda belgilanadi</li>
+                    <li>⛔ <strong>Holati:</strong> Video QULFLANGAN va foydalanuvchilarga ko'rsatilmaydi</li>
+                    <li>📋 <strong>Admin Ro'yxatiga O'tish:</strong> "Sifatsiz Kontentlar" ro'yxatiga darhol qo'shiladi</li>
+                    <li>👨‍💼 <strong>Admin va Kontent Menejer Notifikatsiyasi:</strong></li>
+                    <li style="padding-left: 40px;">📧 Email xabari: "⚠️ Sifatsiz kontent aniqlandi - Mentor X, Savol 1.12"</li>
+                    <li style="padding-left: 40px;">🔔 Dashboard Alert: "❌ 50 ta reyting ichida 15-tasi Qoniqarsiz (30%)"</li>
+                    <li>🔗 <strong>Admin Panelida "Sifatsiz Kontentlar" Bo'limi:</strong> Qizil belgisiz, o'chirish yoki qayta so'rash tugmaları</li>
+                    <li>✉️ <strong>Mentor Xabari:</strong> "Sizning videongiz sifat chegarasiga tushdi. Iltimos, takomillashtirib qayta yuboring"</li>
+                </ul>
+            </div>
+
+            <p><strong>Admin Panelida Sifatsiz Kontentlar Ro'yxati:</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mentor</th>
+                        <th>Video/Savol</th>
+                        <th>Sifatsiz %</th>
+                        <th>Reytinglar</th>
+                        <th>Holati</th>
+                        <th>Harakat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mentor A</td>
+                        <td>Savol 1.12</td>
+                        <td style="color: #d32f2f;"><strong>35%</strong></td>
+                        <td>Ajoyib: 20 | Yaxshi: 30 | Qoniqarsiz: 35</td>
+                        <td>⛔ Qulflangan</td>
+                        <td><button style="background: #f44336; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">O'chirish</button></td>
+                    </tr>
+                    <tr style="background: #fff3e0;">
+                        <td>Mentor B</td>
+                        <td>Savol 2.5</td>
+                        <td style="color: #d32f2f;"><strong>32%</strong></td>
+                        <td>Ajoyib: 10 | Yaxshi: 35 | Qoniqarsiz: 40</td>
+                        <td>⛔ Qulflangan</td>
+                        <td><button style="background: #f44336; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">O'chirish</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3.7. Ko'p Tillik (Lokalizatsiya) - Multilingual Sistema</h3>
+            
+            <p>Platforma 3 ta tilda to'liq ishlashi kerak:</p>
+            <ul class="feature-list">
+                <li><strong>🇺🇿 O'zbek tili (Lotin):</strong> Standart kiritish tili</li>
+                <li><strong>🇺🇿 O'zbek tili (Kirilcha/Cyrillic):</strong> Lotin versiyasidan avtomatik konvertatsiya</li>
+                <li><strong>🇷🇺 Rus tili:</strong> Alohida ma'lumotlar bazasi</li>
+            </ul>
+
+            <div class="important">
+                <strong>🔄 Lotin → Kirilcha Avtomatik Konvertatsiya:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>✅ <strong>Mexanizm:</strong> Barcha Lotin O'zbek matni real-time avtomatik Kirilchaga konvertatsiya qilinadi</li>
+                    <li>📝 <strong>Qaylar Konvertatsiya Qilinadi:</strong></li>
+                    <li style="padding-left: 40px;">• Savollar va javoblar (test matni)</li>
+                    <li style="padding-left: 40px;">• Video izohlar va subtitrlar</li>
+                    <li style="padding-left: 40px;">• Interfeys va tugmalar</li>
+                    <li style="padding-left: 40px;">• Bildirishnomalar va xabarlar</li>
+                    <li>💾 <strong>Saqlash:</strong> <span class="highlight">Alohida Kirilcha database yo'q</span> - Lotin matnda saqlansa, Kirilchada real-time o'ngadib chiqadi</li>
+                    <li>🚀 <strong>Foyda:</strong> Admin/Mentor faqat Lotin matnini kiritadi → Kirilcha avtomatik!</li>
+                    <li>🔀 <strong>Konvertatsiya Misoli:</strong> "Chorrahada" → "Чорраҳада", "Svetofor" → "Светофор"</li>
+                </ul>
+            </div>
+
+            <p><strong>Foydalanuvchi Tilni O'zgartirish</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Til</th>
+                        <th>Kod</th>
+                        <th>Misol</th>
+                        <th>O'zgartirish</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🇺🇿 O'zbek (Lotin)</strong></td>
+                        <td><code>uz_Latin</code></td>
+                        <td>"Savolga javob berish"</td>
+                        <td>Profil → Til: O'zbek (Lotin)</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td><strong>🇺🇿 O'zbek (Kirilcha)</strong></td>
+                        <td><code>uz_Cyrillic</code></td>
+                        <td>"Саволга жавоб бериш"</td>
+                        <td>Profil → Til: O'zbek (Кириллица)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🇷🇺 Rus</strong></td>
+                        <td><code>ru</code></td>
+                        <td>"Ответить на вопрос"</td>
+                        <td>Profil → Til: Русский</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 4. Monetizatsiya va Obuna Rejalari -->
+        <div class="section">
+            <h2>4. Monetizatsiya va Obuna Rejalari</h2>
+            <p><em>Obunalar 1 oyga mo'ljallangan.</em></p>
+
+            <div class="important">
+                <strong>💰 BHM-GA ASOSLANGAN NARXLAR TIZIMI:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>📊 <strong>Joriy BHM:</strong> <span class="highlight">412,000 UZS</span></li>
+                    <li>🔄 <strong>Narxlar formulasi:</strong> Barcha narxlar BHM ning ma'lum foiziga asoslanadi</li>
+                    <li>📈 <strong>Avtomatik yangilash:</strong> BHM o'zgarganda, narxlar avtomatik qayta hisoblanadi</li>
+                    <li>💡 <strong>Foyda:</strong> Inflyatsiya va iqtisodiy o'zgarishlarga moslashuvchan tizim</li>
+                    <li>📐 <strong>Misol:</strong> Agar Plus = 12% BHM, va BHM = 412,000 → Plus = 49,440 UZS</li>
+                </ul>
+            </div>
+
+            <div class="tariff-card">
+                <h3><span class="emoji">🏁</span>1. Lite – 0 UZS / oy</h3>
+                <p><em>Bepul reja - Tizim bilan tanishish uchun</em></p>
+                <h4>Asosiy Xususiyatlar:</h4>
+                <ul class="feature-list">
+                    <li>Barcha testlarga kirish</li>
+                    <li>Maxfiy Telegram guruhida savol-javoblarda qatnashish</li>
+                    <li>24 soat ichida 25 ta savolga javob berish</li>
+                </ul>
+                <h4>Cheklovlar:</h4>
+                <ul class="restriction-list">
+                    <li>Faqat matnli izohlar mavjud</li>
+                    <li>Audio va video izohlarga kirish yo'q</li>
+                    <li>Xato javoblarni ko'rish yo'q</li>
+                    <li>Mavzular bo'yicha tayyorgarlik yo'q</li>
+                    <li>Google Meet orqali darslarda qatnashish yo'q</li>
+                </ul>
+            </div>
+
+            <div class="tariff-card">
+                <h3><span class="emoji">🚘</span>2. Plus – <span class="price">49,440 UZS</span> / oy <span style="color: #666; font-size: 0.9em;">(12% BHM)</span></h3>
+                <p><em>Ko'proq mashq qilishni va o'z xatolarini tahlil qilishni xohlaydiganlar uchun</em></p>
+                <h4>Asosiy Xususiyatlar:</h4>
+                <ul class="feature-list">
+                    <li>Barcha testlarga to'liq kirish</li>
+                    <li>Maxfiy Telegram guruhida savol-javob</li>
+                    <li>24 soat ichida 100 ta savolga javob berish</li>
+                    <li>Xato javoblarni ko'rish imkoniyati</li>
+                    <li>Barcha audio izohlarga to'liq kirish</li>
+                    <li><strong>Videolarga 30 soniyalik oldindan ko'rish:</strong> Har bir videoning faqat birinchi 30 soniyasi ko'rish mumkin. 30 soniya o'tdiki qism qulflangan bo'ladi</li>
+                    <li><strong>"Bir Martalik To'liq Ko'rish":</strong> Hafta davomida FAQATGINA 1 MARTA biror videoning to'liq versiyasini ko'rish mumkin (haftada 1 ta imtiyoz)</li>
+                </ul>
+                
+                <div class="important" style="margin-top: 15px;">
+                    <strong>🔒 Video Qulflanish Mexanizmi:</strong>
+                    <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                        <li>📺 Video 0:30 dan 0:31 ga o'tishga harakat qilganda → qulflangan ⛔</li>
+                        <li>⏱️ Plus foydalanuvchi videoning faqat 30 soniyasini ko'rishi mumkin</li>
+                        <li>🔑 "Bir Martalik To'liq Ko'rish" imkoniyati bo'lsa → butun videoni ko'rish mumkin</li>
+                        <li>📢 Qolgan qism uchun: "Pro paketga o'ting" xabari ko'rsatiladi</li>
+                    </ul>
+                </div>
+
+                <h4>Cheklovlar:</h4>
+                <ul class="restriction-list">
+                    <li>Mavzular bo'yicha tayyorgarlik yo'q</li>
+                    <li>Google Meet orqali darslarda qatnashish yo'q</li>
+                </ul>
+            </div>
+
+            <div class="tariff-card">
+                <h3><span class="emoji">🏆</span>3. Pro – <span class="price">98,880 UZS</span> / oy <span style="color: #666; font-size: 0.9em;">(24% BHM)</span></h3>
+                <p><em>Imtihonga jiddiy tayyorlanayotgan va cheklovlarsiz o'qishni xohlaydiganlar uchun - ENG MASHHUR TANLOV</em></p>
+                <h4>Asosiy Xususiyatlar:</h4>
+                <ul class="feature-list">
+                    <li>Barça testlarga to'liq kirish</li>
+                    <li>Maxfiy Telegram guruhida savol-javob</li>
+                    <li><strong>🔓 Cheksiz Test Yechish</strong> (ba'zi cheklovlar bilan - tafsilotlar quyida)</li>
+                    <li>Xato javoblarni ko'rish</li>
+                    <li>Mavzular bo'yicha tayyorgarlik</li>
+                    <li>Boshqa foydalanuvchilar bilan cheksiz bellashish</li>
+                    <li>Barça audio izohlarga cheksiz kirish</li>
+                    <li>Barça sifat nazolatidan o'tgan Mentor videolariga cheksiz kirish</li>
+                </ul>
+
+                <div class="important" style="margin-top: 15px;">
+                    <strong>📊 "Cheksiz Test" Tafsilotlari:</strong>
+                    <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                        <li>✅ <strong>Mashq Rejimi:</strong> Haqiqatan CHEKSIZ - kuniga nechta test yechsa ham bo'ladi</li>
+                        <li>⏱️ <strong>Imtihon Rejimi:</strong> Kuniga MAKSIMAL 2 ta imtihon (realistik tayyorgarlik uchun)</li>
+                        <li>🎮 <strong>Battle Rejimi:</strong> Kuniga MAKSIMAL 10 ta duel (har biri 5,000 UZS xaraji bor)</li>
+                        <li>📅 <strong>Kundalik Fokus Test:</strong> Kuniga 1 ta (avtomatik 00:00 da yangilanadi)</li>
+                    </ul>
+                </div>
+
+                <h4>Cheklovlar:</h4>
+                <ul class="restriction-list">
+                    <li>Google Meet orqali darslarda qatnashish yo'q</li>
+                </ul>
+            </div>
+
+            <div class="tariff-card">
+                <h3><span class="emoji">🎓</span>4. Expert – <span class="price">164,800 UZS</span> / oy <span style="color: #666; font-size: 0.9em;">(40% BHM)</span></h3>
+                <p><em>Professional darajada to'liq tayyorgarlik va jonli darslarda qatnashish uchun - PREMIUM TAJRIBA</em></p>
+                <h4>Barcha Xususiyatlar:</h4>
+                <ul class="feature-list">
+                    <li>Barcha testlarga to'liq kirish</li>
+                    <li><strong>🔓 HAQIQATAN CHEKSIZ test yechish</strong> (barcha rejimda cheklov yo'q)</li>
+                    <li>Xato javoblarni ko'rish va tahlil qilish</li>
+                    <li>Mavzular bo'yicha tayyorgarlik</li>
+                    <li>Cheksiz bellashish imkoniyati</li>
+                    <li>Google Meet orqali professorlar bilan jonli darslar (haftasiga 2 marta)</li>
+                    <li>Google Meet yozuvlarini keyinroq tomosha qilish</li>
+                    <li>Mentor Mikro-Kurslari kutubxonasiga to'liq kirish</li>
+                    <li>Barça audio izohlarga cheksiz kirish</li>
+                    <li>Barça kontentga va Premium Mentor kontent kutubxonasiga to'liq kirish</li>
+                    <li>Shaxsiy taraqqiyot konsultanti (oyiga 1 marta)</li>
+                </ul>
+
+                <div class="important" style="margin-top: 15px;">
+                    <strong>✨ Expert'da Haqiqatan Cheksiz:</strong>
+                    <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                        <li>✅ <strong>Mashq Rejimi:</strong> CHEKSIZ (kuniga nechta test)</li>
+                        <li>✅ <strong>Imtihon Rejimi:</strong> CHEKSIZ (kuniga 5 ta gacha + ko'proq kerak bo'lsa, o'tkazish mumkin)</li>
+                        <li>✅ <strong>Battle Rejimi:</strong> CHEKSIZ (kuniga 20 ta duel)</li>
+                        <li>✅ <strong>Kundalik Fokus Test:</strong> CHEKSIZ qatnashish</li>
+                        <li>💡 <strong>Farq:</strong> Expert = "To'g'ri Cheksiz", Pro = "Oqilona Cheksiz"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Express Individual — <span class="price">412,000 UZS</span> <span style="color: #666;">(100% BHM)</span></h3>
+            <p><strong>Kimlar uchun:</strong> Nazariy imtihonga qisqa muddatda, lekin sifatli tayyorlanmoqchi bo'lgan o'quvchilar uchun. Bu, 4 haftalik intensiv to'liq tayyorgarlik dasturi.</p>
+            <h4>Xususiyatlar:</h4>
+            <ul class="feature-list">
+                <li>Barça testlarga cheksiz kirish (4 hafta davomida)</li>
+                <li>Xato javoblarni ko'rish va tahlil qilish</li>
+                <li>Mavzular bo'yicha bosqichma-bosqich tayyorgarlik</li>
+                <li>Maxfiy Telegram guruhida savol-javob</li>
+                <li>Cheksiz bellashish imkoniyati</li>
+                <li><strong>Haftasiga 2 MARTA 60 daqiqalik individual savol-javob sessiyasi Google Meet orqali (JAMI 8 ta sessiya)</strong></li>
+                <li>Har bir Google Meet sessiyasini yozib olish va qayta ko'rish</li>
+                <li>Shaxsiy mentor yo'llanmasi va kunlik taraqqiyot kuzatuvi</li>
+                <li>Ekspert Mikro-Kurslarining to'liq kutubxonasiga kirishni o'z ichiga oladi</li>
+                <li>Zarurat bo'lsa, kursni uzaytirish imkoniyati (50,000 UZS/hafta)</li>
+                <li>Imtihondan oldin yakuniy mock imtihon va tahlil</li>
+            </ul>
+
+            <div class="important" style="margin-top: 15px;">
+                <strong>💎 Express Individual - Qiymat Tahlili:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>🎯 <strong>8 ta Individual Sessiya:</strong> 8 × 53,560 = 428,480 UZS qiymati</li>
+                    <li>📚 <strong>4 haftalik Expert kirish:</strong> ~110,000 UZS qiymati (13% BHM)</li>
+                    <li>📊 <strong>Shaxsiy mentor yo'llanmasi:</strong> 50,000 UZS qiymati</li>
+                    <li>💰 <strong>Jami qiymat:</strong> 588,480 UZS</li>
+                    <li>✅ <strong>Sizning narxingiz:</strong> 412,000 UZS (100% BHM)</li>
+                    <li>🎉 <strong>Tejashingiz:</strong> 176,480 UZS (30% chegirma)</li>
+                </ul>
+            </div>
+
+            <h3>"Mentor bilan Individual Sessiya"</h3>
+            <p><strong>Asosiy narx:</strong> 1 daqiqa = 1,000 UZS</p>
+
+            <h4>Davomiylik bo'yicha chegirmalar:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Davomiyligi</th>
+                        <th>BHM %</th>
+                        <th>Standart Narx</th>
+                        <th>Chegirmali Narx</th>
+                        <th>Tejashingiz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>30 daqiqa</strong></td>
+                        <td>7.5%</td>
+                        <td>30,900 UZS</td>
+                        <td><span class="price">30,900 UZS</span> (7.5% BHM)</td>
+                        <td>Asosiy narx</td>
+                    </tr>
+                    <tr style="background: #f0f8ff;">
+                        <td><strong>60 daqiqa</strong> (Mashhur)</td>
+                        <td>13%</td>
+                        <td>61,800 UZS</td>
+                        <td><span class="price">53,560 UZS</span> (13% BHM)</td>
+                        <td>8,240 UZS (13% chegirma)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>90 daqiqa</strong></td>
+                        <td>18%</td>
+                        <td>92,700 UZS</td>
+                        <td><span class="price">74,160 UZS</span> (18% BHM)</td>
+                        <td>18,540 UZS (20% chegirma)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="important" style="margin-top: 10px;">
+                <strong>📐 Sessiya Narxlari Formulasi:</strong><br>
+                • 30 min = 7.5% BHM = 0.075 × 412,000 = 30,900 UZS<br>
+                • 60 min = 13% BHM = 0.13 × 412,000 = 53,560 UZS (13% tejash)<br>
+                • 90 min = 18% BHM = 0.18 × 412,000 = 74,160 UZS (20% tejash)
+            </div>
+
+            <h4>Sessiya Xususiyatlari:</h4>
+            <ul class="feature-list">
+                <li>Mentor sizning shaxsiy savollaringizga video orqali javob beradi</li>
+                <li>Murakkab testlar va xatolarni tahlil qiladi</li>
+                <li>Buyurtma berishda, o'quvchi ma'lum bir Mentorni tanlashi SHART</li>
+                <li>Sessiya yozib olinadi va 7 kun davomida qayta ko'rish mumkin</li>
+                <li>Shaxsiy tayyorgarlik rejasi va tavsiyalar</li>
+            </ul>
+
+            <h3>📊 To'liq Narxlar Jadvali - Umumiy Ko'rinish (BHM = 412,000 UZS)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Xizmat/Obuna</th>
+                        <th>BHM %</th>
+                        <th>Aniq Narx</th>
+                        <th>Formula</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="4"><strong>O'QUVCHI OBUNALARI</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Lite</td>
+                        <td>0%</td>
+                        <td><span class="price">0 UZS</span></td>
+                        <td>0 × 412,000 = 0</td>
+                    </tr>
+                    <tr>
+                        <td>Plus</td>
+                        <td>12%</td>
+                        <td><span class="price">49,440 UZS</span></td>
+                        <td>0.12 × 412,000 = 49,440</td>
+                    </tr>
+                    <tr>
+                        <td>Pro</td>
+                        <td>24%</td>
+                        <td><span class="price">98,880 UZS</span></td>
+                        <td>0.24 × 412,000 = 98,880</td>
+                    </tr>
+                    <tr>
+                        <td>Expert</td>
+                        <td>40%</td>
+                        <td><span class="price">164,800 UZS</span></td>
+                        <td>0.40 × 412,000 = 164,800</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="4"><strong>INDIVIDUAL SESSIYALAR</strong></td>
+                    </tr>
+                    <tr>
+                        <td>30 daqiqa</td>
+                        <td>7.5%</td>
+                        <td><span class="price">30,900 UZS</span></td>
+                        <td>0.075 × 412,000 = 30,900</td>
+                    </tr>
+                    <tr>
+                        <td>60 daqiqa (13% tejash)</td>
+                        <td>13%</td>
+                        <td><span class="price">53,560 UZS</span></td>
+                        <td>0.13 × 412,000 = 53,560</td>
+                    </tr>
+                    <tr>
+                        <td>90 daqiqa (20% tejash)</td>
+                        <td>18%</td>
+                        <td><span class="price">74,160 UZS</span></td>
+                        <td>0.18 × 412,000 = 74,160</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="4"><strong>PAKET DASTURLAR</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Express Individual (8 sessiya)</td>
+                        <td>100%</td>
+                        <td><span class="price">412,000 UZS</span></td>
+                        <td>1.0 × 412,000 = 412,000</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="4"><strong>BATTLE PAKETLARI</strong></td>
+                    </tr>
+                    <tr>
+                        <td>1 Battle</td>
+                        <td>1.2%</td>
+                        <td><span class="price">4,944 UZS</span></td>
+                        <td>0.012 × 412,000 = 4,944</td>
+                    </tr>
+                    <tr>
+                        <td>5 Battle Paketi (8% tejash)</td>
+                        <td>5.5%</td>
+                        <td><span class="price">22,660 UZS</span></td>
+                        <td>0.055 × 412,000 = 22,660</td>
+                    </tr>
+                    <tr>
+                        <td>10 Battle Paketi (19% tejash)</td>
+                        <td>9.7%</td>
+                        <td><span class="price">39,964 UZS</span></td>
+                        <td>0.097 × 412,000 = 39,964</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td colspan="4"><strong>MENTOR DARAJALARI (BEPUL - Ishlash asosida)</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Basic Mentor</td>
+                        <td>-</td>
+                        <td>0 UZS oylik + <strong>20% komissiya</strong></td>
+                        <td>Avtomatik beriladi</td>
+                    </tr>
+                    <tr>
+                        <td>Pro Mentor</td>
+                        <td>-</td>
+                        <td>0 UZS oylik + <strong>15% komissiya</strong></td>
+                        <td>50 sessiya, 4.0⭐ kerak</td>
+                    </tr>
+                    <tr>
+                        <td>Premium Mentor</td>
+                        <td>-</td>
+                        <td>0 UZS oylik + <strong>10% komissiya</strong></td>
+                        <td>200 sessiya, 4.5⭐ kerak</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="important" style="margin-top: 20px;">
+                <strong>💡 ASOSIY O'ZGARISHLAR XULOSASI:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>✅ O'quvchi obuna narxlari <strong>87-100% oshirildi</strong> - qiymat va sifatni aks ettiradi</li>
+                    <li>✅ Mentor darajalari uchun oylik to'lovlar <strong>BEKOR QILINDI</strong> - endi ishlash asosida</li>
+                    <li>✅ Sessiya narxlariga davomiylik chegirmalari qo'shildi - uzoq sessiyalarni rag'batlantiradi</li>
+                    <li>✅ Battle paketlari qo'shildi - 10-20% tejash imkoniyati</li>
+                    <li>✅ Express Individual yanada ko'proq qiymat beradi - 4 o'rniga 8 ta sessiya</li>
+                    <li>✅ Barcha narxlar BHM (412,000 UZS) ga nisbatan mantiqiy shaklda sozlangan</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Mentor Roli -->
+        <div class="section">
+            <h2>5. Mentor Roli va Hamkorlik Dasturi</h2>
+            
+            <h3>5.1. Mentor Ro'yxatdan O'tishi</h3>
+            <p>Mentorlar o'zlarining maxsus boshqaruv paneli orqali o'quvchilarni ro'yxatga olishlari mumkin.</p>
+
+            <h3>5.2. Yo'llanma Bonusi (O'qituvchi Komissiyasi - Qat'iy)</h3>
+            <div class="important">
+                <strong>MUHIM:</strong> Mentorlar o'zlari ro'yxatga olgan o'quvchilar tomonidan amalga oshirilgan obuna to'lovlaridan kafolatlangan <span class="highlight">25% komissiya</span> oladilar. Ushbu komissiya ularning o'quvchilar tarmog'idan olinadigan asosiy daromad bo'lib, video ko'rish ulushidan ustun turadi.
+            </div>
+
+            <h3>5.3. To'lovlar</h3>
+            <p>Mentorlar to'plangan daromadlarini yechib olish uchun so'rov yuborishlari mumkin.</p>
+
+            <h3>5.4. Konversiya Imkoniyatlari Hisoboti</h3>
+            <p>Mentor boshqaruv panelida ularning Lite'dagi o'quvchilari obunani yangilagan taqdirda olinadigan potentsial komissiyani ko'rsatadigan hisobot mavjud.</p>
+
+            <h2>Mentor Darajalari - Ishlash Asosida Tizim</h2>
+
+            <div class="important">
+                <strong>⚡ MUHIM O'ZGARISH:</strong> Mentor darajalari endi SOTIB OLINMAYDI. Ular sizning ishlashingiz va talabalar mamnunligiga asoslanib AVTOMATIK BERILADI!
+                <br><br>
+                Har bir dushanba kuni soat 00:00 da tizim sizning ko'rsatkichlaringizni tekshiradi va mos keladigan darajani tayinlaydi yoki yangilaydi.
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Daraja</th>
+                        <th>Oylik To'lov</th>
+                        <th>Sessiya Komissiyasi</th>
+                        <th>Qanday Olish Mumkin</th>
+                        <th>Imtiyozlar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🧩 Basic Mentor</strong></td>
+                        <td><span class="price">BEPUL</span></td>
+                        <td>20%</td>
+                        <td>Avtomatik - Mentor sifatida tasdiqlangandan keyin</td>
+                        <td>Oyiga 10 ta sessiya. 5 ta video yuklash.</td>
+                    </tr>
+                    <tr style="background: #e8f5e9;">
+                        <td><strong>🚀 Pro Mentor</strong></td>
+                        <td><span class="price">BEPUL</span></td>
+                        <td>15%</td>
+                        <td>
+                            <strong>AVTOMATIK BERILADI:</strong><br>
+                            • 50+ tugallangan sessiya<br>
+                            • 4.0⭐ o'rtacha reyting<br>
+                            • ≤5% bekor qilish darajasi<br>
+                            • 10+ aktiv talabalar<br>
+                            • 2+ oy tajriba
+                        </td>
+                        <td>Oyiga 30 ta sessiya. Cheksiz video. Profilda Pro badge.</td>
+                    </tr>
+                    <tr style="background: #fff3e0;">
+                        <td><strong>🏆 Premium Mentor</strong></td>
+                        <td><span class="price">BEPUL</span></td>
+                        <td>10%</td>
+                        <td>
+                            <strong>AVTOMATIK BERILADI:</strong><br>
+                            • 200+ tugallangan sessiya<br>
+                            • 4.5⭐ o'rtacha reyting<br>
+                            • ≤2% bekor qilish darajasi<br>
+                            • 30+ aktiv talabalar<br>
+                            • 80%+ video "Ajoyib" bahosi<br>
+                            • 500,000 UZS+ platforma daromadi<br>
+                            • 6+ oy tajriba
+                        </td>
+                        <td>Cheksiz sessiyalar. Birinchi o'rinda ko'rsatish. Ijtimoiy tarmoqlarda reklama. "Elite Mentor" statusi.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>📊 Darajangizni Kuzatish</h3>
+            <p>Har bir Mentor o'z boshqaruv panelida real vaqtda taraqqiyotini ko'rishi mumkin:</p>
+            <div style="background: #f0f8ff; padding: 15px; border-radius: 5px; margin: 15px 0; font-family: monospace;">
+                <strong>🎯 PRO MENTOR'GA TARAQQIYOT</strong><br>
+                ✅ Sessiyalar: 52/50<br>
+                ✅ Reyting: 4.3⭐/4.0⭐<br>
+                ⚠️ Bekor qilish: 6%/5% ← <span style="color: #f44336;">YAXSHILANG!</span><br>
+                ✅ Talabalar: 12/10<br>
+                ✅ Tajriba: 3 oy/2 oy<br>
+                <br>
+                <strong style="color: #ff9800;">🔥 Deyarli tayyor! Bekor qilishlarni kamaytiring!</strong>
+            </div>
+
+            <h3>⬆️ Avtomatik Yangilash va ⬇️ Pasaytirish</h3>
+            <div class="important">
+                <strong>Yangilash:</strong> Barcha shartlar bajarilganda - darhol yangilanadi! Tabriklaymiz xabari + yangi komissiya darajasi.<br><br>
+                <strong>Pasaytirish:</strong> Agar siz talablarga javob bermay qolsangiz:<br>
+                • 1-hafta: ⚠️ Ogohlantirish xabari<br>
+                • 2-hafta: ⚠️ Oxirgi ogohlantirish<br>
+                • 3-hafta: ⬇️ Daraja pasaytiriladi<br>
+                <br>
+                <strong>Istisno:</strong> Firibgarlik yoki bir nechta bekor qilishlar uchun - darhol pasaytirish (ogohlantirish yo'q)
+            </div>
+
+            <h3>Mentor Komissiyasi Hisoblash - Aniq Mexanizm</h3>
+            <div class="important">
+                <strong>⚠️ MUHIM: Ikkita Turli Holatda Komissiya Farq Qiladi</strong>
+            </div>
+
+            <h4>SCENARIO 1: O'quvchi Obuna Sotib Olsa</h4>
+            <p><strong>Misol:</strong> O'quvchi 20,600 UZS (Plus) obuna sotib oldi. Mentor A uni ro'yxatdan o'tkazgan.</p>
+            <div style="background: #e8f8f5; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>💰 <strong>O'quvchi to'lova:</strong> 20,600 UZS</li>
+                    <li>✂️ <strong>Mentor A komissiyasi:</strong> 25% = 5,150 UZS</li>
+                    <li>🏢 <strong>Platform:</strong> 75% = 15,450 UZS</li>
+                    <li>❌ <strong>Sessiya komissiyasi:</strong> BU HOLAT'DA YO'Q (obuna uchun faqat 25%)</li>
+                </ul>
+            </div>
+
+            <h4>SCENARIO 2: O'quvchi Sessiya Buyurtmasi Qilsa</h4>
+            <p><strong>Misol:</strong> O'quvchi Mentor B bilan 60 daqiqalik sessiya uchun 55,000 UZS to'ladi. Mentor B Pro darajali (15% sessiya komissiyasi).</p>
+            <div style="background: #fdf5e6; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>💰 <strong>Sessiya to'lova:</strong> 55,000 UZS</li>
+                    <li>✂️ <strong>Mentor B komissiyasi:</strong> 55,000 × 15% = 8,250 UZS (sessiya uchun)</li>
+                    <li>🏢 <strong>Platform:</strong> 8,250 UZS</li>
+                    <li>💵 <strong>Mentor B oladi:</strong> 55,000 - 8,250 = 46,750 UZS</li>
+                </ul>
+            </div>
+
+            <h4>SCENARIO 3: Mentor O'quvchini RO'YXATDAN O'TKAZGAN VA Sessiya Ko'rmoqchi</h4>
+            <p><strong>Misol:</strong> Mentor B o'quvchini ro'yxatdan o'tkazgan VA shu o'quvchi bilan sessiya qilmoqchi (Pro Mentor - 15% komissiya).</p>
+            <div style="background: #ffe8e8; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>💰 <strong>Sessiya to'lova:</strong> 55,000 UZS</li>
+                    <li>📊 <strong>Komissiya Hisoblash:</strong></li>
+                    <li style="padding-left: 20px;">→ 25% (ro'yxatdan o'tish uchun) = 13,750 UZS</li>
+                    <li style="padding-left: 20px;">→ 15% (sessiya uchun Pro Mentordan) = 8,250 UZS</li>
+                    <li>⚡ <strong>LEKIN QOIDA:</strong> Jami komissiya MAX 25%ni o'tmasin!</li>
+                    <li>💵 <strong>Mentor B oladi:</strong> 55,000 - 13,750 = 41,250 UZS</li>
+                    <li>🔍 <strong>Tushuntirish:</strong> Sessiya komissiyasi 25% ichiga kiritiladi (ko'proq yo'q)</li>
+                </ul>
+            </div>
+
+            <h3>Komissiya Jadvalida Umumiy Qoida</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Holatlar</th>
+                        <th>Komissiya</th>
+                        <th>Misol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Obuna (Mentor ro'yxatdan o'tkazgan)</strong></td>
+                        <td>25%</td>
+                        <td>20,600 UZS obuna → Mentor 5,150 UZS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sessiya (ro'yxatdan o'tkazgan)</strong></td>
+                        <td>MAX 25%</td>
+                        <td>60,000 UZS sessiya → Mentor 45,000 UZS (25% cheklangan)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sessiya (ro'yxatdan o'tkazgan EMAS)</strong></td>
+                        <td>Sessiya komissiyasi (10-20%)</td>
+                        <td>55,000 UZS → Mentor 46,750 UZS (Pro: 15%)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 6. Battle Rejimi -->
+        <div class="section">
+            <h2>6. "Battle" Rejimi (Jonli Duel)</h2>
+            
+            <h3>🎯 G'oya</h3>
+            <p>Foydalanuvchilar 20 ta savoldan iborat testda bir-birlari bilan bellashadilar. Har bir javob bilan real vaqtda rivojlanish chizig'i, ballar va yetakchilik holati ko'rsatiladi.</p>
+
+            <h3>🔍 Raqib Topish Mantig'i</h3>
+            <p><strong>Tizim quyidagi usullarda raqib topadi:</strong></p>
+            <ul class="feature-list">
+                <li><strong>Darajasi Yaqin:</strong> Tizim deyarli bir xil darajadagi o'quvchilarni joylashtiradi (masalan, 4.2 reyting bilan 4.0-4.4 reyting o'rtasida tanlaydi)</li>
+                <li><strong>Online Holat:</strong> Shu paytda onlayn bo'lgan raqiblarni avvalo ko'rsatadi</li>
+                <li><strong>Offline 24 Soat:</strong> Agar online raqib bo'lmasa, oxirgi 24 soat ichida aktiv bo'lgan o'quvchilar orasidan tanlaydi</li>
+                <li><strong>Noyob Foydalanuvchi IDsi:</strong> Istalgan o'quvchining "Battle Kodi"ni kiritib, ma'lum bir foydalanuvchiga qarshi chiqish mumkin</li>
+            </ul>
+
+            <div class="important">
+                <strong>⚡ Duel Vaqti va Natijaviy Mexanizmi (MUHIM):</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>📌 <strong>Duelda Vaqt Chegarasi:</strong> Har ikkala o'quvchi 20 ta savolga javob berishi uchun <span class="highlight">25 daqiqasi</span> mavjud</li>
+                    <li>🔄 <strong>Bir xil 20 ta Savol:</strong> Ikkala o'quvchi <span class="highlight">AYNAN SHUNAQA 20 ta savol</span>ni yechadi (randomize, lekin ikkalasiham bir xil)</li>
+                    <li>⏰ <strong>Vaqt Cicli:</strong> Har biri 25 daqiqa vaqtiga ega, lekin bir-birini kuzatib o'tganida:</li>
+                    <li style="padding-left: 40px;">• O'quvchi 1: 10:00 da boshladi → 10:25 da tugatdi ✓</li>
+                    <li style="padding-left: 40px;">• O'quvchi 2: 10:05 da boshladi → 10:30 da tugatdi ✓ (ikkasida ham 25 min)</li>
+                    <li>✅ <strong>Natija Hammasiga Ko'rinadi:</strong> Ikkala o'quvchi test yechishni yakunlagandan so'ng (hatto biri birinchi tugatsa ham), <span class="highlight">IKKALASIGA HAM NATIJA</span> ko'rsatiladi</li>
+                    <li>💡 <strong>Misol:</strong> Bittasi 10:10 da tugatsa, ikkinchisi 10:25 da tugatgun, IKKALASIDA HAM natijalari ko'rsatiladi</li>
+                    <li>🎯 <strong>Bellashuvning Hisoblanish Sharti:</strong> Agar ikkalasi ham <span class="highlight">24 soat ichida</span> bir xil 20 ta savolga javob berita, bellashsuv hisoblanadi va Leaderboard'ga kiritiladi</li>
+                </ul>
+            </div>
+
+            <h3>💰 Battle Narxlari va Paketlar</h3>
+
+            <h4>Yagona Battle:</h4>
+            <ul>
+                <li><strong>Kirish To'lovi:</strong> Har bir ishtirokchi <span class="price">4,944 UZS</span> (1.2% BHM) to'laydi</li>
+                <li><strong>Jami Pool:</strong> 9,888 UZS (2 ta ishtirokchi × 4,944)</li>
+                <li><strong>G'olib Oladi:</strong> 7,910 UZS (~2,966 UZS sof foyda - 60% ROI)</li>
+                <li><strong>Platforma Komissiyasi:</strong> 1,978 UZS (20%)</li>
+                <li><strong>Mag'lub:</strong> 4,944 UZS yo'qotadi</li>
+            </ul>
+
+            <h4>💎 Battle Paketlari - Tejash va Ko'proq O'ynash</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Paket</th>
+                        <th>BHM %</th>
+                        <th>Narx</th>
+                        <th>Battle Soni</th>
+                        <th>Battle Uchun Narx</th>
+                        <th>Tejashingiz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Yagona Battle</strong></td>
+                        <td>1.2%</td>
+                        <td><span class="price">4,944 UZS</span> (1.2% BHM)</td>
+                        <td>1</td>
+                        <td>4,944 UZS</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #e8f5e9;">
+                        <td><strong>5-Battle Paketi</strong></td>
+                        <td>5.5%</td>
+                        <td><span class="price">22,660 UZS</span> (5.5% BHM)</td>
+                        <td>5</td>
+                        <td>4,532 UZS</td>
+                        <td>2,060 UZS (8.3%)</td>
+                    </tr>
+                    <tr style="background: #fff3e0;">
+                        <td><strong>10-Battle Paketi</strong> (Mashhur)</td>
+                        <td>9.7%</td>
+                        <td><span class="price">39,964 UZS</span> (9.7% BHM)</td>
+                        <td>10</td>
+                        <td>3,996 UZS</td>
+                        <td>9,476 UZS (19.2%)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="important">
+                <strong>📌 Battle Paketlari Qoidalari:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>✅ Paket sotib olingandan keyin battle kreditleri hisobingizga qo'shiladi</li>
+                    <li>✅ Kredit amal qilish muddati: 30 kun</li>
+                    <li>✅ G'oliblik mukofotlari bir xil qoladi (8,000 UZS)</li>
+                    <li>✅ Plus obunachilarga: Kuniga 10 ta battle chegarasi</li>
+                    <li>✅ Pro obunachilarga: Kuniga 10 ta battle chegarasi</li>
+                    <li>✅ Expert obunachilarga: Kuniga 20 ta battle (haqiqatan cheksiz)</li>
+                </ul>
+            </div>
+
+            <h3>🏆 Haftalik "Battle Pahlavonlari" Leaderboard</h3>
+            <p><strong>Har haftaning oxirida (Yakshanba 23:59):</strong> Eng ko'p duellarda g'olib bo'lgan TOP 10 o'quvchi "Battle Pahlavonlari" ro'yxatiga kiritiladi.</p>
+            
+            <div class="important">
+                <strong>📊 TOP 10 Hisoblash Algoritmi:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>🔢 <strong>Reytingi:</strong> Ballar = (G'olib duellar × 3) + (Barcha duellar × 1)</li>
+                    <li>📌 <strong>Davr:</strong> Har HAFTA yengilanadi (Dushanba 00:00 - Yakshanba 23:59)</li>
+                    <li>👥 <strong>Qaytish Imkoniyati:</strong> TOP 10 ga faqat haftalik duellalari orqali kiritiladi, yangi hafta boshlananda reset qilinadi</li>
+                </ul>
+            </div>
+
+            <p><strong>TOP 10 Mukofotlari:</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>O'rin</th>
+                        <th>Nishon/Badge</th>
+                        <th>Chegirma/Bonus</th>
+                        <th>Vaqti</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1️⃣ O'rin</strong></td>
+                        <td>👑 "Battle Pahlavon"</td>
+                        <td>Keyingi hafta: 50% Battle to'lovi chegirmasi (2,500 UZS)</td>
+                        <td>1 hafta</td>
+                    </tr>
+                    <tr style="background: #f5f5f5;">
+                        <td><strong>2️⃣-3️⃣ O'rinlar</strong></td>
+                        <td>🥈 "Yuqori Raqib"</td>
+                        <td>25% chegirma (1,250 UZS)</td>
+                        <td>1 hafta</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4️⃣-10️⃣ O'rinlar</strong></td>
+                        <td>🥉 "Elite Jangchi"</td>
+                        <td>10% chegirma (500 UZS)</td>
+                        <td>1 hafta</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Leaderboard Ko'rish:</strong> "Battle" → "Haftalik TOP 10" tugmasi → Joriy hafta TOP 10 ko'rsatiladi (har o'quvchining profili, janglar soni, g'olibliklari)</p>
+        </div>
+
+        <!-- 7. Mentor Baholash Tizimi -->
+        <div class="section">
+            <h2>7. Mentor Baholash va Ishonchililik Tizimi (YANGI)</h2>
+            
+            <p><strong>Maqsad:</strong> Mentorlar sessiyalarni bekor qilish yoki to'g'ri bo'lmagan harakatlar uchun mas'ul bo'lishlari va o'quvchilar sifatli Mentor tanlayshlari uchun.</p>
+
+            <h3>📊 Mentor Reytingi Tuzilmasi</h3>
+            <div style="background: #f0f8ff; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                <p style="margin-top: 0;"><strong>Mentor Profilida Ko'rsatiladi:</strong> ⭐⭐⭐⭐☆ <span style="font-size: 1.2em; color: #ff9800;">4.2</span></p>
+                <ul style="list-style: none; padding-left: 0; margin: 10px 0;">
+                    <li>🎯 <strong>Sessiya Ishonchiligi (40%):</strong> Mentorning vaqtida va bekor qilmaslik darajasi</li>
+                    <li>✅ <strong>Kontent Sifati (30%):</strong> Video va audio tushuntirishlari sifati</li>
+                    <li>💬 <strong>O'quvchi Fikr-Mulohazasi (20%):</strong> O'quvchilarning bergan reyting va sharhlar</li>
+                    <li>⏰ <strong>Javob Vaqti (10%):</strong> Savolga qancha tezda javob berish</li>
+                </ul>
+            </div>
+
+            <h3>🔴 Sessiya Bekor Qilish Penaltilari</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Holatlar</th>
+                        <th>Penalti</th>
+                        <th>O'quvchiga</th>
+                        <th>Natija</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1 marta bekor qildi</strong></td>
+                        <td>-0.5 ⭐</td>
+                        <td>50% pul + 5,000 bonus</td>
+                        <td>Eslatma</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2 marta (1 oy ichida)</strong></td>
+                        <td>-1.0 ⭐</td>
+                        <td>Qolgan to'lov qaytarish</td>
+                        <td>⚠️ Peringil (Warning)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3 marta (1 oy ichida)</strong></td>
+                        <td>-2.0 ⭐</td>
+                        <td>Qolgan to'lov qaytarish</td>
+                        <td>🔴 Sessiyalari 7 kun yopiladi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vaqtida kelmadi (15 min+)</strong></td>
+                        <td>-1.5 ⭐</td>
+                        <td>50% + 10,000 bonus</td>
+                        <td>Yozuv</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>✅ Reytingi Tiklash va Yuqotirish</h3>
+            <div style="background: #e8f5e9; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                <h4 style="margin-top: 0;">Reytingi Yuqotirish:</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>🟡 <strong>3.0 ⭐ dan past:</strong> Sessiyalar avtomatik suspend, Admin ko'rib chiqish talab qilinadi</li>
+                    <li>🔴 <strong>2.0 ⭐ dan past:</strong> Mentor roli bekor qilinadi</li>
+                </ul>
+            </div>
+
+            <div style="background: #fff3e0; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                <h4 style="margin-top: 0;">Reytingi Orttirish va Mukofotlar:</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>⭐ <strong>30 kunda 0 muammo:</strong> +0.25 ⭐ (avtomatik)</li>
+                    <li>⭐ <strong>60 kunda 0 muammo:</strong> +0.5 ⭐</li>
+                    <li>💎 <strong>4.5 ⭐ va yuqori:</strong> "Top Mentor" Badge + 2% sessiya bonus</li>
+                    <li>👑 <strong>5.0 ⭐:</strong> "Elite Mentor" Status + Social media reklama</li>
+                </ul>
+            </div>
+
+            <h3>📋 Sessiya Bekor Qilish - Munosib va Munosib Emas Sabablar</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>MUNOSIB SABABLAR ✅</th>
+                        <th>MUNOSIB EMAS SABABLAR ❌</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li>✓ O'quvchi o'zini bekor qildi</li>
+                                <li>✓ Internet muammolari (vaqtdan oldin aytgan)</li>
+                                <li>✓ Tizim xatosi</li>
+                                <li>✓ To'paylovchi holat</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li>✗ Mentor o'zini unutdi</li>
+                                <li>✗ Mentor band bo'lib ketdi (ayt(k)an yo'q)</li>
+                                <li>✗ Mentor vaqtida kelmadi</li>
+                                <li>✗ Sababsiz bekor qildi</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Xatolar Tahlili Tizimi -->
+        <div class="section">
+            <h2>8. Xatolar Tahlili Tizimi</h2>
+            <p>Ushbu funksiya tegishli obunaga ega foydalanuvchilarga o'zlari noto'g'ri javob bergan savollar ustida ishlash imkonini beradi.</p>
+
+            <h3>Jarayon</h3>
+            <ol>
+                <li>Foydalanuvchi 10 ta bilet yechadi va noto'g'ri javoblar "Noto'g'ri Javoblar" bo'limida "Xato" statusi bilan paydo bo'ladi</li>
+                <li>Foydalanuvchi ushbu savollarni izohlari bilan mashq qiladi</li>
+                <li>Savolga birinchi urinishda to'g'ri javob berganda, u vaqtinchalik "o'rganilgan" deb belgilanadi</li>
+                <li>Tizim foydalanuvchiga ushbu savollardan iborat tasdiqlash testini yechishni taklif qiladi</li>
+                <li>Agar barcha savollar to'g'ri yechilsa, holati "To'liq O'zlashtirildi" ga o'zgaradi</li>
+                <li>Ushbu jarayon barcha noto'g'ri javoblar "To'liq O'zlashtirildi" holatiga kelguncha takrorlanadi</li>
+            </ol>
+        </div>
+
+        <!-- 8. Mentor Roli -->
+        <div class="section">
+            <h2>9. Mentor Roli va Sessiyalarni Boshqarish</h2>
+            
+            <h3>Malakaviylik</h3>
+            <p>Mentor bo'lish uchun foydalanuvchi tizim tomonidan belgilangan mezonlarga javob berishi kerak (masalan, Express Individual rejasini o'tish).</p>
+
+            <h3>Daromad Mantig'i</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Xizmat Turi</th>
+                        <th>Daromad Manbai</th>
+                        <th>To'lovni Qabul Qiluvchi</th>
+                        <th>To'lov Mantig'i</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Individual Sessiya</strong></td>
+                        <td>Sessiya To'lovi (masalan, 30,000 UZS)</td>
+                        <td>Tanlangan Mentor</td>
+                        <td>To'liq summa, Tizim Komissiyasini (5-15%) chegirib tashlangan holda, Mentorga to'g'ridan-to'g'ri</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mikro-Kurs</strong></td>
+                        <td>Kurs Sotuvi (masalan, 20,000 UZS)</td>
+                        <td>Yaratuvchi Mentor</td>
+                        <td>To'liq summa, Tizim Komissiyasini (30%) chegirib tashlangan holda, Mentorga to'g'ridan-to'g'ri</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Obuna (Passiv)</strong></td>
+                        <td>O'quvchi Obuna To'lovi</td>
+                        <td>Ro'yxatga Olgan Mentor</td>
+                        <td>Faqat 25% komissiya va video ko'rish ulushiga asoslanadi</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Jadval</h3>
+            <ul class="feature-list">
+                <li>O'quvchilar kalendar interfeysi orqali sessiyalarni bron qiladi</li>
+                <li>Ma'lum bir Mentorni tanlash yoki avtomatik tayinlashni so'rashi mumkin</li>
+                <li>Mentorlar o'z profillarida bo'sh vaqtlarini belgilashlari kerak</li>
+                <li>Bron qilish kalendari faqat bo'sh vaqtlarni ko'rsatadi</li>
+            </ul>
+        </div>
+
+        <!-- 9. Qo'shimcha Tizimlar -->
+        <div class="section">
+            <h2>9. Qo'shimcha Tizimlar va Xususiyatlar</h2>
+
+            <h3>9.1. Mentorlar Uchun Daromad Modeli</h3>
+            <p>Har bir xizmat (Sessiya, Mikro-Kurs Sotib Olish) uchun to'lov Mentor darajasiga qarab taqsimlanadi.</p>
+
+            <h3>9.2. Mentorlar uchun Qo'shimcha Imkoniyatlar</h3>
+            <ul class="feature-list">
+                <li>Darslarni yozib olish va yuklash orqali passiv daromad</li>
+                <li>Har bir ko'rish uchun bonus olish</li>
+                <li>Ichki hamkorlik mexanizmi orqali mukofotlar</li>
+            </ul>
+
+            <h3>9.3. Mikro-Kurs Sotuvlari</h3>
+            <h4>Daromad Taqsimoti:</h4>
+            <ul>
+                <li><strong>70%</strong> — Yaratuvchi Mentor</li>
+                <li><strong>30%</strong> — Platform</li>
+            </ul>
+
+            <h4>Kirish Nazorati va Moslashuvchan Narxlar</h4>
+            <p>Premium Mentorlar o'zlarining Mikro-Kurslari uchun ikkita alohida foydalanuvchi guruhi uchun maxsus narxlarni belgilash imkoniyatiga ega:</p>
+            <ul class="feature-list">
+                <li>Umumiy Foydalanuvchilar (Standart ommaviy narx)</li>
+                <li>Mentorning O'z Ro'yxatidan O'tgan O'quvchilari (Chegirmali yoki maxsus narx)</li>
+            </ul>
+
+            <div class="important">
+                <strong>MUHIM:</strong> O'quvchi Mikro-Kurs sotib olayotganda, shaffoflikni ta'minlash uchun tizim interfeysi kontent Muallifini (Mentor Ismi) aniq ko'rsatishi SHART. Agar O'quvchi kurs sotib olsa, pul o'sha kursning Yaratuvchisiga tushadi, hatto uning ro'yxatdan o'tishini boshqa Mentor boshqargan bo'lsa ham.
+            </div>
+
+            <h3>9.4. Multimedia Kontenti Uchun Mentor Monetizatsiyasi</h3>
+            
+            <h4>Obunadan Olinadigan Daromad Ulushi (Asosiy Passiv Daromad)</h4>
+
+            <div class="important">
+                <strong>📊 "Ekspert Jamg'armasi" Aniq Hisoblash:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>💰 <strong>Har Oy Ajratilish:</strong> Pro va Expert obunalardan olingan platformaning umumiy sof daromadining <span class="highlight">18%</span></li>
+                    <li>📈 <strong>Misol Hisoblash:</strong></li>
+                    <li style="padding-left: 40px;">Pro: 61,875 UZS × 150 foydalanuvchi = 9,281,250 UZS</li>
+                    <li style="padding-left: 40px;">Expert: 82,500 UZS × 50 foydalanuvchi = 4,125,000 UZS</li>
+                    <li style="padding-left: 40px;">Jami: 13,406,250 UZS × 18% = <span class="highlight">2,413,125 UZS (Jamg'armasi)</span></li>
+                    <li>👥 <strong>Taqsimot:</strong> Barcha Mentorlar o'rtasida ularning "Kontent Iste'mol Ulushi" bo'yicha</li>
+                </ul>
+            </div>
+
+            <h4>Kontent Iste'mol Ulushi Hisoblash</h4>
+            <p><strong>Misol:</strong> 3 ta Mentorning video ko'rishlar:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mentor</th>
+                        <th>Video Ko'rish Soni</th>
+                        <th>Jami Video Ko'rish</th>
+                        <th>Ulushi %</th>
+                        <th>Jamg'armadan Oladigan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mentor A</td>
+                        <td>300</td>
+                        <td>1000</td>
+                        <td>30%</td>
+                        <td>723,937.50 UZS</td>
+                    </tr>
+                    <tr>
+                        <td>Mentor B</td>
+                        <td>250</td>
+                        <td>1000</td>
+                        <td>25%</td>
+                        <td>603,281.25 UZS</td>
+                    </tr>
+                    <tr>
+                        <td>Mentor C</td>
+                        <td>200</td>
+                        <td>1000</td>
+                        <td>20%</td>
+                        <td>482,625 UZS</td>
+                    </tr>
+                    <tr style="background: #e8f5e9;">
+                        <td><strong>Boshqalar</strong></td>
+                        <td>250</td>
+                        <td>1000</td>
+                        <td>25%</td>
+                        <td>603,281.25 UZS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="important" style="margin-top: 15px;">
+                <strong>⚠️ MUHIM QOIDA - Istisno Mantig'i:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>❌ Mentor A-ning O'Z ro'yxatdan o'tkazgan o'quvchilari tamondan yaratilgan video ko'rishlar <strong>HISOBLANMAYDI</strong></li>
+                    <li>✅ Faqat boshqa foydalanuvchilar tomonidan yaratilgan ko'rishlar hisoblanadi</li>
+                    <li>💡 <strong>Sababi:</strong> 25% ro'yxatdan o'tish komissiyasi allaqachon Mentor A olgan, shuning uchun ikkilamchi daromad olmasin</li>
+                    <li>📌 <strong>Natija:</strong> Adolatli daromad taqsimoti</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10. Investor Paneli va Moliyaviy Hisobotlar -->
+        <div class="section">
+            <h2>10. Investor Paneli va Moliyaviy Hisobotlar</h2>
+
+            <h3>10.1. Investor Roli va Kirish Huquqlari</h3>
+            <p><strong>Maqsad:</strong> Investorlarga platformaning moliyaviy ahvolini shaffof va real vaqtda kuzatib borish imkoniyatini berish.</p>
+
+            <h4>Asosiy Kirish Huquqlari:</h4>
+            <ul class="feature-list">
+                <li>📊 Barcha daromadlar va xarajatlarni real vaqtda ko'rish</li>
+                <li>📈 Oylik, haftalik va kunlik moliyaviy hisobotlar</li>
+                <li>💰 Platformaning sof foydasi va yo'qotish hisoboti</li>
+                <li>👥 Foydalanuvchilar sonining o'sish statistikasi</li>
+                <li>🔍 Har bir xarajat va daromad manbai bo'yicha batafsil ma'lumot</li>
+            </ul>
+
+            <h3>10.2. Daromadlar Kategoriyasi</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Daromad Manbai</th>
+                        <th>Tavsif</th>
+                        <th>Hisoblanish Usuli</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Obuna To'lovlari</strong></td>
+                        <td>Lite, Plus, Pro, Expert obunalaridan olingan daromad</td>
+                        <td>Har bir obuna to'lovining 75% (Mentor komissiyasidan keyin)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Battle To'lovlari</strong></td>
+                        <td>Duel kirish to'lovlaridan platforma komissiyasi</td>
+                        <td>Har bir battle uchun 2,000 UZS (10,000 UZS jami to'lovdan)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Individual Sessiya Komissiyasi</strong></td>
+                        <td>Mentor sessiyalaridan olingan platforma ulushi</td>
+                        <td>10-20% (Mentor darajasiga qarab: Basic 20%, Pro 15%, Premium 10%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mikro-Kurs Sotuvlari</strong></td>
+                        <td>Mentor mikro-kurslaridan platforma ulushi</td>
+                        <td>Har bir sotuv narxining 30%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Express Individual Dasturi</strong></td>
+                        <td>4 haftalik individual tayyorgarlik dasturi</td>
+                        <td>412,000 UZS to'lovdan platforma ulushi</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>10.3. Xarajatlar Kategoriyasi</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Xarajat Turi</th>
+                        <th>Tavsif</th>
+                        <th>To'lov Daври</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Server Xarajatlari</strong></td>
+                        <td>Hosting, ma'lumotlar bazasi, CDN va boshqa infratuzilma xarajatlari</td>
+                        <td>Oylik</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Internet va Kommunikatsiya</strong></td>
+                        <td>Internet, API xizmatlari (Google Calendar, Telegram Bot), SMS OTP</td>
+                        <td>Oylik</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Xodimlar Ish Haqi</strong></td>
+                        <td>Admin, Kontent Menejer va boshqa xodimlarning oylik maoshi</td>
+                        <td>Oylik</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mentor Komissiyalari</strong></td>
+                        <td>Obuna to'lovlaridan 25%, sessiya daromadlaridan 10-20%</td>
+                        <td>Har bir tranzaksiya</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mentor Bonuslari</strong></td>
+                        <td>Video ko'rishlar ulushi, "Ekspert Jamg'armasi" taqsimoti (18%)</td>
+                        <td>Oylik</td>
+                    </tr>
+                    <tr>
+                        <td><strong>O'quvchi Bonuslari</strong></td>
+                        <td>Battle g'oliblariga mukofotlar, haftalik TOP 10 chegirmalari</td>
+                        <td>Haftalik/Har bir battle</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Qaytarish va Kompensatsiyalar</strong></td>
+                        <td>Sessiya bekor qilish kompensatsiyalari, xizmat qaytarishlari</td>
+                        <td>Har bir holat</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Marketing va Reklama</strong></td>
+                        <td>Platformani targ'ib qilish xarajatlari</td>
+                        <td>Oylik yoki kampaniya asosida</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>10.4. Investor Dashboard Xususiyatlari</h3>
+
+            <h4>Real Vaqt Moliyaviy Ko'rsatkichlar:</h4>
+            <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <ul class="feature-list">
+                    <li>💵 <strong>Bugungi Daromad:</strong> Kun davomida olingan jami daromad</li>
+                    <li>💸 <strong>Bugungi Xarajatlar:</strong> Kun davomida qilingan jami xarajatlar</li>
+                    <li>📊 <strong>Oylik Sof Foyda:</strong> Jami daromad - Jami xarajatlar</li>
+                    <li>👥 <strong>Aktiv Obunchilar:</strong> Har bir obuna turiga qarab ajratilgan</li>
+                    <li>📈 <strong>O'sish Ko'rsatkichi:</strong> Foydalanuvchilar va daromadning o'sish foizi</li>
+                    <li>🎯 <strong>ROI (Return on Investment):</strong> Investitsiya qaytimi hisoblash</li>
+                </ul>
+            </div>
+
+            <h4>Batafsil Hisobotlar:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hisobot Turi</th>
+                        <th>Ma'lumotlar</th>
+                        <th>Eksport Formati</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Kunlik Hisobot</strong></td>
+                        <td>Kunlik daromad, xarajatlar, yangi ro'yxatdan o'tishlar</td>
+                        <td>PDF, Excel, CSV</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Haftalik Hisobot</strong></td>
+                        <td>Haftalik tendentsiyalar, Battle mukofotlari, Mentor to'lovlari</td>
+                        <td>PDF, Excel, CSV</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Oylik Hisobot</strong></td>
+                        <td>To'liq moliyaviy xulosalar, xodimlar ish haqi, sof foyda</td>
+                        <td>PDF, Excel, CSV</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Yillik Hisobot</strong></td>
+                        <td>Yillik o'sish, investitsiya qaytimi, prognozlar</td>
+                        <td>PDF, Excel, CSV</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="important">
+                <strong>🔒 Xavfsizlik va Maxfiylik:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px; list-style-type: none;">
+                    <li>🔐 Investor paneli uchun ikki faktorli autentifikatsiya (2FA) majburiy</li>
+                    <li>📋 Barcha kirish urinishlari va faoliyatlar loglanadi</li>
+                    <li>👁️ Investorlar faqat moliyaviy ma'lumotlarni ko'ra oladi, foydalanuvchilarning shaxsiy ma'lumotlariga kirish yo'q</li>
+                    <li>⏱️ Moliyaviy ma'lumotlar har 15 daqiqada yangilanadi</li>
+                </ul>
+            </div>
+
+            <h3>10.5. Xarajatlarni Boshqarish va Tasdiqlash</h3>
+            <p><strong>Xarajat Tasdiqlash Jarayoni:</strong></p>
+            <ul class="feature-list">
+                <li>Admin tomonidan barcha yangi xarajatlar kiritiladi va tasdiqlashga yuboriladi</li>
+                <li>Investor real vaqtda xarajat so'rovlarini ko'radi va tasdiqlaydi/rad etadi</li>
+                <li>Tasdiqlangan xarajatlar moliyaviy hisobotlarga avtomatik qo'shiladi</li>
+                <li>Har bir xarajat uchun sabablar va izohlar kiritilishi shart</li>
+            </ul>
+
+            <h3>10.6. Prognoz va Tahlil Vositalari</h3>
+            <div style="background: #f0f8ff; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                <h4>Moliyaviy Prognozlash:</h4>
+                <ul class="feature-list">
+                    <li>📊 AI asosida keyingi 3-6 oy uchun daromad prognozi</li>
+                    <li>📉 Xarajatlar tendentsiyasi va optimallashtirish takliflari</li>
+                    <li>🎯 Maqsadli foyda ko'rsatkichlariga erishish yo'llari</li>
+                    <li>💡 Yangi obuna rejalari va narxlarni test qilish imkoniyati</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 11. Tashqi Xizmatlar Integratsiyasi -->
+        <div class="section">
+            <h2>11. Tashqi Xizmatlar Integratsiyasi Tafsilotlari</h2>
+
+            <h3>11.1. Google Calendar & Meet Integratsiyasi</h3>
+            <p><strong>Maqsad:</strong> Mentorlardan shaxsiy akkauntlarini ulashni talab qilmasdan, bron qilish paytida avtomatik ravishda Google Meet havolasini yaratish.</p>
+
+            <h4>Akkauntni Sozlash (Markazlashtirilgan Tizimga Kirish)</h4>
+            <div class="important">
+                <strong>TALAB:</strong> Tizim Google Calendar API orqali barcha rejalashtirish va uchrashuvlarni yaratishni boshqarish uchun yagona, maxsus Onless.uz Xizmat Akkauntidan (masalan, info@onless.uz) foydalanishi SHART.
+                <br><br>
+                Barcha API chaqiruvlari Xizmat Akkaunti ma'lumotlari bilan tasdiqlangan holda server tomonidan amalga oshiriladi. Mentorlardan individual OAuth kirish huquqini berish TALAB QILINMAYDI.
+            </div>
+
+            <h4>Uchrashuv Yaratish Jarayoni</h4>
+            <p>Quyidagi ketma-ketlik O'quvchining Individual Sessiya uchun to'lovi tasdiqlanganidan so'ng darhol ishga tushadi:</p>
+            <ol>
+                <li><strong>API Chaqiruvi:</strong> Tizim Onless.uz Xizmat Akkauntidan foydalanib, Google Calendar APIga events.insert chaqiruvini yuboradi</li>
+                <li><strong>Tashkilotchi:</strong> Xizmat Akkaunti uchrashuv tashkilotchisi sifatida belgilanadi</li>
+                <li><strong>Ishtirokchilar:</strong> Tanlangan Mentorning va O'quvchining elektron pochtasi/akkaunti mehmon sifatida qo'shiladi</li>
+                <li><strong>Google Meet Yaratish:</strong> API chaqiruvi avtomatik ravishda noyob Google Meet havolasini yaratadi</li>
+                <li><strong>Adminsiz Kirish:</strong> Uchrashuv Mentorga ham, O'quvchiga ham to'liq huquqlar bilan to'liq ishtirokchilar sifatida qo'shiladi</li>
+                <li><strong>Xabarnomani Tarqatish:</strong> Yaratilgan Meet havolasi quyidagi yo'llar orqali yuboriladi:
+                    <ul>
+                        <li>Tizim Bildirishnomasi / Onless.uz Boshqaruv Paneli</li>
+                        <li>Telegram Bot xabari</li>
+                        <li>Standart Google Calendar Taklifnomasi</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>11.2. Telegram Bot Integratsiyasi</h3>
+            <p><strong>Botning Maqsadi:</strong> Qaytishni, motivatsiyani va muhim tranzaksiya ogohlantirishlarini ta'minlash uchun tizimdan tashqari aloqalarni boshqarish.</p>
+
+            <h4>Foydalanuvchini Bog'lash va Avtorizatsiya</h4>
+            <p>Foydalanuvchilar ro'yxatdan o'tish paytida yoki Profil Sozlamalari orqali o'zlarining Onless.uz IDlarini Telegram IDlariga uladilar:</p>
+            <ul class="feature-list">
+                <li>Noyob Havola Yaratish: Foydalanuvchi bog'lanishni boshlaganda, xesh IDni o'z ichiga olgan noyob bir martalik havola yaratiladi</li>
+                <li>ID Moslashtirish: Foydalanuvchi havolani bosadi va botga /start buyrug'ini yuboradi</li>
+                <li>Tasdiqlash: Bot tasdiqlash xabarini yuboradi</li>
+            </ul>
+
+            <h4>Bot Bildirishnoma Stsenariylari</h4>
+            <p>Bot jalb qilishni davom ettirish uchun tranzaksiyaga asoslangan va motivatsion xabarlarni yuboradi.</p>
+        </div>
+
+        <div class="section" style="background-color: #e8f4f8; border-left-color: #27ae60;">
+            <h2>✅ Xulosa</h2>
+            <p>Onless.uz platformasi rivojlanayotgan talabalar uchun kompleks o'quv tizimi bo'lib, quyidagilarni o'z ichiga oladi:</p>
+            <ul style="list-style: circle; padding-left: 20px;">
+                <li>Interaktiv test va mashq rejimlari</li>
+                <li>Reyting-asosida video sifat nazorati</li>
+                <li>Ko'p darajali monetizatsiya va obuna rejalari</li>
+                <li>Mentor hamkorlik va daromad mexanizmi</li>
+                <li>Jonli duellar va raqabat elementlari</li>
+                <li>Google Calendar/Meet integratsiyasi</li>
+                <li>Telegram Bot aloqalari</li>
+                <li>Ko'p tillik qo'llash</li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>
