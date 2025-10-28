@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { ThemeProvider } from './lib/contexts/ThemeContext';
 
 export const metadata: Metadata = {
   title: 'Onless.uz - Haydovchilik Imtihoni',
@@ -12,8 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="uz">
-      <body className="antialiased">{children}</body>
+    <html lang="uz" suppressHydrationWarning>
+      <body className="antialiased">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

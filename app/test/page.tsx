@@ -97,7 +97,7 @@ export default function TestPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-primary-dark to-[#172a45] border-2 border-background-border">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-100 via-blue-50 to-gray-100 dark:from-primary-dark dark:via-background dark:to-primary-dark">
       {/* Header */}
       <TestHeader
         currentQuestionNumber={session.currentQuestionIndex + 1}
@@ -110,17 +110,19 @@ export default function TestPage() {
       <div className="flex-1 flex flex-col overflow-hidden">
         <div className="flex flex-1 p-5 gap-5 overflow-y-auto min-h-0">
           {/* Left Panel: Question and Options */}
-          <div className="flex-[0_0_300px] flex flex-col">
+          <div className="flex-[0_0_420px] flex flex-col">
             <OptionsPanel
               questionText={currentQuestion.text}
               options={currentQuestion.options}
               selectedOptionId={session.answers[currentQuestion.id] || null}
+              correctOptionId={currentQuestion.correctOptionId}
+              showFeedback={!!session.answers[currentQuestion.id]}
               onSelectOption={handleSelectOption}
             />
           </div>
 
           {/* Right Panel: Image */}
-          <div className="flex-1 flex justify-center items-center bg-background-dark relative min-h-[300px]">
+          <div className="flex-1 flex justify-center items-center bg-white dark:bg-background-dark relative min-h-[300px] rounded-xl border-2 border-gray-200 dark:border-background-border shadow-2xl overflow-hidden">
             <QuestionDisplay
               questionText={currentQuestion.text}
               imagePath={currentQuestion.imagePath}
