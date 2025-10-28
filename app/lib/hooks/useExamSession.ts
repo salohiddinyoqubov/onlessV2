@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useMemo } from 'react';
 import { Question, ExamSession } from '@/types/exam.types';
-import { selectRandomQuestions } from '../test-logic';
+import { selectRandomQuestions } from '../exam-logic';
 import { EXAM_CONFIG } from '@/config/exam.config';
 
 /**

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { formatTime } from '../test-logic';
+import { formatTime } from '../exam-logic';
 
 /**
  * Custom hook for managing countdown timer
