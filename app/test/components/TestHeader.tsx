@@ -1,6 +1,7 @@
 'use client';
 
 import { useTheme } from '@/app/lib/contexts/ThemeContext';
+import { useLanguage, Language, LANGUAGE_LABELS } from '@/app/lib/contexts/LanguageContext';
 
 interface TestHeaderProps {
   /** Current question number (1-20) */
@@ -23,8 +24,9 @@ export function TestHeader({
   onClose,
 }: TestHeaderProps) {
   const { theme, toggleTheme } = useTheme();
+  const { language, setLanguage } = useLanguage();
 
-  const languages = [
+  const languages: { code: Language; label: string }[] = [
     { code: 'uz-latn', label: 'Uzb (lotin.)' },
     { code: 'uz-cyrl', label: 'Uzb (кирил.)' },
     { code: 'qr-latn', label: 'Qrq (lotin.)' },
@@ -49,11 +51,12 @@ export function TestHeader({
 
       {/* Center: Language Tabs */}
       <div className="flex gap-1 bg-gray-100 dark:bg-background-dark p-1 rounded-lg">
-        {languages.map((lang, idx) => (
+        {languages.map((lang) => (
           <button
             key={lang.code}
+            onClick={() => setLanguage(lang.code)}
             className={`px-4 py-2 text-xs font-medium rounded-md transition-all ${
-              idx === 4
+              language === lang.code
                 ? 'bg-blue-600 dark:bg-primary text-white shadow-md'
                 : 'bg-transparent text-gray-600 dark:text-neutral-light hover:bg-gray-200 dark:hover:bg-background-secondary hover:text-gray-900 dark:hover:text-white'
             }`}

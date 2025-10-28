@@ -1,6 +1,7 @@
 'use client';
 
 import { QuestionOption } from '@/types/test.types';
+import { useLanguage } from '@/app/lib/contexts/LanguageContext';
 
 interface OptionsPanelProps {
   /** Question text */
@@ -29,11 +30,12 @@ export function OptionsPanel({
   showFeedback = false,
   onSelectOption,
 }: OptionsPanelProps) {
+  const { convertText } = useLanguage();
   return (
     <div className="flex flex-col">
       {/* Question Box */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-500 dark:from-primary dark:to-primary-light p-5 mb-5 border-2 border-blue-300 dark:border-primary-border rounded-xl text-lg font-semibold text-white text-center shadow-lg">
-        {questionText}
+        {convertText(questionText)}
       </div>
 
       {/* Options List */}
@@ -73,7 +75,7 @@ export function OptionsPanel({
               <span className={`p-4 flex-1 font-medium flex items-center leading-relaxed ${
                 shouldShowCorrect ? 'text-green-700 dark:text-success' : isIncorrect ? 'text-red-700 dark:text-danger' : 'text-gray-800 dark:text-neutral'
               }`}>
-                {option.text}
+                {convertText(option.text)}
                 {/* Show checkmark or X for feedback */}
                 {showFeedback && isCorrect && (
                   <span className="ml-auto text-green-600 dark:text-success text-xl">✓</span>
