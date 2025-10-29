@@ -1,212 +1,269 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 
 export default function HomePage() {
   const [language, setLanguage] = useState<'uz' | 'ru'>('uz');
+  const [counters, setCounters] = useState({ students: 0, tests: 0, success: 0, mentors: 0 });
+  const [isCounterVisible, setIsCounterVisible] = useState(false);
+  const counterRef = useRef<HTMLDivElement>(null);
+  const [scrollY, setScrollY] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isCounterVisible) {
+          setIsCounterVisible(true);
+          animateCounters();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isCounterVisible]);
+
+  const animateCounters = () => {
+    const duration = 2000;
+    const steps = 60;
+    const interval = duration / steps;
+
+    let step = 0;
+    const timer = setInterval(() => {
+      step++;
+      const progress = step / steps;
+
+      setCounters({
+        students: Math.floor(10000 * progress),
+        tests: Math.floor(500 * progress),
+        success: Math.floor(95 * progress),
+        mentors: Math.floor(50 * progress),
+      });
+
+      if (step >= steps) clearInterval(timer);
+    }, interval);
+  };
 
   const content = {
     uz: {
       hero: {
-        title: 'Haydovchilik guvohnomangizni',
-        titleHighlight: 'Onlayn',
-        titleEnd: 'oling!',
-        subtitle: 'Zamonaviy, interaktiv va samarali ta\'lim platformasi. Yangi qonunlar talablariga to\'liq mos.',
-        ctaPrimary: 'Bepul sinab ko\'ring',
-        ctaSecondary: 'Platformani o\'rganing',
+        badge: 'O\'zbekistonda birinchi raqamli platforma',
+        title: 'Haydovchilik ta\'limi',
+        titleHighlight: 'ekotizimi',
+        subtitle: 'Talabalar, mentorlar, avtomaktablar va investorlar uchun to\'liq yechim. Nazariya, amaliyot va biznes bir joyda.',
+        cta: 'Bepul boshlash',
+        demo: 'Demo ko\'rish'
       },
-      features: {
-        title: 'Nega aynan Onless.uz?',
-        subtitle: 'Zamonaviy texnologiyalar va o\'yinlashtirish usullari bilan nazariy imtihonga tayyorlanish',
-        items: [
+      solutions: {
+        title: 'Har bir ishtirokchi uchun',
+        titleHighlight: 'maxsus yechim',
+        students: {
+          title: 'Talabalar',
+          desc: 'Imtihonga tayyorgarlik, interaktiv testlar va professional mentorlar',
+          features: ['500+ test savoli', 'Battle rejimi', 'Video darslar', 'Mobil ilovalar']
+        },
+        mentors: {
+          title: 'Mentorlar',
+          desc: 'O\'qiting, daromad qiling. 10-25% komissiya va referral bonuslar',
+          features: ['3 daraja tizimi', 'Session boshqarish', 'Reyting tizimi', 'Bonuslar']
+        },
+        business: {
+          title: 'Avtomaktablar',
+          desc: 'B2B marketplace, white-label brending va to\'liq boshqaruv tizimi',
+          features: ['White-label', 'Xodimlar boshqaruvi', 'Escrow to\'lovlar', 'Analytics']
+        },
+        investors: {
+          title: 'Investorlar',
+          desc: 'Moliyaviy dashboard, daromad va xarajatlar tahlili',
+          features: ['Real-time hisobotlar', 'ROI tahlili', 'Prognozlar', 'Xarajat boshqaruvi']
+        }
+      },
+      platform: {
+        title: 'Kuchli',
+        titleHighlight: 'platforma imkoniyatlari',
+        features: [
           {
             icon: '🎯',
-            title: 'Rasmiy test savollari',
-            description: 'Yo\'l harakati qoidalariga asoslangan barcha kategoriyalar va savollar'
+            title: 'Test tizimi',
+            desc: 'Practice, Exam va Battle rejimlari',
+            color: 'from-blue-500 to-cyan-500'
           },
           {
             icon: '📱',
-            title: 'Istalgan joyda',
-            description: 'Mobil, desktop yoki brauzerda - o\'zingizga qulay vaqt va joyda o\'rganing'
+            title: 'Multi-platform',
+            desc: 'Web, iOS, Android, Desktop',
+            color: 'from-purple-500 to-pink-500'
           },
           {
-            icon: '💡',
-            title: 'Batafsil izohlar',
-            description: 'Har bir savol uchun to\'liq izoh va qoidalar bilan tanishing'
+            icon: '🎨',
+            title: 'White-label',
+            desc: 'O\'z brendingiz ostida ishga tushiring',
+            color: 'from-green-500 to-teal-500'
+          },
+          {
+            icon: '⚔️',
+            title: 'Battle rejimi',
+            desc: 'Jonli duellar va turnirlar',
+            color: 'from-orange-500 to-red-500'
           },
           {
             icon: '📊',
-            title: 'Taraqqiyotni kuzatish',
-            description: 'Real vaqtda o\'z natijalaringizni ko\'ring va tahlil qiling'
+            title: 'Analytics',
+            desc: 'Real-time tahlil va hisobotlar',
+            color: 'from-indigo-500 to-blue-500'
           },
           {
-            icon: '🎮',
-            title: 'Gamifikatsiya',
-            description: 'O\'yinlashtirish elementlari bilan qiziqarli va samarali o\'qish'
-          },
-          {
-            icon: '👨‍🏫',
-            title: 'Professional mentorlar',
-            description: 'Malakali o\'qituvchilardan maslahat va yordam oling'
+            icon: '💰',
+            title: 'Escrow tizimi',
+            desc: 'Xavfsiz to\'lovlar va komissiyalar',
+            color: 'from-yellow-500 to-orange-500'
           }
         ]
       },
-      pricing: {
-        title: 'O\'zingizga mos tarifni tanlang',
-        free: {
-          name: 'Bepul',
-          price: '0',
-          features: [
-            '20 ta bepul test',
-            'Asosiy statistika',
-            'Mobil ilova'
-          ]
-        },
-        pro: {
-          name: 'Pro',
-          price: '49,000',
-          features: [
-            'Barcha testlar',
-            'To\'liq statistika',
-            'Video darslar',
-            'Mentor yordami',
-            'Oflayn rejim'
-          ],
-          popular: true
-        },
-        business: {
-          name: 'Biznes',
-          price: 'Kelishuv asosida',
-          features: [
-            'White-label brending',
-            'O\'z o\'quvchilaringiz',
-            'To\'liq moliyaviy hisobot',
-            'Shaxsiy menejer'
-          ]
-        }
-      },
       stats: {
-        students: '10,000+',
-        studentsLabel: 'Faol o\'quvchilar',
-        tests: '500+',
-        testsLabel: 'Test savollari',
-        success: '95%',
-        successLabel: 'Muvaffaqiyat darajasi',
-        mentors: '50+',
-        mentorsLabel: 'Professional mentorlar'
+        students: { label: 'Faol talabalar' },
+        tests: { label: 'Test savollari' },
+        success: { label: 'Muvaffaqiyat' },
+        mentors: { label: 'Professional mentorlar' }
+      },
+      battle: {
+        title: 'Battle rejimi',
+        titleHighlight: '- o\'yinlashtirish',
+        desc: 'Jonli 1v1 duellar, leaderboardlar va haftalik turnirlar. Bilimingizni sinab ko\'ring!',
+        features: ['Real-time duellar', 'Mos raqiblar', 'Haftalik reytinglar', 'Sovrinlar'],
+        cta: 'Battle haqida'
       },
       cta: {
         title: 'Bugun boshlang!',
-        subtitle: 'Bepul sinov muddati bilan barcha imkoniyatlardan foydalaning',
-        button: 'Ro\'yxatdan o\'tish'
-      },
-      footer: {
-        about: 'Onless.uz — O\'zbekistonda birinchi raqamli haydovchilik maktabi platformasi',
-        links: 'Foydali havolalar',
-        contact: 'Aloqa',
-        rights: '© 2024 Onless.uz. Barcha huquqlar himoyalangan.'
+        subtitle: 'O\'zingiz uchun mos yechimni toping',
+        options: [
+          { title: 'Talaba sifatida', desc: 'Imtihonga tayyorlan', link: '/solutions/students', icon: '🎓' },
+          { title: 'Mentor sifatida', desc: 'Daromad qiling', link: '/solutions/mentors', icon: '👨‍🏫' },
+          { title: 'Biznes sifatida', desc: 'Platformani ishga tushiring', link: '/solutions/business', icon: '🏢' },
+          { title: 'Investor sifatida', desc: 'Moliya boshqaring', link: '/solutions/investors', icon: '💼' }
+        ]
       }
     },
     ru: {
       hero: {
-        title: 'Получите водительские права',
-        titleHighlight: 'Онлайн',
-        titleEnd: '!',
-        subtitle: 'Современная, интерактивная и эффективная образовательная платформа. Полностью соответствует новым законам.',
-        ctaPrimary: 'Попробуват бесплатно',
-        ctaSecondary: 'Изучить платформу',
+        badge: 'Первая цифровая платформа в Узбекистане',
+        title: 'Экосистема',
+        titleHighlight: 'обучения вождению',
+        subtitle: 'Полное решение для студентов, менторов, автошкол и инвесторов. Теория, практика и бизнес в одном месте.',
+        cta: 'Начать бесплатно',
+        demo: 'Смотреть демо'
       },
-      features: {
-        title: 'Почему Onless.uz?',
-        subtitle: 'Подготовка к теоретическому экзамену с использованием современных технологий и геймификации',
-        items: [
+      solutions: {
+        title: 'Специальное решение',
+        titleHighlight: 'для каждого участника',
+        students: {
+          title: 'Студенты',
+          desc: 'Подготовка к экзамену, интерактивные тесты и профессиональные менторы',
+          features: ['500+ тестовых вопросов', 'Battle режим', 'Видео уроки', 'Мобильные приложения']
+        },
+        mentors: {
+          title: 'Менторы',
+          desc: 'Учите и зарабатывайте. 10-25% комиссия и реферальные бонусы',
+          features: ['3-уровневая система', 'Управление сессиями', 'Система рейтинга', 'Бонусы']
+        },
+        business: {
+          title: 'Автошколы',
+          desc: 'B2B маркетплейс, white-label брендинг и полная система управления',
+          features: ['White-label', 'Управление персоналом', 'Escrow платежи', 'Аналитика']
+        },
+        investors: {
+          title: 'Инвесторы',
+          desc: 'Финансовая панель, анализ доходов и расходов',
+          features: ['Отчеты в реальном времени', 'ROI анализ', 'Прогнозы', 'Управление расходами']
+        }
+      },
+      platform: {
+        title: 'Мощные возможности',
+        titleHighlight: 'платформы',
+        features: [
           {
             icon: '🎯',
-            title: 'Официальные тесты',
-            description: 'Все категории и вопросы основаны на правилах дорожного движения'
+            title: 'Система тестов',
+            desc: 'Режимы Practice, Exam и Battle',
+            color: 'from-blue-500 to-cyan-500'
           },
           {
             icon: '📱',
-            title: 'Где угодно',
-            description: 'Мобильное приложение, десктоп или браузер - учитесь когда и где удобно'
+            title: 'Multi-platform',
+            desc: 'Web, iOS, Android, Desktop',
+            color: 'from-purple-500 to-pink-500'
           },
           {
-            icon: '💡',
-            title: 'Подробные объяснения',
-            description: 'Полное объяснение и правила для каждого вопроса'
+            icon: '🎨',
+            title: 'White-label',
+            desc: 'Запустите под своим брендом',
+            color: 'from-green-500 to-teal-500'
+          },
+          {
+            icon: '⚔️',
+            title: 'Battle режим',
+            desc: 'Живые дуэли и турниры',
+            color: 'from-orange-500 to-red-500'
           },
           {
             icon: '📊',
-            title: 'Отслеживание прогресса',
-            description: 'Смотрите и анализируйте свои результаты в реальном времени'
+            title: 'Аналитика',
+            desc: 'Анализ и отчеты в реальном времени',
+            color: 'from-indigo-500 to-blue-500'
           },
           {
-            icon: '🎮',
-            title: 'Геймификация',
-            description: 'Увлекательное и эффективное обучение с игровыми элементами'
-          },
-          {
-            icon: '👨‍🏫',
-            title: 'Профессиональные менторы',
-            description: 'Получайте советы и помощь от квалифицированных преподавателей'
+            icon: '💰',
+            title: 'Escrow система',
+            desc: 'Безопасные платежи и комиссии',
+            color: 'from-yellow-500 to-orange-500'
           }
         ]
       },
-      pricing: {
-        title: 'Выберите подходящий тариф',
-        free: {
-          name: 'Бесплатно',
-          price: '0',
-          features: [
-            '20 бесплатных тестов',
-            'Базовая статистика',
-            'Мобильное приложение'
-          ]
-        },
-        pro: {
-          name: 'Pro',
-          price: '49,000',
-          features: [
-            'Все тесты',
-            'Полная статистика',
-            'Видео уроки',
-            'Помощь ментора',
-            'Оффлайн режим'
-          ],
-          popular: true
-        },
-        business: {
-          name: 'Бизнес',
-          price: 'По договоренности',
-          features: [
-            'White-label брендинг',
-            'Ваши ученики',
-            'Полный финансовый отчет',
-            'Личный менеджер'
-          ]
-        }
-      },
       stats: {
-        students: '10,000+',
-        studentsLabel: 'Активных учеников',
-        tests: '500+',
-        testsLabel: 'Тестовых вопросов',
-        success: '95%',
-        successLabel: 'Успешность',
-        mentors: '50+',
-        mentorsLabel: 'Профессиональных менторов'
+        students: { label: 'Активных студентов' },
+        tests: { label: 'Тестовых вопросов' },
+        success: { label: 'Успешность' },
+        mentors: { label: 'Профессиональных менторов' }
+      },
+      battle: {
+        title: 'Battle режим',
+        titleHighlight: '- геймификация',
+        desc: 'Живые 1v1 дуэли, лидерборды и еженедельные турниры. Проверьте свои знания!',
+        features: ['Дуэли в реальном времени', 'Подбор противников', 'Еженедельные рейтинги', 'Призы'],
+        cta: 'О Battle режиме'
       },
       cta: {
         title: 'Начните сегодня!',
-        subtitle: 'Воспользуйтесь всеми возможностями с бесплатным пробным периодом',
-        button: 'Регистрация'
-      },
-      footer: {
-        about: 'Onless.uz — первая платформа цифровой автошколы в Узбекистане',
-        links: 'Полезные ссылки',
-        contact: 'Контакты',
-        rights: '© 2024 Onless.uz. Все права защищены.'
+        subtitle: 'Найдите подходящее решение для себя',
+        options: [
+          { title: 'Как студент', desc: 'Готовьтесь к экзамену', link: '/solutions/students', icon: '🎓' },
+          { title: 'Как ментор', desc: 'Зарабатывайте', link: '/solutions/mentors', icon: '👨‍🏫' },
+          { title: 'Как бизнес', desc: 'Запустите платформу', link: '/solutions/business', icon: '🏢' },
+          { title: 'Как инвестор', desc: 'Управляйте финансами', link: '/solutions/investors', icon: '💼' }
+        ]
       }
     }
   };
@@ -214,280 +271,278 @@ export default function HomePage() {
   const t = content[language];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2">
-              <div className="text-3xl">🚗</div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-300 bg-clip-text text-transparent">
-                Onless.uz
+      <Navigation language={language} setLanguage={setLanguage} />
+
+      {/* Animated Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute w-96 h-96 bg-blue-400/20 dark:bg-blue-600/10 rounded-full blur-3xl"
+          style={{
+            top: `${20 + scrollY * 0.05}%`,
+            left: `${10 + mousePosition.x * 0.01}%`,
+            transition: 'all 0.3s ease-out'
+          }}
+        />
+        <div
+          className="absolute w-96 h-96 bg-purple-400/20 dark:bg-purple-600/10 rounded-full blur-3xl"
+          style={{
+            bottom: `${10 + scrollY * 0.03}%`,
+            right: `${15 + mousePosition.y * 0.01}%`,
+            transition: 'all 0.3s ease-out'
+          }}
+        />
+      </div>
+
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="text-center relative z-10">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 backdrop-blur-sm border border-blue-500/20 rounded-full mb-8 animate-float">
+              <span className="w-2 h-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full animate-pulse" />
+              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                {t.hero.badge}
               </span>
             </div>
 
-            <div className="flex items-center gap-4">
-              {/* Language Switcher */}
-              <div className="flex gap-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
-                <button
-                  onClick={() => setLanguage('uz')}
-                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-                    language === 'uz'
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                  }`}
-                >
-                  UZ
-                </button>
-                <button
-                  onClick={() => setLanguage('ru')}
-                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-                    language === 'ru'
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                  }`}
-                >
-                  RU
-                </button>
-              </div>
+            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black text-gray-900 dark:text-white mb-8 leading-tight">
+              {t.hero.title}
+              <br />
+              <span className="relative inline-block">
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 blur-3xl opacity-50 animate-pulse" />
+                <span className="relative bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 bg-clip-text text-transparent">
+                  {t.hero.titleHighlight}
+                </span>
+              </span>
+            </h1>
 
+            <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto">
+              {t.hero.subtitle}
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
-                href="/auth"
-                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white rounded-lg font-semibold transition-colors shadow-md hover:shadow-lg"
+                href="/exam"
+                className="px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-2xl font-bold text-lg shadow-2xl hover:shadow-blue-500/50 transition-all hover:scale-105"
               >
-                {language === 'uz' ? 'Kirish' : 'Войти'}
+                {t.hero.cta}
+              </Link>
+              <Link
+                href="/platform"
+                className="px-10 py-5 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl border-2 border-gray-200 dark:border-gray-700 hover:scale-105 transition-all"
+              >
+                {t.hero.demo}
               </Link>
             </div>
           </div>
         </div>
-      </nav>
+      </section>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      {/* Solutions Grid */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6">
-              {t.hero.title}{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
-                {t.hero.titleHighlight}
+          <div className="text-center mb-16">
+            <h2 className="text-5xl sm:text-6xl font-black text-gray-900 dark:text-white mb-4">
+              {t.solutions.title}{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                {t.solutions.titleHighlight}
               </span>
-              {t.hero.titleEnd}
-            </h1>
-            <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
-              {t.hero.subtitle}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { key: 'students', color: 'from-blue-500 to-cyan-500', icon: '🎓', link: '/solutions/students' },
+              { key: 'mentors', color: 'from-purple-500 to-pink-500', icon: '👨‍🏫', link: '/solutions/mentors' },
+              { key: 'business', color: 'from-green-500 to-teal-500', icon: '🏢', link: '/solutions/business' },
+              { key: 'investors', color: 'from-orange-500 to-red-500', icon: '💼', link: '/solutions/investors' }
+            ].map((solution, index) => (
               <Link
-                href="/exam"
-                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white rounded-xl font-semibold text-lg transition-all shadow-lg hover:shadow-xl hover:scale-105"
+                key={solution.key}
+                href={solution.link}
+                className="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-3xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-transparent shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+                style={{ animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both` }}
               >
-                {t.hero.ctaPrimary}
+                <div className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity`} />
+
+                <div className="relative">
+                  <div className="text-6xl mb-4 transform group-hover:scale-110 transition-transform">
+                    {solution.icon}
+                  </div>
+                  <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-3">
+                    {t.solutions[solution.key as keyof typeof t.solutions].title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6">
+                    {t.solutions[solution.key as keyof typeof t.solutions].desc}
+                  </p>
+                  <ul className="space-y-2">
+                    {t.solutions[solution.key as keyof typeof t.solutions].features.map((feature: string, idx: number) => (
+                      <li key={idx} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                        <span className="text-green-500">✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </Link>
-              <button className="px-8 py-4 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white rounded-xl font-semibold text-lg transition-all shadow-md hover:shadow-lg border-2 border-gray-200 dark:border-gray-700">
-                {t.hero.ctaSecondary}
-              </button>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
+      <section ref={counterRef} className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm relative">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">{t.stats.students}</div>
-              <div className="text-gray-600 dark:text-gray-400">{t.stats.studentsLabel}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">{t.stats.tests}</div>
-              <div className="text-gray-600 dark:text-gray-400">{t.stats.testsLabel}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">{t.stats.success}</div>
-              <div className="text-gray-600 dark:text-gray-400">{t.stats.successLabel}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">{t.stats.mentors}</div>
-              <div className="text-gray-600 dark:text-gray-400">{t.stats.mentorsLabel}</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              {t.features.title}
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              {t.features.subtitle}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {t.features.items.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:scale-105 border border-gray-200 dark:border-gray-700"
-              >
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {feature.description}
-                </p>
+            {[
+              { key: 'students', color: 'from-blue-500 to-cyan-500', icon: '👨‍🎓' },
+              { key: 'tests', color: 'from-green-500 to-teal-500', icon: '📝' },
+              { key: 'success', color: 'from-purple-500 to-pink-500', icon: '🎯' },
+              { key: 'mentors', color: 'from-orange-500 to-red-500', icon: '👨‍🏫' }
+            ].map((stat) => (
+              <div key={stat.key} className="text-center">
+                <div className="text-5xl mb-4">{stat.icon}</div>
+                <div className={`text-5xl font-black mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                  {stat.key === 'students' && `${counters.students.toLocaleString()}+`}
+                  {stat.key === 'tests' && `${counters.tests}+`}
+                  {stat.key === 'success' && `${counters.success}%`}
+                  {stat.key === 'mentors' && `${counters.mentors}+`}
+                </div>
+                <div className="text-gray-600 dark:text-gray-400 font-semibold">
+                  {t.stats[stat.key as keyof typeof t.stats].label}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
+      {/* Platform Features */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              {t.pricing.title}
+            <h2 className="text-5xl sm:text-6xl font-black text-gray-900 dark:text-white mb-4">
+              {t.platform.title}{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                {t.platform.titleHighlight}
+              </span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Free */}
-            <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                {t.pricing.free.name}
-              </h3>
-              <div className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
-                {t.pricing.free.price} <span className="text-xl text-gray-600 dark:text-gray-400">so'm</span>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.platform.features.map((feature, index) => (
+              <div
+                key={index}
+                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-3xl p-8 border-2 border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              >
+                <div className="text-6xl mb-4">{feature.icon}</div>
+                <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {feature.desc}
+                </p>
               </div>
-              <ul className="space-y-3 mb-8">
-                {t.pricing.free.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <span className="text-green-500 mt-1">✓</span>
-                    <span className="text-gray-600 dark:text-gray-300">{feature}</span>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/platform"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-bold transition-all hover:scale-105 shadow-lg"
+            >
+              {language === 'uz' ? 'Barcha imkoniyatlar' : 'Все возможности'}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Battle Mode Highlight */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-500/10" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-5xl font-black text-gray-900 dark:text-white mb-4">
+                {t.battle.title}{' '}
+                <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                  {t.battle.titleHighlight}
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+                {t.battle.desc}
+              </p>
+              <ul className="grid grid-cols-2 gap-4 mb-8">
+                {t.battle.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-center gap-2">
+                    <span className="text-orange-500 text-xl">⚔️</span>
+                    <span className="font-semibold text-gray-700 dark:text-gray-300">{feature}</span>
                   </li>
                 ))}
               </ul>
               <Link
-                href="/exam"
-                className="block w-full py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-semibold text-center transition-colors"
+                href="/battle"
+                className="inline-block px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold transition-all hover:scale-105 shadow-lg"
               >
-                {language === 'uz' ? 'Boshlash' : 'Начать'}
+                {t.battle.cta}
               </Link>
             </div>
-
-            {/* Pro */}
-            <div className="bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 rounded-2xl p-8 relative transform scale-105 shadow-2xl">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-gray-900 px-4 py-1 rounded-full text-sm font-bold">
-                {language === 'uz' ? 'Ommabop' : 'Популярный'}
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">
-                {t.pricing.pro.name}
-              </h3>
-              <div className="text-4xl font-bold text-white mb-6">
-                {t.pricing.pro.price} <span className="text-xl">so'm</span>
-              </div>
-              <ul className="space-y-3 mb-8">
-                {t.pricing.pro.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <span className="text-yellow-300 mt-1">✓</span>
-                    <span className="text-white">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/auth"
-                className="block w-full py-3 bg-white hover:bg-gray-100 text-blue-600 rounded-lg font-semibold text-center transition-colors"
-              >
-                {language === 'uz' ? 'Xarid qilish' : 'Купить'}
-              </Link>
-            </div>
-
-            {/* Business */}
-            <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                {t.pricing.business.name}
-              </h3>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                {t.pricing.business.price}
-              </div>
-              <ul className="space-y-3 mb-8">
-                {t.pricing.business.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <span className="text-green-500 mt-1">✓</span>
-                    <span className="text-gray-600 dark:text-gray-300">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <button className="w-full py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-semibold transition-colors">
-                {language === 'uz' ? 'Bog\'lanish' : 'Связаться'}
-              </button>
-            </div>
+            <div className="text-9xl text-center">⚔️</div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-700 dark:to-cyan-700 rounded-3xl p-12 shadow-2xl">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            {t.cta.title}
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            {t.cta.subtitle}
-          </p>
-          <Link
-            href="/auth"
-            className="inline-block px-10 py-4 bg-white hover:bg-gray-100 text-blue-600 rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:scale-105"
-          >
-            {t.cta.button}
-          </Link>
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-black text-gray-900 dark:text-white mb-4">
+              {t.cta.title}
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              {t.cta.subtitle}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {t.cta.options.map((option, index) => (
+              <Link
+                key={index}
+                href={option.link}
+                className="group bg-white dark:bg-gray-800 rounded-3xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              >
+                <div className="text-6xl mb-4 transform group-hover:scale-110 transition-transform">
+                  {option.icon}
+                </div>
+                <h3 className="text-xl font-black text-gray-900 dark:text-white mb-2">
+                  {option.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {option.desc}
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 dark:bg-black text-gray-300 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="text-3xl">🚗</div>
-                <span className="text-2xl font-bold text-white">Onless.uz</span>
-              </div>
-              <p className="text-gray-400 mb-4">
-                {t.footer.about}
-              </p>
-            </div>
+      <Footer language={language} />
 
-            <div>
-              <h4 className="text-white font-semibold mb-4">{t.footer.links}</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="hover:text-blue-400 transition-colors">{language === 'uz' ? 'Biz haqimizda' : 'О нас'}</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors">{language === 'uz' ? 'Xizmatlar' : 'Услуги'}</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors">{language === 'uz' ? 'Narxlar' : 'Цены'}</a></li>
-                <li><Link href="/exam" className="hover:text-blue-400 transition-colors">{language === 'uz' ? 'Imtihon' : 'Экзамен'}</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-white font-semibold mb-4">{t.footer.contact}</h4>
-              <ul className="space-y-2">
-                <li>📧 info@onless.uz</li>
-                <li>📱 +998 99 123 45 67</li>
-                <li>📍 Toshkent, O'zbekiston</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 pt-8 text-center">
-            <p className="text-gray-500">{t.footer.rights}</p>
-          </div>
-        </div>
-      </footer>
+      <style jsx global>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 }
