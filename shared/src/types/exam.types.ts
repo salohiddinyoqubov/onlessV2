@@ -58,6 +58,12 @@ export interface ExamSession {
   startedAt: Date;
   /** Whether exam is completed */
   isCompleted: boolean;
+  /** Number of correct answers (set when exam is completed) */
+  correctAnswers?: number;
+  /** Score percentage (set when exam is completed) */
+  score?: number;
+  /** Completion timestamp (set when exam is completed) */
+  completedAt?: Date;
 }
 
 /**

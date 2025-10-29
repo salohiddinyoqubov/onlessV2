@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { QuestionOption } from '@/types/exam.types';
 import { useLanguage } from '@/app/lib/contexts/LanguageContext';
+import { getFKeyLabel, ExplanationModal } from '@onless/shared';
 
 interface OptionsPanelProps {
   /** Question text */
@@ -35,7 +36,7 @@ export function OptionsPanel({
   onSelectOption,
 }: OptionsPanelProps) {
   const { convertText } = useLanguage();
-  const [isExplanationOpen, setIsExplanationOpen] = useState(false);
+  const [isExplanationModalOpen, setIsExplanationModalOpen] = useState(false);
   return (
     <div className="flex flex-col">
       {/* Question Box */}
@@ -45,7 +46,7 @@ export function OptionsPanel({
 
       {/* Options List */}
       <ul className="list-none p-0 m-0 flex flex-col gap-3 mb-3">
-        {options.map((option) => {
+        {options.map((option, index) => {
           const isSelected = selectedOptionId === option.id;
           const isCorrect = correctOptionId === option.id;
           const isIncorrect = showFeedback && isSelected && !isCorrect;
@@ -69,11 +70,11 @@ export function OptionsPanel({
                 showFeedback ? 'cursor-default' : 'cursor-pointer'
               } ${styleClasses}`}
             >
-              {/* F-key Badge */}
+              {/* F-key Badge - Dynamic */}
               <span className={`bg-gradient-to-b from-gray-100 to-gray-50 dark:from-background-dark dark:to-background px-5 py-4 font-bold border-r-2 border-gray-200 dark:border-background-border text-sm flex items-center justify-center min-w-[65px] ${
                 shouldShowCorrect ? 'text-green-600 dark:text-success' : isIncorrect ? 'text-red-600 dark:text-danger' : 'text-blue-600 dark:text-accent'
               }`}>
-                {option.id}
+                {getFKeyLabel(index)}
               </span>
 
               {/* Option Text */}
@@ -94,27 +95,27 @@ export function OptionsPanel({
         })}
       </ul>
 
-      {/* Explanation Box */}
+      {/* Explanation Button - Opens Modal */}
       {explanation && (
-        <div className="bg-amber-50 dark:bg-background-secondary border-2 border-amber-300 dark:border-warning/30 rounded-lg overflow-hidden text-gray-600 dark:text-neutral-light text-sm shadow-md">
-          <button
-            onClick={() => setIsExplanationOpen(!isExplanationOpen)}
-            className="w-full flex items-center gap-2 p-4 hover:bg-amber-100 dark:hover:bg-background-dark transition-colors cursor-pointer"
-          >
-            <span className="text-amber-600 dark:text-warning font-bold text-lg">💡</span>
-            <span className="font-semibold text-amber-700 dark:text-warning">Izoh</span>
-            <span className="ml-auto text-amber-700 dark:text-warning">
-              {isExplanationOpen ? '▲' : '▼'}
-            </span>
-          </button>
-          {isExplanationOpen && (
-            <div className="px-4 pb-4 pt-2">
-              <p className="leading-relaxed text-gray-700 dark:text-neutral-light ml-7">
-                {convertText(explanation)}
-              </p>
-            </div>
-          )}
-        </div>
+        <button
+          onClick={() => setIsExplanationModalOpen(true)}
+          className="w-full bg-amber-50 dark:bg-background-secondary border-2 border-amber-300 dark:border-warning/30 rounded-lg p-4 hover:bg-amber-100 dark:hover:bg-background-dark transition-colors cursor-pointer shadow-md hover:shadow-lg flex items-center gap-3"
+        >
+          <span className="text-amber-600 dark:text-warning font-bold text-xl">💡</span>
+          <span className="font-semibold text-amber-700 dark:text-warning text-base">
+            {convertText('Izohni ko\'rish')}
+          </span>
+        </button>
+      )}
+
+      {/* Explanation Modal - Only render when open */}
+      {isExplanationModalOpen && explanation && (
+        <ExplanationModal
+          explanation={explanation}
+          isOpen={true}
+          onClose={() => setIsExplanationModalOpen(false)}
+          convertText={convertText}
+        />
       )}
     </div>
   );

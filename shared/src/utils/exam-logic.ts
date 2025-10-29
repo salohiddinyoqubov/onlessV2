@@ -110,3 +110,23 @@ export function areAllQuestionsAnswered(
 export function getAnsweredCount(answers: Record<number, string>): number {
   return Object.keys(answers).filter((key) => answers[Number(key)] !== '').length;
 }
+
+/**
+ * Calculate score from questions and answers
+ *
+ * @param questions Array of questions
+ * @param answers Map of question ID to selected option ID
+ * @returns Object with correctCount and percentage
+ */
+export function calculateScore(
+  questions: Question[],
+  answers: Record<number, string>
+): { correctCount: number; percentage: number } {
+  const correctCount = questions.filter(
+    (q) => answers[q.id] === q.correctOptionId
+  ).length;
+
+  const percentage = Math.round((correctCount / questions.length) * 100);
+
+  return { correctCount, percentage };
+}

@@ -26,15 +26,35 @@ onless/
 │   ├── App.tsx       # Main application entry
 │   └── package.json  # Mobile dependencies
 │
-├── shared/           # Shared business logic package
+├── desktop/          # Electron desktop application
+│   ├── electron/     # Electron main & preload processes
+│   ├── src/          # Renderer process (React app)
+│   │   ├── pages/    # HomePage, ExamPage, ResultPage
+│   │   ├── components/ # UI components
+│   │   └── contexts/ # React contexts
+│   └── package.json  # Desktop dependencies
+│
+├── shared/           # Shared code package (~60% code reuse)
 │   └── src/
 │       ├── types/    # TypeScript type definitions
-│       ├── utils/    # Utility functions (exam logic)
+│       ├── utils/    # Utility functions (exam logic, cyrillic converter)
 │       ├── constants/ # Configuration constants
-│       └── data/     # Question bank
+│       ├── data/     # Question bank
+│       ├── hooks/    # Unified React hooks (useExamSession, useTimer)
+│       ├── contexts/ # Unified React contexts (Theme, Language)
+│       └── adapters/ # Platform abstraction (storage adapters)
 │
-├── backend/          # Backend API (to be implemented)
-│   └── (backend code will go here)
+├── backend/          # FastAPI backend with PostgreSQL
+│   ├── app/          # Application code
+│   │   ├── api/      # API routes and endpoints
+│   │   ├── core/     # Configuration and security
+│   │   ├── db/       # Database setup and session
+│   │   ├── models/   # SQLAlchemy models
+│   │   ├── schemas/  # Pydantic schemas
+│   │   └── crud/     # Database operations
+│   ├── alembic/      # Database migrations
+│   ├── tests/        # Test suite
+│   └── pyproject.toml # Python dependencies
 │
 ├── assets/           # Design assets and references
 ├── package.json      # Root workspace configuration
@@ -78,6 +98,25 @@ cd mobile && npm start
 - Or press `w` to open in web browser
 - Or press `a` for Android emulator
 - Or press `i` for iOS simulator (macOS only)
+
+### Desktop App Development
+
+1. Start the Electron development server:
+```bash
+npm run dev:desktop
+# or
+cd desktop && npm run electron:dev
+```
+
+2. The Electron app will automatically open with hot reload enabled
+
+3. Build for production:
+```bash
+cd desktop
+npm run build:mac    # macOS
+npm run build:win    # Windows
+npm run build:linux  # Linux
+```
 
 ## Features
 
@@ -128,10 +167,29 @@ cd mobile && npm start
 - **Navigation**: React Navigation (Stack Navigator)
 - **UI**: React Native StyleSheet
 
+### Desktop App
+- **Framework**: Electron 33 + React + Vite
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **State**: React Context + Electron Store
+- **Auto-updates**: electron-updater
+- **Platform**: Cross-platform (Windows, macOS, Linux)
+
 ### Shared Package
-- **Business Logic**: Shared between web and mobile
-- **Code Reuse**: ~40-50% (types, utils, constants, data)
-- **Monorepo**: npm workspaces
+- **Business Logic**: Shared across web, mobile, and desktop
+- **Code Reuse**: ~60% (types, utils, constants, data, hooks, contexts)
+- **Platform Abstraction**: Storage adapters prevent conflicts
+- **Monorepo**: npm workspaces with @onless/shared package
+
+### Backend API
+- **Framework**: FastAPI (async Python)
+- **Database**: PostgreSQL with asyncpg
+- **ORM**: SQLAlchemy 2.0 (async)
+- **Migrations**: Alembic
+- **Auth**: JWT with refresh tokens
+- **Authorization**: Role-based access control (6 roles)
+- **Multi-tenancy**: Organization-based isolation
+- **Containerization**: Docker Compose
 
 ## Configuration
 
@@ -189,16 +247,70 @@ cd frontend
 vercel
 ```
 
-## Backend (To Be Implemented)
+## Code Sharing Architecture
 
-The backend API will handle:
-- User authentication and authorization
-- Question bank management
-- Exam session management
-- Results storage and history
-- Student/instructor management
-- Analytics and reporting
-- Multi-tenancy for driving schools
+The project uses a **platform abstraction layer** pattern to safely share ~60% of code across frontend, mobile, and desktop platforms while preventing production conflicts.
+
+### Platform Abstraction Layer
+
+**Storage Adapter Pattern** (`shared/src/adapters/storage.ts`):
+```typescript
+// Auto-detects platform and returns appropriate adapter
+const storageAdapter = createStorageAdapter();
+
+// WebStorageAdapter - uses localStorage (frontend)
+// ElectronStorageAdapter - uses Electron store (desktop)
+// MobileStorageAdapter - uses AsyncStorage (mobile)
+// MemoryStorageAdapter - fallback for SSR/testing
+```
+
+### Unified Hooks
+
+**useExamSession** (`shared/src/hooks/useExamSession.ts`):
+- Manages exam state across all platforms
+- Consistent API: `selectOption`, `navigateToQuestion`, `completeExam`
+- Platform-agnostic implementation
+
+**useTimer** (`shared/src/hooks/useTimer.ts`):
+- Countdown timer with platform-independent types
+- Works in browser, Electron, and React Native
+
+### Unified Contexts
+
+**ThemeContext** (`shared/src/contexts/ThemeContext.tsx`):
+```typescript
+<ThemeProvider
+  storageAdapter={storageAdapter}
+  applyTheme={(theme) => document.documentElement.classList.add(theme)}
+  getSystemTheme={() => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'}
+>
+```
+
+**LanguageContext** (`shared/src/contexts/LanguageContext.tsx`):
+- Multi-language support with Cyrillic conversion
+- Persistent across sessions using storage adapter
+
+### Benefits
+
+✅ **DRY Principle**: Eliminated ~40% code duplication
+✅ **No Conflicts**: Platform adapters prevent localStorage/Electron/AsyncStorage conflicts
+✅ **Type Safety**: Full TypeScript support across all platforms
+✅ **Consistent Behavior**: Same business logic everywhere
+✅ **Easy Maintenance**: Update once, deploy everywhere
+
+## Backend API
+
+The backend implements a production-ready FastAPI application with:
+
+- **Authentication**: JWT access + refresh tokens with secure password hashing
+- **Authorization**: Role-based access control (Student, Teacher, Instructor, Business Owner, Mentor, Admin)
+- **Multi-tenancy**: Organization-based data isolation for driving schools
+- **Database**: Async PostgreSQL with SQLAlchemy 2.0
+- **Migrations**: Alembic for schema versioning
+- **Models**: User, Organization, Question, Exam, Booking, Payment
+- **Testing**: Comprehensive test suite with pytest
+- **Containerization**: Docker Compose with PostgreSQL and Redis
+- **Documentation**: Auto-generated API docs with FastAPI
 
 ## License
 
