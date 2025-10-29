@@ -3,7 +3,11 @@
     "allow": [
       "Bash(npm install)",
       "mcp__playwright__browser_take_screenshot",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(npm install:*)",
+      "Bash(corepack enable:*)",
+      "Bash(corepack prepare:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []

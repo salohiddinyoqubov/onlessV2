@@ -1,199 +1,209 @@
-# Onless.uz - Haydovchilik Nazariy Imtihoni
+# Onless - Haydovchilik Nazariy Imtihoni
 
-O'zbekiston Respublikasi haydovchilik nazariy imtihoni platformasi. Next.js 15, React 19, TypeScript va TailwindCSS yordamida qurilgan.
+Online driving theory exam platform for Uzbekistan.
 
-## Xususiyatlar
-
-- ✅ 50 savoldan iborat savollar bazasi (Uzbekcha)
-- ✅ Har bir imtihonda tasodifiy 20 savol tanlanadi
-- ✅ 40 daqiqalik taymerni (sekund-sekund hisoblanadi)
-- ✅ F1-F4 klaviatura tugmalari orqali javob tanlash
-- ✅ Barcha 50 savol ko'rinishida navigatsiya grid
-- ✅ Real vaqtda javob berish holati
-- ✅ Batafsil natijalar sahifasi
-- ✅ 70% o'tish darajasi
-- ✅ Pixel-perfect dizayn
-
-## Texnologiyalar
-
-- **Framework:** Next.js 15 (App Router)
-- **UI Library:** React 19
-- **Language:** TypeScript
-- **Styling:** TailwindCSS
-- **State Management:** Custom hooks with React hooks
-- **Animation:** Framer Motion (optional)
-
-## O'rnatish
-
-### 1. Loyihani klonlash
-
-```bash
-cd onless
-```
-
-### 2. Bog'liqliklarni o'rnatish
-
-```bash
-npm install
-```
-
-### 3. Ishga tushirish
-
-```bash
-npm run dev
-```
-
-Brauzerda ochish: [http://localhost:3000](http://localhost:3000)
-
-## Loyiha Strukturasi
+## Project Structure
 
 ```
 onless/
-├── app/
-│   ├── globals.css                   # Global CSS va Tailwind direktivalar
-│   ├── layout.tsx                    # Root layout
-│   ├── page.tsx                      # Home page
-│   ├── test/
-│   │   ├── page.tsx                  # Test sahifasi (asosiy imtihon)
-│   │   ├── result/
-│   │   │   └── page.tsx             # Natijalar sahifasi
-│   │   └── components/
-│   │       ├── TestHeader.tsx        # Header (logo, timer, progress)
-│   │       ├── QuestionDisplay.tsx   # Savol matn va rasm
-│   │       ├── OptionsPanel.tsx      # Javob variantlari (F1-F4)
-│   │       ├── QuestionNavigationGrid.tsx  # 50 savollik grid
-│   │       └── ResultDisplay.tsx     # Natijalar ko'rinishi
-│   └── lib/
-│       ├── test-logic.ts             # Biznes logika funksiyalari
-│       └── hooks/
-│           ├── useTimer.ts           # Taymerni boshqarish hook
-│           ├── useKeyboardShortcuts.ts  # F-keys uchun hook
-│           └── useTestSession.ts     # Test sessiya holatini boshqarish
-├── types/
-│   └── test.types.ts                 # TypeScript type definitions
-├── data/
-│   └── questions.ts                  # 50 ta mock savol
-├── config/
-│   └── test.config.ts                # Test konfiguratsiyasi
-├── public/
-│   └── images/
-│       └── scenarios/                # Yo'l holati rasmlari
-├── tailwind.config.ts                # Tailwind konfiguratsiyasi
-├── tsconfig.json                     # TypeScript konfiguratsiyasi
-└── package.json                      # Loyiha bog'liqliklari
+├── frontend/          # Next.js web application
+│   ├── app/          # Next.js 14 app directory
+│   │   ├── exam/     # Desktop exam interface
+│   │   │   └── mobile/  # Mobile-optimized web interface
+│   │   ├── lib/      # Utilities, hooks, contexts
+│   │   └── page.tsx  # Home page
+│   ├── config/       # Configuration files
+│   ├── data/         # Mock data and question bank
+│   ├── public/       # Static assets
+│   ├── types/        # TypeScript type definitions
+│   └── package.json  # Frontend dependencies
+│
+├── mobile/           # React Native mobile application
+│   ├── src/          # Source code
+│   │   ├── screens/  # HomeScreen, ExamScreen
+│   │   ├── components/ # Reusable UI components
+│   │   └── hooks/    # Custom React hooks
+│   ├── App.tsx       # Main application entry
+│   └── package.json  # Mobile dependencies
+│
+├── shared/           # Shared business logic package
+│   └── src/
+│       ├── types/    # TypeScript type definitions
+│       ├── utils/    # Utility functions (exam logic)
+│       ├── constants/ # Configuration constants
+│       └── data/     # Question bank
+│
+├── backend/          # Backend API (to be implemented)
+│   └── (backend code will go here)
+│
+├── assets/           # Design assets and references
+├── package.json      # Root workspace configuration
+└── README.md         # This file
 ```
 
-## Foydalanish
+## Getting Started
 
-### Imtihonni boshlash
+### Prerequisites
 
-1. Bosh sahifadan **"Imtihonni boshlash"** tugmasini bosing
-2. 50 ta savoldan tasodifiy 20 ta savol tanlanadi
-3. 40 daqiqalik taymer avtomatik boshlanadi
+```bash
+npm install     # Install all workspace dependencies
+```
 
-### Imtihon davomida
+### Web Frontend Development
 
-- **Javob tanlash:** F1, F2, F3, F4 tugmalari yoki sichqoncha bilan bosish
-- **Savollar orasida harakatlanish:** Pastdagi grid tugmalarini bosish
-- **Imtihonni yakunlash:** "Imtihonni yakunlash" tugmasini bosing
+1. Run the development server:
+```bash
+npm run dev:frontend
+# or
+cd frontend && npm run dev
+```
 
-### Klaviatura yorliqlari
+2. Open your browser:
+- Desktop interface: http://localhost:3000/exam
+- Mobile web interface: http://localhost:3000/exam/mobile
+- Home page: http://localhost:3000
 
-- `F1` - Birinchi variant
-- `F2` - Ikkinchi variant
-- `F3` - Uchinchi variant
-- `F4` - To'rtinchi variant (agar mavjud bo'lsa)
+### Mobile App Development
 
-### Natijalar
+1. Start the Expo development server:
+```bash
+npm run dev:mobile
+# or
+cd mobile && npm start
+```
 
-- ✅ **O'tdingiz:** 70% va undan yuqori
-- ❌ **O'tmadingiz:** 70% dan past
-- Batafsil natijalar sahifasida barcha savollar bo'yicha ko'rsatma
+2. Test the app:
+- Install Expo Go app on your phone
+- Scan the QR code to open the app
+- Or press `w` to open in web browser
+- Or press `a` for Android emulator
+- Or press `i` for iOS simulator (macOS only)
 
-## Konfiguratsiya
+## Features
 
-Imtihon parametrlarini `config/test.config.ts` faylida o'zgartirish mumkin:
+### Desktop Interface (`/exam`)
+- Full-featured exam interface optimized for desktop/laptop
+- Side-by-side question and image display
+- Comprehensive header with ticket number, student info, timer
+- 20-question navigation grid (centered, larger buttons)
+- Dark/light mode support
+- Multi-language support (Uzbek Latin/Cyrillic, Karakalpak, Russian)
+- F1-F4 keyboard shortcuts for answer selection
+- F7 keyboard shortcut to skip to next unanswered question
+- Collapsible explanation sections with "Izoh" button
+- Real-time answer feedback (green/red)
+
+### Mobile Interface (`/exam/mobile`)
+- Touch-optimized interface for smartphones
+- Vertical scrolling layout
+- Large, tap-friendly buttons (48px minimum)
+- Collapsible question grid (5 columns)
+- Fixed bottom navigation with Previous/Skip/Next buttons
+- Compact header with essential information
+- Full feature parity with desktop
+- Optimized for mobile screen sizes
+
+### Key Features
+- **Question Bank**: 50 questions in Uzbek with images
+- **Random Selection**: 20 questions randomly selected per exam
+- **Timer**: 40 minutes (MM:SS format) with countdown
+- **Answer Feedback**: Immediate visual feedback (green for correct, red for incorrect)
+- **Explanations**: Optional explanations for each question
+- **Progress Tracking**: Visual indicators for answered/unanswered questions
+- **Keyboard Shortcuts**: F1-F4 for answers, F7 to skip to next unanswered
+- **Responsive**: Separate interfaces for desktop and mobile
+
+## Technologies
+
+### Web Frontend
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **State Management**: React Context API
+- **Icons**: Heroicons (SVG outlines)
+
+### Mobile App
+- **Framework**: React Native + Expo
+- **Language**: TypeScript
+- **Navigation**: React Navigation (Stack Navigator)
+- **UI**: React Native StyleSheet
+
+### Shared Package
+- **Business Logic**: Shared between web and mobile
+- **Code Reuse**: ~40-50% (types, utils, constants, data)
+- **Monorepo**: npm workspaces
+
+## Configuration
+
+Edit `frontend/config/exam.config.ts` to modify exam settings:
 
 ```typescript
-export const TEST_CONFIG = {
-  TOTAL_QUESTIONS: 50,          // Jami savollar
-  QUESTIONS_PER_SESSION: 20,    // Har bir imtihonda savollar
-  TEST_DURATION_SECONDS: 2400,  // 40 daqiqa
-  PASSING_THRESHOLD: 70,        // O'tish %
-  GRID: {
-    COLUMNS: 10,                // Grid ustunlar soni
-    ROWS: 5,                    // Grid qatorlar soni
-  },
+export const EXAM_CONFIG = {
+  TOTAL_QUESTIONS: 50,          // Total questions in bank
+  QUESTIONS_PER_SESSION: 20,    // Questions per exam
+  EXAM_DURATION_SECONDS: 2400,  // 40 minutes
+  PASSING_THRESHOLD: 70,        // Passing percentage
 };
 ```
 
-## Yangi savollar qo'shish
+## Adding New Questions
 
-`data/questions.ts` faylida yangi savollar qo'shish:
+Edit `shared/src/data/questions.ts` (used by both web and mobile):
 
 ```typescript
 {
   id: 51,
-  text: "Savol matni o'zbek tilida?",
-  imagePath: '/images/scenarios/new-scenario.png', // ixtiyoriy
+  text: "Question text in Uzbek",
+  imagePath: "/images/scenarios/example.png",  // optional
   options: [
-    { id: 'F1', text: "Birinchi variant" },
-    { id: 'F2', text: "Ikkinchi variant" },
-    { id: 'F3', text: "Uchinchi variant" },
+    { id: 'F1', text: "Option 1" },
+    { id: 'F2', text: "Option 2" },
+    { id: 'F3', text: "Option 3" },
   ],
   correctOptionId: 'F2',
+  explanation: "Explanation text in Uzbek",  // optional
   category: 'traffic-rules',
 }
 ```
 
-## Build va Deploy
+## Build & Deploy
 
-### Production build
+### Production Build
 
 ```bash
+cd frontend
 npm run build
 ```
 
-### Production serverni ishga tushirish
+### Start Production Server
 
 ```bash
 npm start
 ```
 
-### Vercel'ga deploy qilish
+### Deploy to Vercel
 
 ```bash
 npm install -g vercel
+cd frontend
 vercel
 ```
 
-## Rang palitrasi
+## Backend (To Be Implemented)
 
-```typescript
-colors: {
-  primary: {
-    DEFAULT: '#1a3a52',  // Asosiy ko'k
-    dark: '#0d2436',     // To'q ko'k (header)
-    light: '#2a4a62',    // Och ko'k (kartalar)
-  },
-  success: '#2ecc71',    // Yashil (to'g'ri javoblar)
-  danger: '#e74c3c',     // Qizil (noto'g'ri javoblar)
-  warning: '#f39c12',    // Sariq (ogohlantirish)
-  neutral: {
-    DEFAULT: '#34495e',  // Kulrang-ko'k
-    light: '#bdc3c7',    // Och kulrang
-  },
-}
-```
+The backend API will handle:
+- User authentication and authorization
+- Question bank management
+- Exam session management
+- Results storage and history
+- Student/instructor management
+- Analytics and reporting
+- Multi-tenancy for driving schools
 
-## Litsenziya
+## License
 
-Bu loyiha Onless.uz kompaniyasi uchun ishlab chiqilgan.
+Copyright © 2024 Onless.uz
 
-## Muallif
+## Contact
 
-Loyiha Next.js 15, React 19, TypeScript va TailwindCSS texnologiyalari yordamida qurilgan.
-
----
-
-**Eslatma:** Bu loyiha demo maqsadda ishlab chiqilgan. Real ishlab chiqarish uchun backend integratsiyasi, foydalanuvchi autentifikatsiyasi va boshqa xususiyatlar qo'shilishi kerak.
+Website: onless.uz
